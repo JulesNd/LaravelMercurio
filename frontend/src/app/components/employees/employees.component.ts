@@ -23,7 +23,7 @@ export class User {
 
 export class EmployeesComponent implements OnInit {
 
-employees: any = [];
+employees: any ;
 user: User;
 
   constructor(private DataService: DataService,public jwtService: JwtService) {

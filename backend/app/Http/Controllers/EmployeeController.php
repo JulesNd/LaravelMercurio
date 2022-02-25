@@ -15,18 +15,9 @@ class EmployeeController extends Controller
 /** TEST **/
     public function getUserEmployee() {
       $userId = Auth::id();
-      //$useremployee = Employee::all('owner_id','name')->where('owner_id',$userId);
-      $useremployee = Employee::all('owner_id','name')->where('owner_id',$userId);
-      $useremployee = $useremployee->toArray();
-
-
-
-      return response()->json($useremployee);
-      return response()->json(['message' => $userId]);
-
-
-
-
+    // A NE PAS FAIRE :   $useremployee = Employee::select('owner_id','name')->where('owner_id',$userId)->modelKeys();
+  $useremployee = Employee::where('owner_id',$userId)->get()->toArray();
+    return response($useremployee);
 
       }
 /** TEST **/
