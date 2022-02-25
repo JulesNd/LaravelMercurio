@@ -1,0 +1,18 @@
+
+
+
+  <app-navbar></app-navbar>
+
+<div class="container">
+
+  <h2>MERCURIO TEST</h2>
+  <nav>
+    <a routerLink="/user-profile" *ngIf="isLoggedin">Profile</a>
+    <a *ngIf="!isLoggedin" routerLink="/signin">Se connecter</a>
+    <a routerLink="/signup">S'inscrire</a>
+  </nav>
+
+  <button class="btn btn-danger" (click)="logOut()" *ngIf="isLoggedin">Sign-out</button>
+</div>
+
+<router-outlet></router-outlet>
