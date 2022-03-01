@@ -16,9 +16,15 @@ import { EmployeesComponent } from './components/employees/employees.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UseremployeeComponent } from './components/useremployee/useremployee.component';
 import { PipePipe } from './components/pipe.pipe';
+import { RtiComponent } from './components/rti/rti.component';
+import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
 
 
-const routes: Routes = [ ];
+const routes: Routes = [
+
+  {path:'user-profile/:rti_id', component:RtiEditComponent},
+
+ ];
 
 
 
@@ -33,6 +39,8 @@ const routes: Routes = [ ];
     NavbarComponent,
     UseremployeeComponent,
     PipePipe,
+    RtiComponent,
+    RtiEditComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

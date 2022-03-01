@@ -5,6 +5,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { UseremployeeComponent } from './components/useremployee/useremployee.component';
+import { RtiComponent } from './components/rti/rti.component';
+import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,9 @@ const routes: Routes = [
   { path: 'signup', component: RegisterComponent },
   { path: 'user-profile', component: ProfileComponent },
   {path:'Employees', component: EmployeesComponent},
-    {path:'useremployees', component: UseremployeeComponent},
+  {path:'useremployees', component: UseremployeeComponent},
+  {path:'rtis', component: RtiComponent},
+
 ];
 
 

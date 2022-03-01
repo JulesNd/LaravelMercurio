@@ -13,6 +13,7 @@ import { AuthenticationStateService } from '../../shared/authentication-state.se
 })
 
 export class LoginComponent implements OnInit {
+  isLoggedin: boolean;
 
   signinForm: FormGroup;
   err = null;
@@ -30,7 +31,12 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.authenticationStateService.userAuthState.subscribe(res => {
+        this.isLoggedin = res;
+    });
+
+   }
 
   onSubmit() {
       this.jwtService.logIn(this.signinForm.value).subscribe(
@@ -49,6 +55,12 @@ export class LoginComponent implements OnInit {
 
   tokenStorage(jwt){
     this.tokenAuthService.setTokenStorage(jwt.access_token);
+  }
+
+  logOut() {
+    this.authenticationStateService.setAuthState(false);
+    this.tokenAuthService.destroyToken();
+    this.router.navigate(['signin']);
   }
 
 }
