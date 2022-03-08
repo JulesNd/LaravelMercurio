@@ -6,7 +6,6 @@ import { Rti } from '../../rti';
 
 
 declare var OpenLIME: any;
-declare var layout: any;
 declare var require: any;
 const URL = require("url").URL;
 declare var name: any;
@@ -18,7 +17,7 @@ declare var name: any;
 })
 export class RtiEditComponent implements OnInit {
 rti_id: any;
-  rtis: any ;
+  rtis: any;
   rti = new Rti();
 
   constructor(private route:ActivatedRoute, private dataService: DataService) {
@@ -33,17 +32,20 @@ rti_id: any;
     this.getData();
 
     let lime = new OpenLIME.OpenLIME('#openlime');
- let layer = new OpenLIME.Layer({
-   layout: 'itarzoom',
-   normals: false,
-   type:'rti',
+    let layer = new OpenLIME.Layer({
+      Layout: 'itarzoom',
+      normals: false,
+      type:'rti',
    //url: 'assets/'+(this.IDrti)+'/info.json',
 
-   url: './assets/'+(this.rti_id)+'/info.json',
+   //url: 'https://mercurio-app.com/assets/'+(this.rti_id)+'/info.json',
+  url: 'assets/'+(this.rti_id)+'/info.json',
    label: 'Layer'
  });
  lime.canvas.addLayer('Tome', layer);
+ //let ui = new OpenLIME.UIBasic(lime, { skin: 'http://app.mercurioimaging.com/assets/skin.svg' });
  let ui = new OpenLIME.UIBasic(lime, { skin: 'assets/skin.svg' });
+
  ui.actions.light.active = true;
  ui.actions.layers.display = true;
  lime.camera.maxFixedZoom = 1;
@@ -55,7 +57,6 @@ getData() {
   this.dataService.getRtiById(this.rti_id).subscribe(res=> {
     //console.log(res);
     this.rtis = res;
-    this.rti = this.rtis;
   })
 }
 updateRti() {

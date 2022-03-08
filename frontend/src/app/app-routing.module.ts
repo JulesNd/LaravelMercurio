@@ -7,6 +7,7 @@ import { EmployeesComponent } from './components/employees/employees.component';
 import { UseremployeeComponent } from './components/useremployee/useremployee.component';
 import { RtiComponent } from './components/rti/rti.component';
 import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
+import { AddRtiComponent } from './components/add-rti/add-rti.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path:'Employees', component: EmployeesComponent},
   {path:'useremployees', component: UseremployeeComponent},
   {path:'rtis', component: RtiComponent},
+  {path:'Ajouter-rti',component: AddRtiComponent}
 
 ];
 

@@ -18,15 +18,15 @@ export class JwtService {
   constructor(private http: HttpClient) { }
 
   signUp(user: User): Observable<any> {
-    return this.http.post('http://127.0.0.1:8000/api/auth/signup', user);
+    return this.http.post('http://mercurio-app.com/api/auth/signup', user);
   }
 
   logIn(user: User): Observable<any> {
-    return this.http.post<any>('http://127.0.0.1:8000/api/auth/signin', user);
+    return this.http.post<any>('http://mercurio-app.com/api/auth/signin', user);
   }
 
   profile(): Observable<any> {
-    return this.http.get('http://127.0.0.1:8000/api/auth/user');
+    return this.http.get('http://mercurio-app.com/api/auth/user');
   }
 
 }

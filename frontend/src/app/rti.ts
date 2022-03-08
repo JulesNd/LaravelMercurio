@@ -1,5 +1,4 @@
 export class Rti {
-
       rti_id: any;
       nom: any;
       description: any;
@@ -8,8 +7,6 @@ export class Rti {
       date: any;
       public: any;
       metadata: any;
-
-
-
-
+      type: any;
+      layout: any;
 }

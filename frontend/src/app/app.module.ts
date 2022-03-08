@@ -18,11 +18,14 @@ import { UseremployeeComponent } from './components/useremployee/useremployee.co
 import { PipePipe } from './components/pipe.pipe';
 import { RtiComponent } from './components/rti/rti.component';
 import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
-
+import { AddRtiComponent } from './components/add-rti/add-rti.component';
+import {v4 as uuidv4} from 'uuid';
+import { AnnotationsComponent } from './components/annotations/annotations.component';
 
 const routes: Routes = [
 
   {path:'user-profile/:rti_id', component:RtiEditComponent},
+  {path:'user-profile/:rti_id/annotation/:rti_id', component: AnnotationsComponent}
 
  ];
 
@@ -41,6 +44,8 @@ const routes: Routes = [
     PipePipe,
     RtiComponent,
     RtiEditComponent,
+    AddRtiComponent,
+    AnnotationsComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
