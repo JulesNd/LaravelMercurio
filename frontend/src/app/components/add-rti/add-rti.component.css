@@ -13,18 +13,20 @@
 .form {
   width: 100%;
   max-width: 400px;
-  margin: 64px auto 0;
-  background-color: #fff;
+  margin: 14px auto 0;
+  background-color: rgba(0, 0, 0, 0.80);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  padding: 24px 32px;
+  padding: 14px 22px;
   border-radius: 11px;
+}
 
   .form-title {
     font-size: 28px;
     font-weight: 700;
-    color: #21325e;
+    color: white;
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
+    text-align: left;
   }
 
   .form-group {
@@ -66,7 +68,7 @@
     display: inline-block;
     border: none;
     outline: none;
-    background-color: #21325e;
+    background-color: #2D3047;
     color: #fff;
     font-family: inherit;
     font-size: 14px;
@@ -74,7 +76,7 @@
     border-radius: 1000px;
     cursor: pointer;
   }
-}
+
 
 @media screen and (min-width: 768px) {
   .grid {

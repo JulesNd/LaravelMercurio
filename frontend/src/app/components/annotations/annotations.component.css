@@ -384,3 +384,257 @@ g.openlime-expand {
 	color: #fff;
 	border: 1px #aaa;
 }
+
+form {
+  width: 40%!important;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 5%;
+}
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 50%;
+}
+
+
+.fa-arrow-circle-left {
+  font-size: 5vh!important;
+  color: white;
+  cursor: pointer;
+  padding: 0.5%
+}
+.fa-arrow-circle-left:hover  {
+  transform: scale(1.05);
+}
+
+.col-main {
+  flex: 5;
+  box-shadow: 4px 4px 2px -1px #00000070;
+  background-color: rgba(0, 0, 0, 0.80);
+
+}
+
+
+/* Responsive: */
+
+@media only screen and (min-width: 640px) {
+  .layout {
+    display: flex;
+  }
+}
+
+
+@media only screen and (min-width : 320px) and (max-width : 799px) {
+
+  .col {
+    /**margin: 0 2px 2px 0;**/
+    height: 75vh!important;
+  }
+  .title {
+    font-size: 2em!important;
+    padding: 1%;
+    margin-bottom: 20%;
+
+  }
+  .section-title {
+    font-size: 1em!important;
+    padding-top: 2%;
+    margin-top: 5%;
+  }
+  .col-complementary {
+    flex: 1;
+    padding: 30px;
+    height: 30%;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 4px 4px 2px -1px #00000070;
+
+  }
+
+}
+
+
+.fa-arrow-left {
+  font-size: 5vh;
+  color: white;
+}
+.fa-arrow-left:hover {
+  text-shadow: 0 0px 2px rgb(255,255,255, 0.5);
+  cursor: pointer;
+
+}
+
+
+/* etc */
+
+body {
+  margin: 1.5em;
+}
+
+span {
+}
+.limitTextHeight {
+    height: 20px;
+    overflow: hidden;
+}
+.container {
+  margin-top: 1%;
+  width: 100%;
+  margin-bottom: 1%;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 1800px!important;
+}
+
+.col {
+  /**margin: 0 2px 2px 0;**/
+  height: 88vh;
+}
+.title {
+  font-size: 2em;
+  padding: 1%;
+  margin-bottom: 20%;
+
+}
+.section-title {
+  font-size: 2em;
+  padding-top: 2%;
+  margin-top: 5%;
+}
+.description {
+  margin-top: 5%;
+}
+
+.section-titleRti {
+  margin-bottom: 20%!important;
+  background-color: #F3F3F4;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2.5px 2.5px 2px -1px #00000070;
+
+}
+
+
+.text-desc {
+  overflow:scroll;
+  white-space: nowrap;
+}
+
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+.action {
+  font-size: 5vh
+}
+.action:hover {
+  color: #FA4616;
+  transition: all 1s;
+}
+
+.universal-inline-block {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.social-icons {
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.5em;
+  color: #FA4616;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+.social-icons ul {
+  list-style: none;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+.social-icons ul li {
+  display: inline-block;
+  zoom: 1;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  *display: inline;
+  vertical-align: middle;
+  text-align: center;
+}
+.social-icons ul li a {
+  display: block;
+  font-size: 1.4em;
+  margin: 0 5px;
+  text-decoration: none;
+}
+.social-icons ul li a i {
+  color: #FA4616;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.social-icons ul li a:hover i {
+  color: #275066;
+}
+.social-icons ul li a:focus i,
+.social-icons ul li a:active i {
+  transition: none;
+  color: #FA4616;
+}
+
+.section-actions{
+  bottom: 0;
+position: absolute;
+margin-left: auto !important;
+margin-right: auto !important;
+display: block !important;
+
+
+}
+
+ul {
+  list-style: none;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}

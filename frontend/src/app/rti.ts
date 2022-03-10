@@ -9,4 +9,8 @@ export class Rti {
       metadata: any;
       type: any;
       layout: any;
+      annotation_id: any;
+      tag: any;
+      vues: any;
+      likes:any;
 }

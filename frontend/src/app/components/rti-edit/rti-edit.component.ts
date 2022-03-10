@@ -16,8 +16,9 @@ declare var name: any;
   styleUrls: ['./rti-edit.component.css']
 })
 export class RtiEditComponent implements OnInit {
-rti_id: any;
+  rti_id: any;
   rtis: any;
+  data: any;
   rti = new Rti();
 
   constructor(private route:ActivatedRoute, private dataService: DataService) {
@@ -30,6 +31,7 @@ rti_id: any;
     //console.log(this.route.snapshot.params.id);
     this.rti_id =  this.route.snapshot.params.rti_id;
     this.getData();
+    this.getDataForUpdate();
 
     let lime = new OpenLIME.OpenLIME('#openlime');
     let layer = new OpenLIME.Layer({
@@ -38,17 +40,20 @@ rti_id: any;
       type:'rti',
    //url: 'assets/'+(this.IDrti)+'/info.json',
 
-   //url: 'https://mercurio-app.com/assets/'+(this.rti_id)+'/info.json',
-  url: 'assets/'+(this.rti_id)+'/info.json',
+   //url: 'https://test.mercurio-app.com/assets/'+(this.rti_id)+'/info.json',
+  url: '/assets/'+(this.rti_id)+'/info.json',
    label: 'Layer'
  });
  lime.canvas.addLayer('Tome', layer);
- //let ui = new OpenLIME.UIBasic(lime, { skin: 'http://app.mercurioimaging.com/assets/skin.svg' });
- let ui = new OpenLIME.UIBasic(lime, { skin: 'assets/skin.svg' });
+ OpenLIME
+ let ui = new OpenLIME.UIBasic(lime, { skin: '/assets/skin.svg' });
+
+ //let ui = new OpenLIME.UIBasic(lime, { skin: 'assets/skin.svg' });
 
  ui.actions.light.active = true;
  ui.actions.layers.display = true;
- lime.camera.maxFixedZoom = 1;
+ lime.camera.maxFixedZoom = 1
+ ;
 
 
   }
@@ -57,6 +62,14 @@ getData() {
   this.dataService.getRtiById(this.rti_id).subscribe(res=> {
     //console.log(res);
     this.rtis = res;
+  })
+}
+
+getDataForUpdate() {
+  this.dataService.getForUpdate(this.rti_id).subscribe(res=> {
+    //console.log(res);
+    this.data = res
+    this.rti = this.data;
   })
 }
 updateRti() {

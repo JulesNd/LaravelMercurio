@@ -39,7 +39,7 @@ export class AnnotationsComponent implements OnInit {
   	type:'rti',
   //	url: 'Data/ptm_lowdef_mask/info.json',
   	//url: 'https://mercurio-app.com/assets/'+(this.rti_id)+'/annotations/info.json',
-    url: 'assets/'+(this.rti_id)+'/annotations/info.json',
+    url: '/assets/'+(this.rti_id)+'/annotations/info.json',
 
   	normals: false
   });
@@ -65,7 +65,7 @@ export class AnnotationsComponent implements OnInit {
   		<h3>${annotation.class}</h3>
   		<p>${annotation.description}</p>
   		`; },
-  	annotations: 'crud.php',
+  	annotations: '/editor/crud.php',
   	editable: true,
   });
 
@@ -117,7 +117,7 @@ OpenLIME.Skin.setUrl('assets/js/annotations/skin.svg');
 
   async function processRequest(anno, action) {
   	anno.action = action;
-  	const response = await fetch('crud.php', {method: 'POST', body: JSON.stringify(anno)});
+  	const response = await fetch('/editor/crud.php', {method: 'POST', body: JSON.stringify(anno)});
   	if (!response.ok) {
   		 const message = `An error has occured: ${response.status} ${response.statusText} `;
   		 alert(message);

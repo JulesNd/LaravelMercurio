@@ -7,8 +7,8 @@ import { Injectable } from '@angular/core';
 export class TokenAuthService {
 
   private tokenIssuer = {
-    login: 'http://mercurio-app.com/api/auth/signin',
-    register: 'http://mercurio-app.com/api/auth/signup'
+    login: '//test.mercurio-app.com/api/auth/signin',
+    register: '//test.mercurio-app.com/api/auth/signup'
   }
 
   constructor() { }

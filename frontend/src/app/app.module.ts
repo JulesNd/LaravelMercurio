@@ -20,6 +20,7 @@ import { RtiComponent } from './components/rti/rti.component';
 import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
 import { AddRtiComponent } from './components/add-rti/add-rti.component';
 import {v4 as uuidv4} from 'uuid';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { AnnotationsComponent } from './components/annotations/annotations.component';
 
 const routes: Routes = [
@@ -60,7 +61,10 @@ const routes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,
       multi: true
-    }
+    },
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
+
+
   ],
   bootstrap: [AppComponent]
 })

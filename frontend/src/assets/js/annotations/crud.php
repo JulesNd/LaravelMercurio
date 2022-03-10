@@ -1,8 +1,22 @@
 ﻿<?php
 
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Cache-Control: post-check=0, pre-check=0', FALSE);
+header('Pragma: no-cache');
+
 include("database.php");
 $request_body = file_get_contents('php://input');
-$data = json_decode($request_body);
+try {
+	$data = json_decode($request_body);
+} catch(Exception $e) {
+	var_dump($e);
+	echo("failed decoding request:");
+	var_dump($request_body);
+	exit(0);
+}
+
+ 
+
 
 
 try {
