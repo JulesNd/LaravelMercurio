@@ -29,64 +29,61 @@ export class AnnotationsComponent implements OnInit {
     this.rti_id =  this.route.snapshot.params.rti_id;
     this.getData();
 
+    var idannojson = "74eb5b82-9fbc-11ec-8b68-661a727a9b35";
 
-    //TODO: preserve is needed for snapshots, unfortunately we would have to recreate the webgl just before snapshot.
   let lime = new OpenLIME.OpenLIME('#openlime', { canvas: { preserveDrawingBuffer: true} });
 
   let layer0 = new OpenLIME.Layer({
-  	label: '4',
-  	layout: 'itarzoom',
-  	type:'rti',
+  label: 'Type de vues',
+  layout: 'itarzoom',
+  type:'rti',
   //	url: 'Data/ptm_lowdef_mask/info.json',
-  	//url: 'https://mercurio-app.com/assets/'+(this.rti_id)+'/annotations/info.json',
-    url: '/assets/'+(this.rti_id)+'/annotations/info.json',
-
-  	normals: false
+  url: '/assets/'+(this.rti_id)+'/info.json',
+  normals: false
   });
-  lime.canvas.addLayer('coin', layer0);
+  lime.canvas.addLayer('fossil', layer0);
 
   let anno = new OpenLIME.SvgAnnotationLayer({
-  	label: 'Annotations',
-  	viewBox: "0 0 256 256",
-  	style:`
-  		.openlime-annotation { pointer-events:stroke; opacity: 0.7; }
-  		.openlime-annotation:hover { cursor:pointer; opacity: 1.0; }
+  label: 'Annotations',
+  layout: layer0.layout,
+  style:`
+    .openlime-annotation { pointer-events:stroke; opacity: 0.7; }
+    .openlime-annotation:hover { cursor:pointer; opacity: 1.0; }
 
-  		:focus { fill:yellow; }
-  		path { fill:none; stroke-width:2; stroke:#000; vector-effect:non-scaling-stroke; pointer-events:all; }
-  		path:hover { cursor:pointer; stroke:#f00; }
+    :focus { fill:yellow; }
+    path { fill:none; stroke-width:2; stroke:#000; vector-effect:non-scaling-stroke; pointer-events:all; }
+    path:hover { cursor:pointer; stroke:#f00; }
 
-  		rect { fill:rgba(255, 0, 0, 0.2); stroke:rgba(127, 0, 0, 0.7); vector-effect:non-scaling-stroke;}
-  		circle { fill:rgba(255, 0, 0, 0.2); stroke:#800; stroke-width:1px; vector-effect:non-scaling-stroke; pointer-events:all;  }
-  		circle.point { stroke-width:10px }
-  		.selected { stroke:#ff0000 !important; stroke-width:3; }
-  		`,
-  	infoTemplate: (annotation) => { return `
-  		<h3>${annotation.class}</h3>
-  		<p>${annotation.description}</p>
-  		`; },
-  	annotations: '/editor/crud.php',
-  	editable: true,
+    rect { fill:rgba(255, 0, 0, 0.2); stroke:rgba(127, 0, 0, 0.7); vector-effect:non-scaling-stroke;}
+    circle { fill:rgba(255, 0, 0, 0.2); stroke:#800; stroke-width:1px; vector-effect:non-scaling-stroke; pointer-events:all;  }
+    circle.point { stroke-width:10px }
+    .selected { stroke:#ff0000 !important; stroke-width:3; }
+    `,
+  infoTemplate: (annotation) => { return `
+    <h3>${annotation.class}</h3>
+    <p>${annotation.description}</p>
+    `; },
+  annotations: '/assets/js/annotations/json_eloi.php?idannojson='+idannojson,
+  editable: true,
   });
 
   lime.canvas.addLayer('anno', anno); //here the overlayelement created and attached to layer
 
   lime.camera.maxFixedZoom = 4;
 
-//  OpenLIME.Skin.setUrl('https://annotation.mercurio-app.com/skin.svg');
+  OpenLIME.Skin.setUrl('/assets/js/annotations/skin.svg');
 
-OpenLIME.Skin.setUrl('assets/js/annotations/skin.svg');
   let editor = new OpenLIME.SvgAnnotationEditor(lime, anno, {
-  	lime: lime,
-  	classes: {
-  		'': { stroke: '#000', label: '' },
-  		'class1': { stroke: '#770', label: 'A' },
-  		'class2': { stroke: '#707', label: 'B' },
-  		'class3': { stroke: '#777', label: 'C' },
-  		'class4': { stroke: '#070', label: 'D' },
-  		'class5': { stroke: '#007', label: 'E' },
-  		'class6': { stroke: '#077', label: 'F' },
-  	}
+  lime: lime,
+  classes: {
+    '': { stroke: '#000', label: '' },
+    'class1': { stroke: '#770', label: 'A' },
+    'class2': { stroke: '#707', label: 'B' },
+    'class3': { stroke: '#777', label: 'C' },
+    'class4': { stroke: '#070', label: 'D' },
+    'class5': { stroke: '#007', label: 'E' },
+    'class6': { stroke: '#077', label: 'F' },
+  }
   });
 
   let ui = new OpenLIME.UIBasic(lime);
@@ -115,18 +112,21 @@ OpenLIME.Skin.setUrl('assets/js/annotations/skin.svg');
 
   editor.multiple = true;
 
+
+
   async function processRequest(anno, action) {
-  	anno.action = action;
-  	const response = await fetch('/editor/crud.php', {method: 'POST', body: JSON.stringify(anno)});
-  	if (!response.ok) {
-  		 const message = `An error has occured: ${response.status} ${response.statusText} `;
-  		 alert(message);
-  		 throw new Error(message);
-  	}
-  	let json = await response.json();
-  	if(json.status == 'error')
-  		alert(json.msg);
-  	console.log(json);
+  anno.action = action;
+  anno.idannojson = idannojson;
+  const response = await fetch('/assets/js/annotations/json_eloi.php', {method: 'POST', body: JSON.stringify(anno)});
+  if (!response.ok) {
+     const message = `An error has occured: ${response.status} ${response.statusText} `;
+     alert(message);
+     throw new Error(message);
+  }
+  let json = await response.json();
+  if(json.status == 'error')
+    alert(json.msg);
+  console.log(json);
   }
 
 
