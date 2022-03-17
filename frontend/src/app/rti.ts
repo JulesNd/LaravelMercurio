@@ -10,7 +10,7 @@ export class Rti {
       type: any;
       layout: any;
       annotation_id: any;
-      tag: any;
+      tag_id: any;
       vues: any;
       likes:any;
 }

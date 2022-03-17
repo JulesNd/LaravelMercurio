@@ -10,9 +10,10 @@ import { AuthenticationStateService } from '../../shared/authentication-state.se
 
 
 export class User {
-  name: String;
-  email: String;
+  name: string;
+  email: string;
   id: string;
+  username: string;
 }
 
 
@@ -57,20 +58,7 @@ export class NavbarComponent implements OnInit {
 
    }
 
-  onSubmit() {
-      this.jwtService.logIn(this.signinForm.value).subscribe(
-        res => {
-          this.tokenStorage(res);
-        },
-        error => {
-          this.err = error.error;
-        },() => {
-          this.authenticationStateService.setAuthState(true);
-          this.signinForm.reset()
-          this.router.navigate(['/user-profile']);
-        }
-      );
-  }
+
 
   tokenStorage(jwt){
     this.tokenAuthService.setTokenStorage(jwt.access_token);

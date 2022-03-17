@@ -50,7 +50,7 @@
      <!-- Collapsible wrapper -->
      <div class="collapse navbar-collapse" id="navbarSupportedContent">
        <!-- Navbar brand -->
-       <a   routerLink="/user-profile"   class="navbar-brand mt-2 mt-lg-0" >
+       <a   routerLink="Dashboard/{{user?.username}}"   class="navbar-brand mt-2 mt-lg-0" >
          <img
            src="./assets/logowhite.png"
            height="25"
@@ -65,14 +65,20 @@
          <li class="nav-item">
            <a class="nav-link" routerLink="/Ajouter-rti" >Ajouter un rti</a>
          </li>
-          <!--
-         <li class="nav-item">
-           <a class="nav-link" >Team</a>
+
+
+
+         <li class="nav-item"   >
+           <a class="nav-link"     routerLink="Dashboard/{{user?.username}}"   > Mes rtis  </a>
          </li>
+
+  <!--
+
          <li class="nav-item">
            <a class="nav-link" >Projects</a>
          </li>
          !-->
+
        </ul>
 
 
@@ -86,7 +92,7 @@
 
 
        <div class="user">
- Hello <B>{{user?.name}}</B>
+ Hello <B>{{user?.username}}</B>
 
        </div>
        <!-- Avatar -->

@@ -22,11 +22,23 @@ import { AddRtiComponent } from './components/add-rti/add-rti.component';
 import {v4 as uuidv4} from 'uuid';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { AnnotationsComponent } from './components/annotations/annotations.component';
+import { MyrtisComponent } from './components/myrtis/myrtis.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
 
-  {path:'user-profile/:rti_id', component:RtiEditComponent},
-  {path:'user-profile/:rti_id/annotation/:rti_id', component: AnnotationsComponent}
+  {path:'rti/:nom/:annotation_id', component:RtiEditComponent},
+//  {path:'rti/'+'abc'+':annotation_id', component:RtiEditComponent},
+
+  {path:'rti/:nom/:annotation_id/annotation', component: AnnotationsComponent},
+  { path: 'Dashboard', component: ProfileComponent },
+  { path: 'loading', component: LoadingComponent },
+
+
+
+
+
 
  ];
 
@@ -47,6 +59,9 @@ const routes: Routes = [
     RtiEditComponent,
     AddRtiComponent,
     AnnotationsComponent,
+    MyrtisComponent,
+    LoadingComponent,
+    AdminComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),

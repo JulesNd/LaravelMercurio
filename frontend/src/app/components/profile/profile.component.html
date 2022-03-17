@@ -1,9 +1,10 @@
-<!--
 
-<div class="container">
-  <h2>Name: {{user?.name}}</h2>
-  <p>Email: {{user?.email}}</p>
-  id : {{user?.id}}
-</div>
-!-->
+<!--<div *ngIf = "!isLoggedin">
+  <h1>
+Veuillez vous connecter
+</h1>
+  </div>
+  !-->
+<div *ngIf="isLoggedin">
 <app-rti></app-rti>
+</div>

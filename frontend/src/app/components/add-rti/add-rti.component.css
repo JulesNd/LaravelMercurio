@@ -10,6 +10,10 @@
   align-items: end;
 }
 
+label {
+  color: white;
+}
+
 .form {
   width: 100%;
   max-width: 400px;

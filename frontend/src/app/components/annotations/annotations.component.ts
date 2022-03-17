@@ -19,17 +19,18 @@ declare var skin: any;
   styleUrls: ['./annotations.component.css']
 })
 export class AnnotationsComponent implements OnInit {
-  rti_id: any;
+  annotation_id: any;
   rtis: any;
   rti = new Rti();
 
   constructor(private route:ActivatedRoute, private dataService: DataService) { }
 
   ngOnInit(): void {
-    this.rti_id =  this.route.snapshot.params.rti_id;
+    this.annotation_id =  this.route.snapshot.params.annotation_id;
     this.getData();
+    console.log(this.annotation_id);
 
-    var idannojson = "74eb5b82-9fbc-11ec-8b68-661a727a9b35";
+    var idannojson = this.annotation_id;
 
   let lime = new OpenLIME.OpenLIME('#openlime', { canvas: { preserveDrawingBuffer: true} });
 
@@ -38,7 +39,7 @@ export class AnnotationsComponent implements OnInit {
   layout: 'itarzoom',
   type:'rti',
   //	url: 'Data/ptm_lowdef_mask/info.json',
-  url: '/assets/'+(this.rti_id)+'/info.json',
+  url: '/assets/'+(this.annotation_id)+'/info.json',
   normals: false
   });
   lime.canvas.addLayer('fossil', layer0);
@@ -134,7 +135,7 @@ export class AnnotationsComponent implements OnInit {
   }
 
   getData() {
-    this.dataService.getRtiById(this.rti_id).subscribe(res=> {
+    this.dataService.getRtiById(this.annotation_id).subscribe(res=> {
       //console.log(res);
       this.rtis = res;
     })

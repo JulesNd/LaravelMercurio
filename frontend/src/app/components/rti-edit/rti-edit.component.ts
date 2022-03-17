@@ -16,7 +16,7 @@ declare var name: any;
   styleUrls: ['./rti-edit.component.css']
 })
 export class RtiEditComponent implements OnInit {
-  rti_id: any;
+  annotation_id: any;
   rtis: any;
   data: any;
   rti = new Rti();
@@ -29,7 +29,7 @@ export class RtiEditComponent implements OnInit {
 
   ngOnInit(): void {
     //console.log(this.route.snapshot.params.id);
-    this.rti_id =  this.route.snapshot.params.rti_id;
+    this.annotation_id =  this.route.snapshot.params.annotation_id;
     this.getData();
     this.getDataForUpdate();
 
@@ -44,7 +44,7 @@ let layer0 = new OpenLIME.Layer({
 	layout: 'itarzoom',
 	type:'rti',
 //	url: 'Data/ptm_lowdef_mask/info.json',
-	url: '/assets/'+(this.rti_id)+'/info.json',
+	url: '/assets/'+(this.annotation_id)+'/info.json',
 	normals: false
 });
 lime.canvas.addLayer('fossil', layer0);
@@ -138,14 +138,14 @@ async function processRequest(anno, action) {
   }
 
 getData() {
-  this.dataService.getRtiById(this.rti_id).subscribe(res=> {
+  this.dataService.getRtiById(this.annotation_id).subscribe(res=> {
     //console.log(res);
     this.rtis = res;
   })
 }
 
 getDataForUpdate() {
-  this.dataService.getForUpdate(this.rti_id).subscribe(res=> {
+  this.dataService.getForUpdate(this.annotation_id).subscribe(res=> {
     //console.log(res);
     this.data = res
     this.rti = this.data;
@@ -153,7 +153,7 @@ getDataForUpdate() {
 }
 updateRti() {
 
-this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
+this.dataService.updateData(this.annotation_id, this.rti).subscribe(res=>{
 
 });
 

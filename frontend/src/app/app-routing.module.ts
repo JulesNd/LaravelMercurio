@@ -8,17 +8,21 @@ import { UseremployeeComponent } from './components/useremployee/useremployee.co
 import { RtiComponent } from './components/rti/rti.component';
 import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
 import { AddRtiComponent } from './components/add-rti/add-rti.component';
+import { MyrtisComponent } from './components/myrtis/myrtis.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
+
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
-  { path: 'user-profile', component: ProfileComponent },
+//  { path: 'Dashboard/:pseudo', component: ProfileComponent },
   {path:'Employees', component: EmployeesComponent},
   {path:'useremployees', component: UseremployeeComponent},
   {path:'rtis', component: RtiComponent},
-  {path:'Ajouter-rti',component: AddRtiComponent}
+  {path:'Ajouter-rti',component: AddRtiComponent},
+  { path: 'Dashboard/:username', component: MyrtisComponent },
+
 
 ];
 

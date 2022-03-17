@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     public jwtService: JwtService
   ) {
     this.signupForm = this.fb.group({
-      name: [''],
+      username: [''],
       email: [''],
       password: [''],
       password_confirmation: ['']
