@@ -5,7 +5,9 @@
 
 <div class="container">
 
-  <form class="form"  #f="ngForm"   (ngSubmit)="insertData() ; onSubmitform(f) ">
+<!-- onSubmitform(f) !-->
+
+  <form class="form"  #f="ngForm"   (ngSubmit)="insertData() ;  ">
     <h1 class="form-title">Ajouter un RTI</h1>
     <div class="grid">
 
@@ -17,13 +19,13 @@
       <div class="form-group">
           <textarea  name="description" class="form-control" placeholder="Description" [(ngModel)]="rti.description"> </textarea>
       </div>
-<!--
+
       <div class="form-group">
         <input type="text" name="lien" class="form-control"  placeholder="Lien" [(ngModel)]="rti.lien">
       </div>
 
 
-!-->
+
 
 
 
@@ -61,10 +63,11 @@
                 </div>
 
 
-
+<!--
                   <input type="file"  name="myFile" (change)="fileEvent($event)"/>
+                  <button>Upload Image</button>
 
-
+!-->
       <button type="submit" class="btn">Ajouter</button>
     </div>
   </form>

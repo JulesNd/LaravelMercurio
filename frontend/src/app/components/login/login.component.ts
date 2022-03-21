@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from "@angular/forms";
-
+import Swal from 'sweetalert2';
 import { JwtService } from './../../shared/jwt.service';
 import { TokenAuthService } from '../../shared/token-auth.service';
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
@@ -42,9 +42,23 @@ export class LoginComponent implements OnInit {
       this.jwtService.logIn(this.signinForm.value).subscribe(
         res => {
           this.tokenStorage(res);
+          Swal.fire({
+  //position: 'top-end',
+  icon: 'success',
+  title: 'Connexion réussie',
+  showConfirmButton: false,
+  timer: 1800
+})
         },
         error => {
           this.err = error.error;
+          Swal.fire({
+  title: '',
+  text: "Adresse E-mail ou mot de passe incorrecte.",
+  icon: 'warning',
+  confirmButtonColor: '#3085d6',
+  confirmButtonText: 'Re-essayer'
+})
         },() => {
           this.authenticationStateService.setAuthState(true);
           this.signinForm.reset()

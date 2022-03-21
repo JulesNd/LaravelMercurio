@@ -40,8 +40,12 @@
 			<label>E-mail</label>
 		</div>
 		<div class="user-box form-group">
+			<div *ngIf="err?.error" class="alert alert-danger mt-3">
+				{{ err?.password }} Mauvais
+			</div>
 			<input type="password" name="Password" formControlName="password" autocomplete="off" type="password">
 			<label for="">Mot de passe</label>
+
 		</div>
 		<button type="submit" >
 			<span></span>

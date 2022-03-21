@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { JwtService } from './shared/jwt.service';
 import {Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,11 +29,15 @@ import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
 
-  {path:'rti/:nom/:annotation_id', component:RtiEditComponent},
+  //{path:'rti/:nom/:annotation_id', component:RtiEditComponent},
+  {path:'rti/:annotation_id', component:RtiEditComponent},
+
 //  {path:'rti/'+'abc'+':annotation_id', component:RtiEditComponent},
 
-  {path:'rti/:nom/:annotation_id/annotation', component: AnnotationsComponent},
-  { path: 'Dashboard', component: ProfileComponent },
+  //{path:'rti/:nom/:annotation_id/annotation', component: AnnotationsComponent},
+  {path:'rti/:annotation_id/annotation', component: AnnotationsComponent},
+
+  { path: 'Users', component: ProfileComponent },
   { path: 'loading', component: LoadingComponent },
 
 

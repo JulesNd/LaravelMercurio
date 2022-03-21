@@ -42,7 +42,17 @@ export class AnnotationsComponent implements OnInit {
   url: '/assets/'+(this.annotation_id)+'/info.json',
   normals: false
   });
+
+  let layer1 = new OpenLIME.Layer({
+  label: 'Test',
+  layout: 'itarzoom',
+  type:'image',
+  //	url: 'Data/ptm_lowdef_mask/info.json',
+  url: '/assets/'+(this.annotation_id)+'/info.json',
+  normals: false
+  });
   lime.canvas.addLayer('fossil', layer0);
+  lime.canvas.addLayer('TEST', layer1);
 
   let anno = new OpenLIME.SvgAnnotationLayer({
   label: 'Annotations',

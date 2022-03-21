@@ -12,16 +12,16 @@ import { MyrtisComponent } from './components/myrtis/myrtis.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/signin', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 
-  { path: 'signin', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
 //  { path: 'Dashboard/:pseudo', component: ProfileComponent },
   {path:'Employees', component: EmployeesComponent},
   {path:'useremployees', component: UseremployeeComponent},
   {path:'rtis', component: RtiComponent},
   {path:'Ajouter-rti',component: AddRtiComponent},
-  { path: 'Dashboard/:username', component: MyrtisComponent },
+  { path: 'Users/:username', component: MyrtisComponent },
 
 
 ];
