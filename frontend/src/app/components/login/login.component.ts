@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
           this.err = error.error;
           Swal.fire({
   title: '',
-  text: "Adresse E-mail ou mot de passe incorrecte.",
+  text: "Adresse E-mail ou mot de passe incorrect.",
   icon: 'warning',
   confirmButtonColor: '#3085d6',
   confirmButtonText: 'Re-essayer'

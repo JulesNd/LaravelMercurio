@@ -10,3 +10,22 @@
 a {
   color: white!important;
 }
+
+
+.fa-power-off {
+  padding-left: 3vh;
+}
+.fa-power-off:hover {
+  color: rgba(255, 255, 255, 1);
+  text-shadow: 1px 1px 15px white;
+
+}
+
+
+
+
+.dropdown-toggle::after {
+
+  display: none;
+
+}

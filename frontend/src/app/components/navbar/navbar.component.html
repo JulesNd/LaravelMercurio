@@ -31,7 +31,7 @@
 
 
  <!-- Navbar -->
- <nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedin">
+ <nav class="navbar navbar-expand-lg navbar-light bg-light" >
    <!-- Container wrapper -->
    <div class="container-fluid">
      <!-- Toggle button -->
@@ -95,12 +95,13 @@
 
      <!-- Right elements -->
      <div class="d-flex align-items-center">
-       <a class="nav-link user"   (click)="logOut()" >Logout</a>
+
+
+
 
 
        <div class="user">
- Hello <B>{{user?.username}}</B>
-
+<B>{{user?.username}}</B>
        </div>
        <!-- Avatar -->
        <div class="dropdown">
@@ -113,7 +114,7 @@
            aria-expanded="false"
          >
            <img
-             src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+             src="//cdn-icons-png.flaticon.com/512/1177/1177568.png"
              class="rounded-circle"
              height="25"
              alt="Black and White Portrait of a Man"
@@ -135,6 +136,7 @@
            </li>
          </ul>
        </div>
+          <li><a ><i aria-hidden="true"   (click)="logOut()" class="fa fa-power-off "></i></a></li>
      </div>
      <!-- Right elements -->
    </div>

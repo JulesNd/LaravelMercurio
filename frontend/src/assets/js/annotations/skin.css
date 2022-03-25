@@ -2,6 +2,8 @@
 /*	pointer-events: none; */
 }
 
+
+
 .openlime-overlay {
 	position:absolute;
 	top:0px;
@@ -51,7 +53,7 @@
 
 
 .openlime-toolbar {
-	position:absolute; 
+	position:absolute;
 	bottom:0px;
 	right:0px;
 	padding:5px;
@@ -73,10 +75,10 @@
 
 
 .openlime-light path[style] {
-	fill:#80808011 !important; 
+	fill:#80808011 !important;
 }
 .openlime-light-active .openlime-light path[style] {
-	fill:#ffcc00 !important; 
+	fill:#ffcc00 !important;
 }
 
 
@@ -91,7 +93,7 @@
 	background: #222;
 	opacity:0.95;
 	padding:20px 40px;
-	border-radius:5px;	
+	border-radius:5px;
     font-family: "Open Sans",sans-serif;
 
 }
@@ -173,7 +175,7 @@ g.openlime-expand {
 }
 
 .active + .openlime-list {
-	height:auto; 
+	height:auto;
 	max-height:100%;
 }
 
@@ -193,7 +195,7 @@ g.openlime-expand {
 .openlime-layers-menu .openlime-entry:hover,
 .openlime-layers-menu .openlime-entry:focus {
 
-	background-color: rgb(40, 40, 40); 
+	background-color: rgb(40, 40, 40);
 	color:#fff;
 }
 
@@ -204,13 +206,13 @@ g.openlime-expand {
 
 .openlime-layers-menu .openlime-entry.active,
 .openlime-layers-menu .openlime-entry:active {
-	background-color: rgb(80, 80, 80); 
+	background-color: rgb(80, 80, 80);
 	color:#fff;
 }
 
 
 .openlime-layers-menu .openlime-entry.selected {
-	background-color: rgb(80, 80, 80); 
+	background-color: rgb(80, 80, 80);
 	color:#fff;
 }
 
@@ -264,7 +266,7 @@ g.openlime-expand {
 /* editor */
 
 .openlime-annotation-edit.hidden { display: none; }
-.openlime-annotation-edit-tools svg, .openlime-tools svg { height:25px; cursor: pointer; margin-right: 10px } 
+.openlime-annotation-edit-tools svg, .openlime-tools svg { height:25px; cursor: pointer; margin-right: 10px }
 .openlime-annotation-edit-tools { margin-top: 5px; }
 .openlime-tool { height: 25px; width:25px; }
 
@@ -274,7 +276,7 @@ g.openlime-expand {
 .openlime-eye, .openlime-eye-off { height:14px; float: right;}
 .openline-eye, .hidden .openlime-eye-off { display: block; }
 .openlime-eye-off, .hidden .openlime-eye { display: none; }
- 
+
 .openlime-eye:hover, .openlime-eye-off:hover { color: #ffa; }
 
 /*.openlime-annotation-edit-tools .active {  background-color:rgb(80, 80, 80); } */
@@ -292,8 +294,8 @@ g.openlime-expand {
 /* Editor select */
 
 .openlime-select  {
-	background: #888; 
-	position: relative; 
+	background: #888;
+	position: relative;
 	cursor: pointer;
 	display: inline-block;
 	height:24px;
@@ -314,7 +316,7 @@ g.openlime-expand {
 	width: 0;
 	height: 0;
 	border: 7px solid transparent;
-	border-color: #fff transparent transparent transparent; 
+	border-color: #fff transparent transparent transparent;
 	position: absolute;
 	top: 8px;
 	right: 10px;
@@ -327,11 +329,11 @@ g.openlime-expand {
 	background-color: #888;
 }
 .active .openlime-select-button:after {
-	top: 1px;	
-	border-color: transparent transparent #fff transparent; 
+	top: 1px;
+	border-color: transparent transparent #fff transparent;
 
 }
-.openlime-select-menu { 
+.openlime-select-menu {
 	display: none;
 	position: absolute;
 	top: 100%;
@@ -357,5 +359,3 @@ g.openlime-expand {
 	color: #fff;
 	border: 1px #aaa;
 }
-
-

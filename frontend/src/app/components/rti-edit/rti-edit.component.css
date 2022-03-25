@@ -18,7 +18,6 @@ form {
   z-index: 1;
 }
 
-
 .fa-arrow-circle-left {
   font-size: 5vh!important;
   color: white;
@@ -58,17 +57,14 @@ form {
 }
 
 
-
-
-
-@media only screen and (min-width : 320px) and (max-width : 799px) {
+@media only screen and (min-width : 320px) and (max-width : 850px) {
 
   .col {
     /**margin: 0 2px 2px 0;**/
-    height: 75vh!important;
+    height: 50vh!important;
   }
   .title {
-    font-size: 2em!important;
+    font-size: 1.2em!important;
     padding: 1%;
     margin-bottom: 20%;
 
@@ -82,7 +78,7 @@ form {
     flex: 1;
     padding: 30px;
     height: 30%;
-    width: 100%;
+    width: 50%;
     text-align: center;
     background-color: #fff;
     border-radius: 10px 10px 10px 10px;
@@ -90,7 +86,40 @@ form {
 
   }
 
+  .col-main {
+    flex: 4;
+    border-radius: 10px 0px 0px 10px;
+    box-shadow: 4px 4px 2px -1px #00000070;
+    background-color: rgba(0, 0, 0, 0.80);
+
+  }
+
+  .openlime-toolbar {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 5px;
+    background-color: rgb(0, 0, 0, 0.0);
+    display: flex;
+    width: 50%!important;
+  }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .fa-arrow-left {
@@ -271,6 +300,19 @@ ul {
   display: block !important;
   text-align: center !important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 .box {

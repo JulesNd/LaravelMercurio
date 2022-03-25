@@ -15,7 +15,7 @@ try {
 	exit(0);
 }
 
- 
+
 
 
 
@@ -127,7 +127,7 @@ function export($pdo) {
 					"type"=> "TextualBody",
 					"value"=> $row['class'],
 					"purpose"=> "classifying"
-					] 
+					]
 				],
 				"target"=> [
 				  "selector"=> [
@@ -135,7 +135,7 @@ function export($pdo) {
 					"value"=> $row["svg"]
 				  ]
 				]
-*/				
+*/
 		}
 		echo(json_encode($annotations));
 		return;

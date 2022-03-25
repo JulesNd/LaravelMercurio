@@ -1,4 +1,14 @@
 
+
+.container {
+
+}
+
+
+.fa {
+  font-size: 2vh;
+}
+
 .form-title {
   margin-bottom: 2vh;
 }
@@ -66,6 +76,19 @@ label {
       resize: none;
       border-radius: 11px;
     }
+  }
+
+  .btn {
+    display: inline-block;
+    border: none;
+    outline: none;
+    background-color: #2D3047;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 16px 32px;
+    border-radius: 1000px;
+    cursor: pointer;
   }
 
   .btn {

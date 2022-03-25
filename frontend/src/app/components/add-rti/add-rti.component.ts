@@ -1,11 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../service/data.service';
 import { Rti } from '../../rti';
-import { User } from '../../user';
 import {NgForm} from '@angular/forms';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {Location} from '@angular/common';
+import { JwtService } from './../../shared/jwt.service';
+import Swal from 'sweetalert2';
 
+export class User {
+  name: string;
+  email: string;
+  id: string;
+  username: string;
+}
 
 
 @Component({
@@ -18,10 +26,15 @@ export class AddRtiComponent implements OnInit {
   rtis: any;
   users:any;
   rti = new Rti();
+  user: User;
 
-    constructor(private dataService: DataService, private http: HttpClient) {
 
+    constructor(private dataService: DataService, private http: HttpClient, private _location: Location,     public jwtService: JwtService,
+) {
 
+      this.jwtService.profile().subscribe((res:any) => {
+        this.user = res;
+      })
 
      }
 
@@ -49,6 +62,11 @@ export class AddRtiComponent implements OnInit {
       }).subscribe(data => {
        //Check success message
        //sweetalert message popup
+
+
+
+
+
       console.log('success')
       });
 
@@ -71,6 +89,14 @@ export class AddRtiComponent implements OnInit {
 
       this.dataService.insertData(this.rti).subscribe(res => {
          console.log(res);
+         Swal.fire({
+         //position: 'top-end',
+         icon: 'success',
+         title: 'RTI crée avec succès',
+         showConfirmButton: false,
+         timer: 1800
+         })
+
       });
 
     }
@@ -81,5 +107,9 @@ export class AddRtiComponent implements OnInit {
          this.users = res;
       });
     }
+
+    backClicked() {
+   this._location.back();
+ }
 
 }

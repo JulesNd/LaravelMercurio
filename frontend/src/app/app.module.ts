@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { JwtService } from './shared/jwt.service';
 import {Observable} from 'rxjs';
 import { map } from 'rxjs/operators';
+import {Location} from '@angular/common';
 import Swal from 'sweetalert2';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { AnnotationsComponent } from './components/annotations/annotations.compo
 import { MyrtisComponent } from './components/myrtis/myrtis.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
 
@@ -75,6 +78,8 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    ClipboardModule,
+    NgbModule,
   ],
   providers: [
     {

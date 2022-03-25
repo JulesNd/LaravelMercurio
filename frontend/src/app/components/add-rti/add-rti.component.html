@@ -3,6 +3,8 @@
 
 
 
+
+  <button (click)="backClicked()" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
 <div class="container">
 
 <!-- onSubmitform(f) !-->
@@ -13,54 +15,86 @@
 
 
       <div class="form-group">
+        <label for="exampleFormControlSelect1">Nom</label>
+
        <input type="text" name="name" class="form-control"  placeholder="Nom"  [(ngModel)]="rti.nom"   >
       </div>
 
       <div class="form-group">
+        <label for="exampleFormControlSelect1">Description</label>
+
           <textarea  name="description" class="form-control" placeholder="Description" [(ngModel)]="rti.description"> </textarea>
       </div>
 
-      <div class="form-group">
-        <input type="text" name="lien" class="form-control"  placeholder="Lien" [(ngModel)]="rti.lien">
-      </div>
 
 
 
 
-
-
-
-
-
-
-
-      <div class="form-group">
+      <div class="form-group" *ngIf=" user.email === 'Admin@gmail.com'">
       <label for="exampleFormControlSelect1">Proprietaire</label>
       <select [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
-        <option *ngFor="let user of users" value="{{user.id}}" >{{user.name}} - {{user.email}}</option>
+    <option value="" selected disabled>Selectionnez un proprietaire pour ce RTI</option>
+    <option   *ngFor="let user of users" value="{{user.id}}" >{{user.username}} - {{user.email}}</option>
 
       </select>
     </div>
 
+    <div class="form-group" *ngIf=" user.email != 'Admin@gmail.com'">
+    <label for="exampleFormControlSelect1">Proprietaire</label>
+    <select [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+  <option value="" selected disabled>Selectionnez un proprietaire pour ce RTI</option>
+  <option    value="{{user?.id}}" >{{user?.username}} - {{user?.email}}</option>
+
+    </select>
+  </div>
+
+
 
 
         <div class="form-group">
+          <label for="exampleFormControlSelect1">Date d'acquisition</label>
+
           <input type="date" name="Email" class="form-control" placeholder="Date" [(ngModel)]="rti.date">
           </div>
 
-          <div class="form-group">
-            <input type="text" name="public" class="form-control" placeholder="Visibilité" [(ngModel)]="rti.public">
-            </div>
+
 
             <div class="form-group">
-              <input type="text" name="layout" class="form-control" placeholder="Layout" [(ngModel)]="rti.layout">
-              </div>
+            <label for="exampleFormControlSelect1">Visibilité</label>
+            <select [(ngModel)]="rti.public" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+          <option   value="1" >Public</option>
+        <option   value="0" >Privé</option>
+            </select>
+          </div>
 
-              <div class="form-group">
-                <input type="text" name="public" class="form-control" placeholder="Type" [(ngModel)]="rti.type">
 
 
-                </div>
+
+
+
+
+                      <div class="form-group">
+                      <label for="exampleFormControlSelect1">Layout</label>
+                      <select [(ngModel)]="rti.layout" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+                    <option   value="tarzoom" >tarzoom</option>
+                  <option   value="itarzoom" >itarzoom</option>
+                  <option   value="deepzoom" >deepzoom</option>
+                <option   value="image" >image</option>
+                      </select>
+                    </div>
+
+
+
+
+
+                            <div class="form-group">
+                            <label for="exampleFormControlSelect1">Type</label>
+                            <select [(ngModel)]="rti.type" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+                          <option   value="rti">rti</option>
+                        <option   value="jpeg" >jpeg</option>
+
+                            </select>
+                          </div>
 
 
 <!--

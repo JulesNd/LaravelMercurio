@@ -6,11 +6,12 @@ import { Rti } from '../../rti';
 
 
 
+
 export class User {
-  name: String;
-  email: String;
+  name: string;
+  email: string;
   id: string;
-  owner_id: string;
+  username: string;
 }
 
 
@@ -22,6 +23,7 @@ export class User {
 export class RtiComponent implements OnInit {
 
   rtis: any ;
+  rtis1:any;
   rti = new Rti();
   user: User;
 
@@ -37,12 +39,19 @@ export class RtiComponent implements OnInit {
 
     ngOnInit(): void {
   this.getRtisData();
+  this.getRtis();
 
     }
 
     getRtisData() {
       this.DataService.getDataByUser().subscribe(res => {
          this.rtis = res;
+      });
+    }
+
+    getRtis() {
+      this.DataService.getData().subscribe(res => {
+         this.rtis1 = res;
       });
     }
 
@@ -53,6 +62,8 @@ export class RtiComponent implements OnInit {
       });
 
     }
+
+
 
 
 

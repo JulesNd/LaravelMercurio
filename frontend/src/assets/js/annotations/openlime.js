@@ -9,21 +9,21 @@
             Object.assign(this, {
                 xLow: 1e20,
                 yLow: 1e20,
-                xHigh: -1e20, 
+                xHigh: -1e20,
                 yHigh: -1e20 });
             Object.assign(this, options);
         }
 
         fromArray(x) {
             this.xLow = x[0];
-            this.yLow = x[1]; 
+            this.yLow = x[1];
             this.xHigh = x[2];
             this.yHigh  = x[3];
         }
-        
+
         toEmpty() {
             this.xLow = 1e20;
-            this.yLow = 1e20; 
+            this.yLow = 1e20;
             this.xHigh = -1e20;
             this.yHigh  = -1e20;
         }
@@ -57,7 +57,7 @@
             this.xHigh = Math.max(this.xHigh, p.x);
             this.yHigh = Math.max(this.yHigh, p.y);
         }
-        
+
         shift(dx, dy) {
             this.xLow += dx;
             this.yLow += dy;
@@ -75,7 +75,7 @@
         width() {
             return this.xHigh - this.xLow;
         }
-        
+
         height() {
             return this.yHigh - this.yLow;
         }
@@ -97,7 +97,7 @@
     }
 
     /**
-     * 
+     *
      * @param {number} x position
      * @param {number} y position
      * @param {number} z scale
@@ -111,7 +111,7 @@
     		Object.assign(this, { x:0, y:0, z:1, a:0, t:0 });
 
     		if(!this.t) this.t = performance.now();
-    		
+
     		if(typeof(options) == 'object')
     			Object.assign(this, options);
     	}
@@ -125,7 +125,7 @@
     	apply(x, y) {
     		//TODO! ROTATE
     		let r = Transform.rotate(x, y, this.a);
-    		return { 
+    		return {
     			x: r.x*this.z + this.x,
     			y: r.y*this.z + this.y
     		}
@@ -157,7 +157,7 @@
     		a.a += b.a;
     		var r = Transform.rotate(a.x, a.y, b.a);
     		a.x = r.x*b.z + b.x;
-    		a.y = r.y*b.z + b.y; 
+    		a.y = r.y*b.z + b.y;
     		return a;
     	}
 
@@ -172,7 +172,7 @@
     		return box;
     	}
 
-    /*  get the bounding box (in image coordinate sppace) of the vieport. 
+    /*  get the bounding box (in image coordinate sppace) of the vieport.
      */
     	getInverseBox(viewport) {
     		let inverse = this.inverse();
@@ -194,14 +194,14 @@
     		let t = (target.t - source.t);
 
     		this.t = time;
-    		if(time < source.t) 
+    		if(time < source.t)
     			return Object.assign(this, source);
-    		if(time > target.t || t < 0.0001) 
-    			return Object.assign(this, target);		
+    		if(time > target.t || t < 0.0001)
+    			return Object.assign(this, target);
 
     		let tt = (time - source.t)/t;
     		let st = (target.t - time)/t;
-    		
+
     		for(let i of ['x', 'y', 'z', 'a'])
     			this[i] = (st*source[i] + tt*target[i]);
     	}
@@ -216,11 +216,11 @@
     		let z = this.z;
 
     		// In coords with 0 in lower left corner map x0 to -1, and x0+v.w to 1
-    		// In coords with 0 at screen center and x0 at 0, map -v.w/2 -> -1, v.w/2 -> 1 
+    		// In coords with 0 at screen center and x0 at 0, map -v.w/2 -> -1, v.w/2 -> 1
     		// With x0 != 0: x0 -> x0-v.w/2 -> -1, and x0+dx -> x0+v.dx-v.w/2 -> 1
     		// Where dx is viewport width, while w is window width
     		//0, 0 <-> viewport.x + viewport.dx/2 (if x, y =
-    		
+
     		let zx = 2/viewport.dx;
     		let zy = 2/viewport.dy;
 
@@ -229,7 +229,7 @@
 
     		let a = Math.PI *this.a/180;
     		let matrix = [
-    			 Math.cos(a)*zx*z, Math.sin(a)*zy*z,  0,  0, 
+    			 Math.cos(a)*zx*z, Math.sin(a)*zy*z,  0,  0,
     			-Math.sin(a)*zx*z, Math.cos(a)*zy*z,  0,  0,
     			 0,  0,  1,  0,
     			dx, dy, 0,  1];
@@ -238,30 +238,30 @@
 
     /**
      * TODO (if needed)
-     */ 
+     */
     	toMatrix() {
     		let z = this.z;
     		return [
     			z,   0,   0,   0,
-    			0,   z,   0,   0, 
+    			0,   z,   0,   0,
     			0,   0,   1,   0,
     			z*x, z*y, 0,   1,
     		];
     	}
 
         /**
-    	 * Transform p from scene (0 at image center) to [0,wh] 
+    	 * Transform p from scene (0 at image center) to [0,wh]
     	 * @param {*} viewport viewport(x,y,dx,dy,w,h)
     	 * @param {*} p point in scene: 0,0 at image center
-    	 */ 
+    	 */
     	sceneToViewportCoords(viewport, p) {
-            return [p[0] * this.z  + this.x - viewport.x + viewport.w/2, 
+            return [p[0] * this.z  + this.x - viewport.x + viewport.w/2,
                     p[1] * this.z  - this.y + viewport.y + viewport.h/2 ];
         }
 
     	/**
          * Transform p from  [0,wh] to scene (0 at image center)
-    	 * 
+    	 *
     	 * @param {*} viewport viewport(x,y,dx,dy,w,h)
     	 * @param {*} p point in range [0..w-1,0..h-1]
     	 */
@@ -385,10 +385,10 @@
     		Object.assign(this.target, { x: x, y:y, z:z, a:a, t:now + dt });
     		this.emit('update');
     	}
-    	
+
 
     /*
-     * Pan the camera 
+     * Pan the camera
      * @param {number} dx move the camera by dx pixels (positive means the image moves right).
      */
     	pan(dt, dx, dy) {
@@ -450,7 +450,7 @@
     		m.x += r.x*m.z*(1 - dz);
     		m.y += r.y*m.z*(1 - dz);
 
-    		
+
     		this.setPosition(dt, m.x, m.y, m.z*dz, m.a);
     	}
 
@@ -461,7 +461,7 @@
     			Object.assign(pos, this.source);
     		if(time >= this.target.t)
     			Object.assign(pos, this.target);
-    		else 
+    		else
     			pos.interpolate(this.source, this.target, time);
 
     		pos.t = time;
@@ -470,7 +470,7 @@
 
     /**
      * @param {Array} box fit the specified rectangle [minx, miny, maxx, maxy] in the canvas.
-     * @param {number} dt animation duration in millisecond 
+     * @param {number} dt animation duration in millisecond
      * @param {string} size how to fit the image: <contain | cover> default is contain (and cover is not implemented
      */
 
@@ -503,7 +503,7 @@
 
     		let bw = this.boundingBox.width();
     		let bh = this.boundingBox.height();
-    	
+
     		this.minZoom = Math.min(w/bw, h/bh) * this.minScreenFraction;
     		this.maxZoom = minScale > 0 ? this.maxFixedZoom / minScale : this.maxFixedZoom;
     		this.maxZoom = Math.max(this.minZoom, this.maxZoom);
@@ -524,7 +524,7 @@
      *
      * @param {string} id an unique id for each raster
      * @param {url} url of the content
-     * @param {object} options 
+     * @param {object} options
      * * *type*: vec3 (default value) for standard images, vec4 when including alpha, vec2, float other purpouses.
      * * *attribute*: <coeff|kd|ks|gloss|normals|dem> meaning of the image.
      * * *colorSpace*: <linear|srgb> colorspace used for rendering.
@@ -534,8 +534,8 @@
 
     	constructor(options) {
 
-    		Object.assign(this, { 
-    			type: 'vec3', 
+    		Object.assign(this, {
+    			type: 'vec3',
     			colorSpace: 'linear',
     			attribute: 'kd'
     		 });
@@ -567,7 +567,7 @@
     		let tex = this.loadTexture(gl, img);
     		//TODO 3 is not accurate for type of image, when changing from rgb to grayscale, fix this value.
     		let size = img.width * img.height * 3;
-    		return [tex, size];	
+    		return [tex, size];
     	}
 
     	async blobToImage(blob, gl) {
@@ -576,7 +576,7 @@
     			var isFirefox = typeof InstallTrigger !== 'undefined';
     			//firefox does not support options for this call, BUT the image is automatically flipped.
     			if(isFirefox)
-    				img = await createImageBitmap(blob); 
+    				img = await createImageBitmap(blob);
     			else
     				img = await createImageBitmap(blob, { imageOrientation1: 'flipY' });
 
@@ -588,9 +588,9 @@
 
     			await new Promise((resolve, reject) => { img.onload = () => resolve(); });
     			urlCreator.revokeObjectURL(img.src);
-    			
+
     		}
-    		return img;		
+    		return img;
     	}
     /*
      * @param {function} callback as function(tex, sizeinBytes)
@@ -615,7 +615,7 @@
      *  @param {object} options
      * *label*: used for menu
      * *samplers*: array of rasters {id:, type: } color, normals, etc.
-     * *uniforms*: type = <vec4|vec3|vec2|float|int>, needsUpdate controls when updated in gl, size is unused, value is and array or a float, 
+     * *uniforms*: type = <vec4|vec3|vec2|float|int>, needsUpdate controls when updated in gl, size is unused, value is and array or a float,
      *             we also want to support interpolation: source (value is the target), start, end are the timing (same as camera interpolation)
      * *body*: code actually performing the rendering, needs to return a vec4
      * *name*: name of the body function
@@ -725,7 +725,7 @@
     				uniform.location = gl.getUniformLocation(program, name);
 
     			if(!uniform.location)  //uniform not used in program
-    				continue; 
+    				continue;
 
     			if(uniform.needsUpdate) {
     				let value = uniform.value;
@@ -745,8 +745,8 @@
     		let gl2 = !(gl instanceof WebGLRenderingContext);
     		return `${gl2? '#version 300 es':''}
 
-precision highp float; 
-precision highp int; 
+precision highp float;
+precision highp int;
 
 uniform mat4 u_matrix;
 ${gl2? 'in' : 'attribute'} vec4 a_position;
@@ -766,7 +766,7 @@ void main() {
     }
 
     /**
-     * @param {string|Object} url URL of the image or the tiled config file, 
+     * @param {string|Object} url URL of the image or the tiled config file,
      * @param {string} type select one among: <image, {@link https://www.microimages.com/documentation/TechGuides/78googleMapsStruc.pdf google}, {@link https://docs.microsoft.com/en-us/previous-versions/windows/silverlight/dotnet-windows-silverlight/cc645077(v=vs.95)?redirectedfrom=MSDN deepzoom}, {@link http://www.zoomify.com/ZIFFileFormatSpecification.htm zoomify}, {@link https://iipimage.sourceforge.io/ iip}, {@link https://iiif.io/api/image/3.0/ iiif}>
      */
     class Layout {
@@ -776,11 +776,11 @@ void main() {
     			width: 0,
     			height: 0,
     			tilesize: 256,
-    			overlap: 0, 
+    			overlap: 0,
     			nlevels: 1,        //level 0 is the top, single tile level.
     			tiles: [],
     			suffix: 'jpg',
-    			qbox: [],          //array of bounding box in tiles, one for mipmap 
+    			qbox: [],          //array of bounding box in tiles, one for mipmap
     			bbox: [],          //array of bounding box in pixels (w, h)
     			urls: [],
     			signals: { ready: [], updateSize: [] },          //callbacks when the layout is ready.
@@ -861,7 +861,7 @@ void main() {
 
     		if(this.type == 'image') {
     			this.qbox[0] = new BoundingBox({xLow:0, yLow: 0, xHigh: 1, yHigh: 1});
-    			this.bbox[0] = new BoundingBox({xLow:0, yLow: 0, xHigh: w, yHigh: h}); 
+    			this.bbox[0] = new BoundingBox({xLow:0, yLow: 0, xHigh: w, yHigh: h});
     			this.tiles.push({index:0, level:0, x:0, y:0});
     			// Acknowledge bbox change (useful for knowing scene extension (at canvas level))
     			this.emit('updateSize');
@@ -871,7 +871,7 @@ void main() {
     		let tiles = [];
     		for(let level = this.nlevels - 1; level >= 0; level--) {
     			this.qbox[level] = new BoundingBox({xLow:0, yLow: 0, xHigh: 0, yHigh: 0});
-    			this.bbox[level] = new BoundingBox({xLow:0, yLow: 0, xHigh: w, yHigh: h}); 
+    			this.bbox[level] = new BoundingBox({xLow:0, yLow: 0, xHigh: w, yHigh: h});
     			for(let y = 0; y*this.tilesize < h; y++) {
     				this.qbox[level].yHigh = y+1;
     				for(let x = 0; x*this.tilesize < w; x ++) {
@@ -893,7 +893,7 @@ void main() {
     		this.emit('updateSize');
     	}
 
-    /** Return the coordinates of the tile (in [0, 0, w h] image coordinate system) and the texture coords associated. 
+    /** Return the coordinates of the tile (in [0, 0, w h] image coordinate system) and the texture coords associated.
      *
      */
     	tileCoords(level, x, y) {
@@ -903,9 +903,9 @@ void main() {
     		var tcoords = new Float32Array([0, 1,     0, 0,     1, 0,     1, 1]);
 
     		if(this.type == "image") {
-    			return { 
+    			return {
     				coords: new Float32Array([-w/2, -h/2, 0,  -w/2, h/2, 0,  w/2, h/2, 0,  w/2, -h/2, 0]),
-    				tcoords: tcoords 
+    				tcoords: tcoords
     			};
     		}
 
@@ -940,8 +940,8 @@ void main() {
     			tcoords[3] = tcoords[5] = (y==0? 0: dty);
     			tcoords[4] = tcoords[6] = (x==lx? 1: 1 - dtx);
     			tcoords[1] = tcoords[7] = (y==ly? 1: 1 - dty);
-    		} 
-    		//flip Y coordinates 
+    		}
+    		//flip Y coordinates
     		//TODO cleanup this mess!
     		let tmp = tcoords[1];
     		tcoords[1] = tcoords[7] = tcoords[3];
@@ -1062,11 +1062,11 @@ void main() {
     			let url = this.urls[rasterid];
     			let level = tile.level + this.skiplevels;
     			return url + level + '/' + tile.x + '_' + tile.y + '.' + this.suffix;
-    		}; 
+    		};
     	}
 
     	async initTarzoom() {
-    		this.tarzoom =[];	
+    		this.tarzoom =[];
     		for (let url of this.urls) {
     			var response = await fetch(url);
     			if (!response.ok) {
@@ -1085,12 +1085,12 @@ void main() {
     			tile.start = tar.offsets[tile.index];
     			tile.end = tar.offsets[tile.index+1];
     			return tar.url;
-    		}; 
+    		};
     	}
 
 
     	async initITarzoom() {
-    		const url = this.urls[0];		
+    		const url = this.urls[0];
     		var response = await fetch(url);
     		if(!response.ok) {
     			this.status = "Failed loading " + url + ": " + response.statusText;
@@ -1108,7 +1108,7 @@ void main() {
     			for(let i = 0; i < this.stride+1; i++)
     				tile.offsets.push(this.offsets[index + i] - tile.start);
     			return this.url;
-    		}; 
+    		};
     	}
 
 
@@ -1173,7 +1173,7 @@ void main() {
     			// pixel size parameters /ws,hs/
     			let ws = tw;
     			if (xr + tw*s > this.width)
-    				ws = (this.width - xr + s - 1) / s;  
+    				ws = (this.width - xr + s - 1) / s;
     			let hs = tw;
     			if (yr + tw*s > this.height)
     				hs = (this.height - yr + s - 1) / s;
@@ -1184,9 +1184,9 @@ void main() {
     }
 
     /* Cache holds the images and the tile textures.
-     *  Each tile has a priority 0 and above means it is visible, 
+     *  Each tile has a priority 0 and above means it is visible,
      *  negative depends on how far from the border and how more zoomed you need to go
-     * 
+     *
      * * *capacity*: in bytes, max amount of GPU RAM used.
      * *size*: current size (read only!)
      * *maxRequest*: max number of concurrent HTTP requests
@@ -1236,7 +1236,7 @@ void main() {
     			if(worst.tile.time < best.tile.time)
     				this.dropTile(worst.layer, worst.tile);
     			else
-    				return; 
+    				return;
     		}
     		this.loadTile(best.layer, best.tile);
     	}
@@ -1261,8 +1261,8 @@ void main() {
     			for(let tile of layer.tiles) {
     				//TODO might be some are present when switching shaders.
     				if(tile.missing != 0) continue;
-    				if(!worst || 
-    				   tile.time < worst.tile.time || 
+    				if(!worst ||
+    				   tile.time < worst.tile.time ||
     				   (tile.time == worst.tile.time && tile.priority < worst.tile.priority)) {
     					worst = {layer, tile};
     				}
@@ -1271,7 +1271,7 @@ void main() {
     		return worst;
     	}
 
-    /* 
+    /*
      */
     	loadTile(layer, tile) {
     		this.requested++;
@@ -1300,7 +1300,7 @@ void main() {
     	flush(layer) {
     	}
 
-    /* 
+    /*
      */
     }
 
@@ -1331,11 +1331,11 @@ void main() {
     			let type = options.type;
     			delete options.type;
     			if(type in this.types) {
-    				
+
     				return this.types[type](options);
     			}
     			throw "Layer type: " + type + "  module has not been loaded";
-    		} 
+    		}
 
     		this.init(options);
 
@@ -1429,7 +1429,7 @@ void main() {
 
     	setTransform(tx) {
     		this.transform = tx;
-    		this.emit('updateSize'); 
+    		this.emit('updateSize');
     	}
 
     	setShader(id) {
@@ -1496,19 +1496,19 @@ void main() {
     		// FIXME: this do not consider children layers
     		// Take layout bbox
     		let result = this.layout.boundingBox();
-    		
+
     		// Apply layer transform to bbox
     		if (this.transform != null && this.transform != undefined) {
     			result = this.transform.transformBox(result);
     		}
-    		
+
     		return result;
     	}
 
     	static computeLayersBBox(layers, discardHidden) {
     		if (layers == undefined || layers == null) {
     			console.log("ASKING BBOX INFO ON NO LAYERS");
-    			let emptyBox = new BoundingBox(); 
+    			let emptyBox = new BoundingBox();
     			return emptyBox;
     		}
     		let layersBbox = new BoundingBox();
@@ -1569,7 +1569,7 @@ void main() {
     			current.value[i] = (st*source.value[i] + tt*target.value[i]);
     		return false;
     	}
-    	
+
     	clear() {
     		this.ibuffer = this.vbuffer = null;
     		this.tiles = [];
@@ -1579,7 +1579,7 @@ void main() {
     		this.prefetch();
     	}
     /**
-     *  render the 
+     *  render the
      */
     	draw(transform, viewport) {
     		//exception for layout image where we still do not know the image size
@@ -1614,7 +1614,7 @@ void main() {
 
     	drawTile(tile) {
     		let tiledata = this.tiles[tile.index];
-    		if(tiledata.missing != 0) 
+    		if(tiledata.missing != 0)
     			throw "Attempt to draw tile still missing textures"
 
     		//TODO might want to change the function to oaccept tile as argument
@@ -1634,7 +1634,7 @@ void main() {
     		gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT,0);
     	}
 
-    /* given the full pyramid of needed tiles for a certain bounding box, 
+    /* given the full pyramid of needed tiles for a certain bounding box,
      *  starts from the preferred levels and goes up in the hierarchy if a tile is missing.
      *  complete is true if all of the 'brothers' in the hierarchy are loaded,
      *  drawing incomplete tiles enhance the resolution early at the cost of some overdrawing and problems with opacity.
@@ -1737,7 +1737,7 @@ void main() {
     			gl.bindBuffer(gl.ARRAY_BUFFER, this.tbuffer);
     			gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([0, 0,  0, 1,  1, 1,  1, 0]), gl.STATIC_DRAW);
     		}
-    		
+
     		if(this.shader.needsUpdate)
     			this.shader.createProgram(gl);
 
@@ -1767,7 +1767,7 @@ void main() {
     		if(this.rasters.length == 0)
     			return;
 
-    		if(this.status != 'ready') 
+    		if(this.status != 'ready')
     			return;
 
     		if(typeof(this.layout) != 'object')
@@ -1814,14 +1814,14 @@ void main() {
     			let options = {};
     			if(tile.end)
     				options.headers = { range: `bytes=${tile.start}-${tile.end}`, 'Accept-Encoding': 'indentity' };
-    			
+
     			var response = await fetch(tile.url, options);
     			if(!response.ok) {
     				callback("Failed loading " + tile.url + ": " + response.statusText);
     				return;
     			}
     			let blob = await response.blob();
-    			
+
     			console.log(this.shader.samplers.length);
     			let i = 0;
     			for(let sampler of this.shader.samplers) {
@@ -1829,7 +1829,7 @@ void main() {
     				let imgblob = blob.slice(tile.offsets[i], tile.offsets[i+1]);
     				const img = await raster.blobToImage(imgblob, this.gl);
     				let tex = raster.loadTexture(this.gl, img);
-    				let size = img.width * img.height * 3;		
+    				let size = img.width * img.height * 3;
     				tile.size += size;
     				tile.tex[sampler.id] = tex;
     				i++;
@@ -1842,7 +1842,7 @@ void main() {
     		}
 
     		for(let sampler of this.shader.samplers) {
-    			
+
     			let raster = this.rasters[sampler.id];
     			tile.url = this.layout.getTileURL(sampler.id, tile);
     			const [tex, size] = await raster.loadImage(tile, this.gl);
@@ -1874,17 +1874,17 @@ void main() {
      * @param {Object} options
      * * *layers*: Object specifies layers (see. {@link Layer})
      * * *preserveDrawingBuffer* needed for screenshots (otherwise is just a performance penalty)
-     * 
+     *
      * **Signals:**
      * Emits *"update"* event when a layer updates or is added or removed.
-     * 
+     *
      */
 
     class Canvas {
     	constructor(canvas, overlay, camera, options) {
-    		Object.assign(this, { 
+    		Object.assign(this, {
     			canvasElement: null,
-    			preserveDrawingBuffer: false, 
+    			preserveDrawingBuffer: false,
     			gl: null,
     			overlayElement: overlay,
     			camera: camera,
@@ -1894,7 +1894,7 @@ void main() {
     		Object.assign(this, options);
 
     		this.init(canvas);
-    			
+
     		for(let id in this.layers)
     			this.addLayer(id, new Layer(id, this.layers[id]));
     		this.camera.addEvent('update', () => this.emit('update'));
@@ -1934,9 +1934,9 @@ void main() {
 
 
     		let glopt = { antialias: false, depth: false, preserveDrawingBuffer: this.preserveDrawingBuffer };
-    		this.gl = this.gl || 
-    			canvas.getContext("webgl2", glopt) || 
-    			canvas.getContext("webgl", glopt) || 
+    		this.gl = this.gl ||
+    			canvas.getContext("webgl2", glopt) ||
+    			canvas.getContext("webgl", glopt) ||
     			canvas.getContext("experimental-webgl", glopt) ;
 
     		if (!this.gl)
@@ -1947,10 +1947,10 @@ void main() {
     		document.addEventListener("visibilitychange", (event) => { if(this.gl.isContextLost()) { this.restoreWebGL(); }});
 
     		/* DEBUG OpenGL calls */
-    		/*function logGLCall(functionName, args) {   
-    			console.log("gl." + functionName + "(" + 
-    			WebGLDebugUtils.glFunctionArgsToString(functionName, args) + ")");   
-    		} 
+    		/*function logGLCall(functionName, args) {
+    			console.log("gl." + functionName + "(" +
+    			WebGLDebugUtils.glFunctionArgsToString(functionName, args) + ")");
+    		}
     		this.gl = WebGLDebugUtils.makeDebugContext(this.gl, undefined, logGLCall);  */
 
 
@@ -1958,9 +1958,9 @@ void main() {
 
     	restoreWebGL() {
     		let glopt = { antialias: false, depth: false, preserveDrawingBuffer: this.preserveDrawingBuffer };
-    		this.gl = this.gl || 
-    			canvas.getContext("webgl2", glopt) || 
-    			canvas.getContext("webgl", glopt) || 
+    		this.gl = this.gl ||
+    			canvas.getContext("webgl2", glopt) ||
+    			canvas.getContext("webgl", glopt) ||
     			canvas.getContext("experimental-webgl", glopt) ;
 
     		for(let layer of Object.values(this.layers)) {
@@ -1986,7 +1986,7 @@ void main() {
     		const discardHidden = true;
     		let sceneBBox = Layer.computeLayersBBox(this.layers, discardHidden);
     		let minScale =  Layer.computeLayersMinScale(this.layers, discardHidden);
-    		
+
     		if (sceneBBox != null) this.camera.updateBounds(sceneBBox, minScale);
     		this.emit('updateSize');
     	}
@@ -2090,7 +2090,7 @@ void main() {
     	}
 
     	setLight(light) {
-    		if(!this.uniforms.light) 
+    		if(!this.uniforms.light)
     			throw "Shader not initialized, wait on layer ready event for setLight."
 
     		let x = light[0];
@@ -2117,7 +2117,7 @@ void main() {
     		Object.assign(this, relight);
     		if(this.colorspace == 'mycc')
     			this.nplanes = this.yccplanes[0] + this.yccplanes[1] + this.yccplanes[2];
-    		else 
+    		else
     			this.yccplanes = [0, 0, 0];
 
 
@@ -2208,13 +2208,13 @@ void main() {
     	}
 
     	fragShaderSrc(gl) {
-    		
+
     		let basetype = 'vec3'; //(this.colorspace == 'mrgb' || this.colorspace == 'mycc')?'vec3':'float';
     		let gl2 = !(gl instanceof WebGLRenderingContext);
     		let str = `${gl2? '#version 300 es' : ''}
 
-precision highp float; 
-precision highp int; 
+precision highp float;
+precision highp int;
 
 #define np1 ${this.nplanes + 1}
 
@@ -2235,7 +2235,7 @@ uniform ${basetype} base1[np1];
 uniform ${basetype} base2[np1];
 `;
 
-    		for(let n = 0; n < this.njpegs; n++) 
+    		for(let n = 0; n < this.njpegs; n++)
     			str += `
 uniform sampler2D plane${n};
 `;
@@ -2281,7 +2281,7 @@ void main(void) {
 	normal.y = dot(render(base1).xyz, vec3(1));
 	normal.z = dot(render(base2).xyz, vec3(1));
 	normal = normalize(T * normal);
-`; 
+`;
     			switch(this.mode) {
     			case 'normals':  str += `
 	normal = (normal + 1.0)/2.0;
@@ -2294,7 +2294,7 @@ void main(void) {
 `;
     			break;
 
-    			case 'specular': 
+    			case 'specular':
     			default: str += `
 	float s = pow(dot(light, normal), specular_exp);
 	//color = vec4(render(base).xyz*s, 1.0);
@@ -2402,7 +2402,7 @@ vec4 render(vec3 base[np1]) {
 `;
     			}
     		}
-    		str += `	
+    		str += `
 	return vec4(toRgb(rgb), 1);
 }
 `;
@@ -2413,7 +2413,7 @@ vec4 render(vec3 base[np1]) {
 
 
 
-    /* PTM utility functions 
+    /* PTM utility functions
      */
     class PTM {
     	/* @param {Array} v expects light direction as [x, y, z]
@@ -2428,7 +2428,7 @@ vec4 render(vec3 base[np1]) {
     }
 
 
-    /* HSH utility functions 
+    /* HSH utility functions
      */
     class HSH {
     	/* @param {Array} v expects light direction as [x, y, z]
@@ -2543,7 +2543,7 @@ vec4 render(vec3 base[np1]) {
     			}
     		}
 
-    		weights = weights.slice(0, count); 
+    		weights = weights.slice(0, count);
     		for(let i = 0; i < weights.length; i++)
     			weights[i][1] /= totw;
 
@@ -2586,8 +2586,8 @@ vec4 render(vec3 base[np1]) {
     				let o01 = shader.basePixelOffset(p, sx, sy+1, k);
     				let o11 = shader.basePixelOffset(p, sx+1, sy+1, k);
 
-    				lweights[3*p + k] = 
-    					s00*shader.basis[o00] + 
+    				lweights[3*p + k] =
+    					s00*shader.basis[o00] +
     					s10*shader.basis[o10] +
     					s01*shader.basis[o01] +
     					s11*shader.basis[o11];
@@ -2665,12 +2665,12 @@ vec4 render(vec3 base[np1]) {
     				let raster = new Raster({ type: 'vec3', attribute: 'coeff', colorspace: 'linear' });
     				this.rasters.push(raster);
     			}
-    			if(this.normals) { // ITARZOOM must include normals and currently has a limitation: loads the entire tile 
+    			if(this.normals) { // ITARZOOM must include normals and currently has a limitation: loads the entire tile
     				let url = this.imageUrl(this.url, 'normals');
     				urls.push(url);
     				let raster = new Raster({ type: 'vec3', attribute: 'coeff', colorspace: 'linear' });
-    				this.rasters.push(raster);				
-    			}			
+    				this.rasters.push(raster);
+    			}
     			this.layout.setUrls(urls);
 
     		})().catch(e => { console.log(e); this.status = e; });
@@ -2710,7 +2710,7 @@ vec4 render(vec3 base[np1]) {
     		this.mode = 'ward';
     		this.alphaLimits = [0.01, 0.5];
     		Object.assign(this, options);
-    		
+
     		this.uniforms = {
     			uLightInfo:          { type: 'vec4', needsUpdate: true, size: 4, value: [0.1, 0.1, 0.9, 0] },
     			uAlphaLimits:        { type: 'vec2', needsUpdate: true, size: 2, value: this.alphaLimits },
@@ -2731,20 +2731,20 @@ vec4 render(vec3 base[np1]) {
     		this.mode = mode;
     		switch(mode) {
     			case 'ward':
-    				this.innerCode = 
+    				this.innerCode =
     				`vec3 linearColor = (kd + ks * spec) * NdotL;
 				linearColor += kd * 0.02; // HACK! adding just a bit of ambient`;
     			break;
     			case 'diffuse':
-    				this.innerCode = 
+    				this.innerCode =
     				`vec3 linearColor = kd;`;
     			break;
     			case 'specular':
-    				this.innerCode = 
+    				this.innerCode =
     				`vec3 linearColor = clamp((ks * spec) * NdotL, 0.0, 1.0);`;
     			break;
     			case 'normals':
-    				this.innerCode = 
+    				this.innerCode =
     				`vec3 linearColor = (N+vec3(1.))/2.;
 				applyGamma = false;`;
     			break;
@@ -2759,8 +2759,8 @@ vec4 render(vec3 base[np1]) {
     		let gl2 = !(gl instanceof WebGLRenderingContext);
     		let str = `${gl2? '#version 300 es' : ''}
 
-precision highp float; 
-precision highp int; 
+precision highp float;
+precision highp int;
 
 #define NULL_NORMAL vec3(0,0,0)
 #define SQR(x) ((x)*(x))
@@ -2815,10 +2815,10 @@ float ward(in vec3 V, in vec3 L, in vec3 N, in vec3 X, in vec3 Y, in float alpha
 	if(L_dot_N_mult_N_dot_V <= 0.0) return 0.0;
 
 	float spec = 1.0 / (4.0 * PI * alpha * alpha * sqrt(L_dot_N_mult_N_dot_V));
-	
+
 	//float exponent = -(SQR(dot(H,X)) + SQR(dot(H,Y))) / sqr_alpha_H_dot_N; // Anisotropic
 	float exponent = -SQR(tan(acos(H_dot_N))) / SQR(alpha); // Isotropic
-	
+
 	spec *= exp( exponent );
 
 	return spec;
@@ -2852,17 +2852,17 @@ void main() {
 	float maxGloss = 1.0 - pow(uAlphaLimits[0], 1.0 / ISO_WARD_EXPONENT);
 
 	float alpha = pow(1.0 - gloss * (maxGloss - minGloss) - minGloss, ISO_WARD_EXPONENT);
-	
-	
+
+
 	vec3 e = vec3(0.0,0.0,1.0);
 	vec3 T = normalize(cross(N,e));
 	vec3 B = normalize(cross(N,T));
 	float spec = ward(V, L, N, T, B, alpha);
-	
+
 	bool applyGamma = true;
 
 	${this.innerCode}
-	
+
 	vec3 finalColor = applyGamma ? pow(linearColor * 1.0, vec3(1.0/2.2)) : linearColor;
 	color = vec4(finalColor, 1.0);
 	${gl2?'':'gl_FragColor = color;'}
@@ -2887,7 +2887,7 @@ void main() {
 
     		if(!this.channels)
     			throw "channels option is required";
-    	
+
     		if(!this.colorspaces) {
     			console.log("LayerBRDF: missing colorspaces: force both to linear");
     			this.colorspaces['kd'] = 'linear';
@@ -2902,12 +2902,12 @@ void main() {
     		({width:this.width, height:this.height});
 
     		this.layout.setUrls(['kd', 'ks', 'normals', 'gloss'].map(c => this.channels[c]));
-    		
+
     		let now = performance.now();
     		this.controls['light'] = { source:{ value: [0, 0], t: now }, target:{ value:[0, 0], t:now }, current:{ value:[0, 0], t:now } };
 
-    		let shader = new ShaderBRDF({'label': 'Rgb', 
-    									 'samplers': [ { id:0, name: 'uTexKd'}, 
+    		let shader = new ShaderBRDF({'label': 'Rgb',
+    									 'samplers': [ { id:0, name: 'uTexKd'},
     												   { id:1, name: 'uTexKs'},
     												   { id:2, name: 'uTexNormals'},
     												   { id:3, name: 'uTexGloss'}],
@@ -2954,13 +2954,13 @@ void main() {
     		let raster = new Raster({ type: 'vec3', attribute: 'kd', colorspace: 'sRGB' });
 
     		this.rasters.push(raster);
-    		
+
 
     		let shader = new Shader({
     			'label': 'Rgb',
     			'samplers': [{ id:0, name:'kd', type:'vec3' }]
     		});
-    		
+
     		shader.fragShaderSrc = function(gl) {
 
     			let gl2 = !(gl instanceof WebGLRenderingContext);
@@ -3008,7 +3008,7 @@ void main() {
     		let parser = new DOMParser();
     		svg = parser.parseFromString(text, "image/svg+xml").documentElement;
     	}
-    	static async getElement(selector) { 
+    	static async getElement(selector) {
     		if(!svg)
     		await Skin.loadSvg();
     		return svg.querySelector(selector).cloneNode(true);
@@ -3021,7 +3021,7 @@ void main() {
     		let icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     		container.appendChild(icon);
     		icon.appendChild(element);
-    		
+
     		let box = element.getBBox();
 
     		let tlist = element.transform.baseVal;
@@ -3049,11 +3049,11 @@ void main() {
      * * *wheelDelta(event)*
      * * *doubleTap(event)*
      * * *resize(event)*
-     * 
+     *
      * In general event.preventDefault() will capture the event and wont be propagated to other controllers.
 
-     * 
-     * @param {options} options 
+     *
+     * @param {options} options
      * * *panDelay* inertia of the movement in ms for panning movements (default 100)
      * * *zoomDelay* a zoom event is smoothed over this delay in ms (default 200)
      * * *priority* higher priority controllers are invoked in advance.
@@ -3086,7 +3086,7 @@ void main() {
     		if(e.ctrlKey) state += 1;
     		if(e.shiftKey) state += 2;
     		if(e.altKey) state += 4;
-    		
+
     		return state;
     	}
 
@@ -3104,7 +3104,7 @@ void main() {
 
     /*
      * Controller that turn the position of the mouse on the screen to a [0,1]x[0,1] parameter
-     * @param {Function} callback 
+     * @param {Function} callback
      * Options: relative (
      */
 
@@ -3121,7 +3121,7 @@ void main() {
     		//By default the controller is active only with no modifiers.
     		//you can select which subsets of the modifiers are active.
     		this.callback = callback;
-    		
+
     		if(!this.box) {
     			this.box = new BoundingBox({xLow:-0.99, yLow: -0.99, xHigh: 0.99, yHigh: 0.99});
     		}
@@ -3162,7 +3162,7 @@ void main() {
     			this.start_x = x;
     			this.start_y = y;
     		}
-    		
+
     		this.update(e);
     		this.panning = true;
     		e.preventDefault();
@@ -3203,8 +3203,8 @@ void main() {
 
     		this.camera = camera;
     		this.zoomAmount = 1.2;          //for wheel or double tap event
-    		
-    		
+
+
     		this.panning = false;           //true if in the middle of a pan
     		this.initialTransform = null;
     		this.startMouse = null;
@@ -3233,7 +3233,7 @@ void main() {
     		let m = this.initialTransform;
     		let dx = (e.offsetX - this.startMouse.x);
     		let dy = (e.offsetY - this.startMouse.y);
-    		
+
     		this.camera.setPosition(this.panDelay, m.x + dx, m.y + dy, m.z, m.a);
     	}
 
@@ -3269,7 +3269,7 @@ void main() {
     	mouseWheel(e) {
     		let delta = e.deltaY > 0 ? 1 : -1;
     		const pos = this.camera.mapToScene(e.offsetX, e.offsetY, this.camera.getCurrentTransform(performance.now()));
-    		const dz = Math.pow(this.zoomAmount, delta);		
+    		const dz = Math.pow(this.zoomAmount, delta);
     		this.camera.deltaZoom(this.zoomDelay, dz, pos.x, pos.y);
     		e.preventDefault();
     	}
@@ -3285,7 +3285,7 @@ void main() {
     }
 
     /**
-     * Manages handles simultaneous events from a target. 
+     * Manages handles simultaneous events from a target.
      * how do I write more substantial documentation.
      *
      * @param {div} target is the DOM element from which the events are generated
@@ -3440,7 +3440,7 @@ void main() {
                 //TODO maybe we should sort by distance instead.
                 fingerDownEvents.sort((a, b) => b.timeStamp - a.timeStamp);
                 for (let e2 of fingerDownEvents) {
-                    if (e1.timeStamp - e2.timeStamp > this.pinchInterval) break; 
+                    if (e1.timeStamp - e2.timeStamp > this.pinchInterval) break;
 
                     handler.pinchStart(e1, e2);
                     if (!e1.defaultPrevented) break;
@@ -3910,7 +3910,7 @@ void main() {
     class Annotation {
     	constructor(options) {
     		Object.assign(
-    			this, 
+    			this,
     			{
     				id: Annotation.UUID(),
     				code: null,
@@ -3918,11 +3918,11 @@ void main() {
     				description: null,
     				class: null,
     				target: null,
-    				selector: { 
-    					type: null, 
-    					value: null, 
+    				selector: {
+    					type: null,
+    					value: null,
     					elements: []  //svg elements (referencing those in the layer.svgElement
-    				}, 
+    				},
     				data: {},
     				style: null,
     				bbox: null,
@@ -3931,10 +3931,10 @@ void main() {
     				ready: false, //already: convertted to svg
     				needsUpdate: true,
     				editing: false,
-    			}, 
+    			},
     			options);
     			//TODO label as null is problematic, sort this issue.
-    			if(!this.label) this.label = ''; 
+    			if(!this.label) this.label = '';
     			this.selector.elements = []; //assign options is not recursive!!!
     	}
 
@@ -3954,8 +3954,8 @@ void main() {
     				const { sx, sy, swidth, sheight } = shape.getBBox();
     				x = Math.min(x, sx);
     				y = Math.min(x, sy);
-    				width = Math.max(width + x, sx + swidth) - x; 
-    				height = Math.max(height + y, sy + sheight) - y; 
+    				width = Math.max(width + x, sx + swidth) - x;
+    				height = Math.max(height + y, sy + sheight) - y;
     		}
     		return { x, y, width, height };
     	}
@@ -4059,7 +4059,7 @@ void main() {
     		this.annotations.sort((a, b) => a.label.localeCompare(b.label));
     		if(this.annotationsListEntry)
     			this.createAnnotationsList();
-    		
+
     		this.emit('update');
     	}
 
@@ -4072,10 +4072,10 @@ void main() {
     		let html = this.createAnnotationEntry(annotation);
     		let template = document.createElement('template');
     		template.innerHTML = html.trim();
-    		
+
     		let list =  this.annotationsListEntry.element.parentElement.querySelector('.openlime-list');
     		list.appendChild(template.content.firstChild);
-    		
+
     		this.clearSelected();
     		this.setSelected(annotation);
 
@@ -4089,7 +4089,7 @@ void main() {
     			list: [], //will be filled later.
     			classes: 'openlime-annotations',
     			status: () => 'active',
-    			oncreate: () => { 
+    			oncreate: () => {
     				if(Array.isArray(this.annotations))
     					this.createAnnotationsList();
     			}
@@ -4104,7 +4104,7 @@ void main() {
 
     		let list =  this.annotationsListEntry.element.parentElement.querySelector('.openlime-list');
     		list.innerHTML = html;
-    		list.addEventListener('click', (e) =>  { 
+    		list.addEventListener('click', (e) =>  {
     			let svg = e.srcElement.closest('svg');
     			if(svg) {
     				let entry = svg.closest('[data-annotation]');
@@ -4126,7 +4126,7 @@ void main() {
     	}
 
     	createAnnotationEntry(a) {
-    		return `<a href="#" data-annotation="${a.id}" class="openlime-entry ${a.visible == 0? 'hidden':''}">${a.label || ''}
+    		return `<a  data-annotation="${a.id}" class="openlime-entry ${a.visible == 0? 'hidden':''}">${a.label || ''}
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="openlime-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
 			<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="openlime-eye-off"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
 			</a>`;
@@ -4165,7 +4165,7 @@ void main() {
      *  light: turn on light changing.
      *  switch layer(s)
      *  lens.
-     * 
+     *
      * How the menu works:
      * Each entry eg: { title: 'Coin 16' }
      * title: large title
@@ -4174,7 +4174,7 @@ void main() {
      * button: visually a button, attributes: group, layer, mode
      * slider: callback(percent)
      * list: an array of entries.
-     * 
+     *
      * Additional attributes:
      * onclick: a function(event) {}
      * group: a group of entries where at most one is active
@@ -4230,10 +4230,10 @@ void main() {
     		for (let [id, layer] of Object.entries(this.lime.canvas.layers)) {
     			let modes = [];
     			for (let m of layer.getModes()) {
-    				let mode = { 
-    					button: m, 
-    					mode: m, 
-    					layer: id, 
+    				let mode = {
+    					button: m,
+    					mode: m,
+    					layer: id,
     					onclick: () => { layer.setMode(m); this.updateMenu(); },
     					status: () => layer.getMode() == m ? 'active' : '',
     				};
@@ -4242,7 +4242,7 @@ void main() {
     				modes.push(mode);
     			}
     			let layerEntry = {
-    				button: layer.label || id, 
+    				button: layer.label || id,
     				onclick: ()=> { this.setLayer(layer); },
     				status: () => layer.visible? 'active' : '',
     				list: modes,
@@ -4252,7 +4252,7 @@ void main() {
     				layerEntry.list.push(layer.annotationsEntry());
     				//TODO: this could be a convenience, creating an editor which can be
     				//customized later using layer.editor.
-    				//if(layer.editable) 
+    				//if(layer.editable)
     				//	layer.editor = this.editor;
     			}
     			this.menu.push(layerEntry);
@@ -4272,7 +4272,7 @@ void main() {
     		let lightLayers = [];
     		for (let [id, layer] of Object.entries(this.lime.canvas.layers))
     			if (layer.controls.light) lightLayers.push(layer);
-    		
+
     		if (lightLayers.length) {
     			for (let layer of lightLayers) {
     				controller.setPosition(0.5, 0.5);
@@ -4293,13 +4293,13 @@ void main() {
     			document.addEventListener('keydown', (e) => this.keyDown(e), false);
     			document.addEventListener('keyup', (e) => this.keyUp(e), false);
 
-    			let panzoom = this.panzoom = new ControllerPanZoom(this.lime.camera, { 
-    				priority: -1000, 
-    				activeModifiers: [0, 1] 
+    			let panzoom = this.panzoom = new ControllerPanZoom(this.lime.camera, {
+    				priority: -1000,
+    				activeModifiers: [0, 1]
     			});
     			this.lime.pointerManager.onEvent(panzoom); //register wheel, doubleclick, pan and pinch
     			this.lime.pointerManager.on("fingerSingleTap", {"fingerSingleTap": (e) => { this.showInfo(e);}, priority: 10000 });
-    			
+
     			//this.lime.pointerManager.on("fingerHover", {"fingerHover": (e) => { this.showInfo(e);}, priority: 10000 });
 
     			this.createMenu();
@@ -4338,7 +4338,7 @@ void main() {
     			return;
 
     		if(e.defaultPrevented) return;
-    		
+
     		for(const a of Object.values(this.actions)) {
     			if('key' in a && a.key == e.key) {
     				e.preventDefault();
@@ -4356,7 +4356,7 @@ void main() {
     		let layer = e.originSrc.getAttribute('data-layer');
     		if(!layer)
     			return this.info.hide();
-    			
+
     		layer = this.lime.canvas.layers[layer];
 
     		if(e.fingerType == 'fingerHover' && !layer.hoverable)
@@ -4369,7 +4369,7 @@ void main() {
     		//this.info.show(e, layer, id);
     	}
 
-    	
+
     	async loadSkin() {
     		let toolbar = document.createElement('div');
     		toolbar.classList.add('openlime-toolbar');
@@ -4383,7 +4383,7 @@ void main() {
     				if (action.display !== true)
     					continue;
 
-    				await Skin.appendIcon(toolbar, '.openlime-' + name); 
+    				await Skin.appendIcon(toolbar, '.openlime-' + name);
     			}
 
     		}
@@ -4429,7 +4429,7 @@ void main() {
     		if(length50 > min) return { length: length50, label: label50 };
     		return { length: 0, label: 0 }
     	}
-    	
+
     	updateScale(line, text) {
     		//let zoom = this.lime.camera.getCurrentTransform(performance.now()).z;
     		let zoom = this.lime.camera.target.z;
@@ -4452,7 +4452,7 @@ void main() {
     		if(!this.scale) return;
     		this.scales = { 'mm': 1, 'cm':10, 'm':1000, 'km':1000000 };
 
-    		
+
     		let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     		svg.setAttribute('viewBox', `0 0 200 40`);
     		svg.classList.add('openlime-scale');
@@ -4517,12 +4517,12 @@ void main() {
     	}
 
     	toggleHelp(help, on) {
-    		
+
     		if(!help.element) {
     			let div = document.createElement('div');
     			div.classList.add('openlime-help-window');
-    	
-    			if (help.html instanceof HTMLElement) 
+
+    			if (help.html instanceof HTMLElement)
     				div.appendChild(help.html);
     			else
     				div.innerHTML = help.html;
@@ -4543,7 +4543,7 @@ void main() {
 
     		help.element.style.display = on? 'block' : 'none';
     	}
-    	
+
     	snapshot() {
     		var e = document.createElement('a');
     		e.setAttribute('href', this.lime.canvas.canvasElement.toDataURL());
@@ -4577,7 +4577,7 @@ void main() {
     			let group = 'group' in entry ? `data-group="${entry.group}"` : '';
     			let layer = 'layer' in entry ? `data-layer="${entry.layer}"` : '';
     			let mode = 'mode' in entry ? `data-mode="${entry.mode}"` : '';
-    			html += `<a href="#" ${id} ${group} ${layer} ${mode} ${tooltip} class="openlime-entry ${classes}">${entry.button}</a>`;
+    			html += `<a  ${id} ${group} ${layer} ${mode} ${tooltip} class="openlime-entry ${classes}">${entry.button}</a>`;
     		} else if ('slider' in entry) {
     			html += `<input type="range" min="1" max="100" value="50" class="openlime-slider ${classes}" ${id}>`;
     		}
@@ -4688,16 +4688,16 @@ void main() {
     			layer: null,
     			annotation: null,
     			container: container
-    		});			
+    		});
     	}
-    	
+
     	hide() {
     		if(!this.element) return;
     		this.element.style.display = 'none';
 
     		if(this.layer)
     			this.layer.setSelected(this.annotation, false);
-    		
+
     		this.annotation = null;
     		this.layer = null;
     	}
@@ -4715,7 +4715,7 @@ void main() {
     			return;
 
     		this.hide();
-    		
+
     		let annotation = layer.getAnnotationById(id);
     		this.element.innerHTML = layer.infoTemplate ? layer.infoTemplate(annotation) : this.template(annotation);
     		this.annotation = annotation;
@@ -4776,7 +4776,7 @@ void main() {
     		}
     		root.appendChild(this.svgElement);
     	}
-    /*  unused for the moment!!! 
+    /*  unused for the moment!!!
     	async loadSVG(url) {
     		var response = await fetch(url);
     		if (!response.ok) {
@@ -4839,13 +4839,13 @@ void main() {
     		console.log("SVG ELM ", this.svgElement);
 
     		if (!this.visible) return;
-    		if(this.status != 'ready') 
+    		if(this.status != 'ready')
     			return;
 
     		const bBox=this.boundingBox();
     		this.svgElement.setAttribute('viewBox', `${bBox.xLow} ${bBox.yLow} ${bBox.xHigh-bBox.xLow} ${bBox.yHigh-bBox.yLow}`);
-    	
-    		//find which annotations needs to be added to the ccanvas, some 
+
+    		//find which annotations needs to be added to the ccanvas, some
     		//indexing whould be used, for the moment we just iterate all of them.
 
     		for (let anno of this.annotations) {
@@ -4875,7 +4875,7 @@ void main() {
     			if(!anno.visible)
     				continue;
 
-    			//second time will be 0 elements, but we need to 
+    			//second time will be 0 elements, but we need to
     			//store somewhere knowledge of which items in the scene and which still not.
     			for (let child of anno.selector.elements) {
     				let c = child; //.cloneNode(true);
@@ -4899,7 +4899,7 @@ void main() {
     				//utils
 
     				/*				let parser = new DOMParser();
-    								let use = createElement('use', { 'xlink:href': '#' + a.id,  'stroke-width': 10,  'pointer-events': 'stroke' });
+    								let use = createElement('use', { 'xlink: href="#" a.id,  'stroke-width': 10,  'pointer-events': 'stroke' });
     								//let use = parser.parseFromString(`<use xlink:href="${a.id}" stroke-width="10" pointer-events="stroke"/>`, "image/svg+xml");
     								this.svgGroup.appendChild(use);  */
     			}
@@ -4926,7 +4926,7 @@ void main() {
         var simplify1 = function(start, end) { // recursize simplifies points from start to end
             var index, i, xx , yy, dx, dy, ddx, ddy,  t, dist, dist1;
             let p1 = points[start];
-            let p2 = points[end];   
+            let p2 = points[end];
             xx = p1.x;
             yy = p1.y;
             ddx = p2.x - xx;
@@ -4940,7 +4940,7 @@ void main() {
                     if (t > 1) {
                         dx = p.x - p2.x;
                         dy = p.y - p2.y;
-                    } else 
+                    } else
                     if (t > 0) {
                         dx = p.x - (xx + ddx * t);
                         dy = p.y - (yy + ddy * t);
@@ -4952,14 +4952,14 @@ void main() {
                     dx = p.x - xx;
                     dy = p.y - yy;
                 }
-                dist = dx * dx + dy * dy; 
+                dist = dx * dx + dy * dy;
                 if (dist > maxDist) {
                     index = i;
                     maxDist = dist;
                 }
             }
 
-            if (maxDist > length2) { 
+            if (maxDist > length2) {
                 if (index - start > 1){
                     simplify1(start, index);
                 }
@@ -4968,7 +4968,7 @@ void main() {
                     simplify1(index, end);
                 }
             }
-        };    
+        };
         var end = points.length - 1;
         var newLine = [points[0]];
         simplify1(0, end);
@@ -4990,7 +4990,7 @@ void main() {
     	function dot(x, y, xx, yy) {  // get do product
     		// dist1,dist2,nx1,nx2,ny1,ny2 are the length and  normals and used outside function
     		// normalise both vectors
-    		
+
     		dist1 = Math.sqrt(x * x + y * y); // get length
     		if (dist1  > 0) {  // normalise
     			nx1 = x / dist1 ;
@@ -5015,13 +5015,13 @@ void main() {
     	let i = 0;  // start from second poitn if line not closed
     	let closed = false;
     	let len = Math.hypot(p1.x- endP.x, p1.y-endP.y);
-    	
+
     	if(len < Math.SQRT2){  // end points are the same. Join them in coordinate space
     		endP =  p1;
     		i = 0;			 // start from first point if line closed
     		p1 = points[points.length-2];
     		closed = true;
-    	}	   
+    	}
     	newPoints.push([points[i].x,points[i].y]);
     	for(; i < points.length-1; i++){
     		let p2 = points[i];
@@ -5034,11 +5034,11 @@ void main() {
     					  dist2 = dist1;
     				  }
     				  // use the two normalized vectors along the lines to create the tangent vector
-    				  let x = (nx1 + nx2) / 2;  
+    				  let x = (nx1 + nx2) / 2;
     				  let y = (ny1 + ny2) / 2;
     				  len = Math.sqrt(x * x + y * y);  // normalise the tangent
     				  if(len === 0){
-    					  newPoints.push([p2.x,p2.y]);								  
+    					  newPoints.push([p2.x,p2.y]);
     				  } else {
     					  x /= len;
     					  y /= len;
@@ -5055,11 +5055,11 @@ void main() {
     					  ]);
     				  }
     			} else {
-    				newPoints.push([p2.x,p2.y]);			
+    				newPoints.push([p2.x,p2.y]);
     			}
     		}
     		p1 = p2;
-    	}  
+    	}
     	if(closed){ // if closed then copy first point to last.
     		p1 = [];
     		for(i = 0; i < newPoints[0].length; i++){
@@ -5067,9 +5067,9 @@ void main() {
     		}
     		newPoints.push(p1);
     	}else {
-    		newPoints.push([points[points.length-1].x,points[points.length-1].y]);	  
+    		newPoints.push([points[points.length-1].x,points[points.length-1].y]);
     	}
-    	return newPoints;	
+    	return newPoints;
     }
 
     function smoothToPath(smoothed) {
@@ -5081,11 +5081,11 @@ void main() {
     	for(let i = 0; i < smoothed.length-1; i++) {
     		p = smoothed[i];
     		p1 = smoothed[i+1];
-    	
-    		
+
+
     		if(p.length == 2)
     			d.push(`l${(p1[0]-p[0]).toFixed(1)} ${(p1[1]-p[1]).toFixed(1)}`);
-    		else if(p.length == 4) 
+    		else if(p.length == 4)
     			d.push(`q${(p[2]-p[0]).toFixed(1)} ${(p[3]-p[1]).toFixed(1)} ${(p1[0]-p[0]).toFixed(1)} ${(p1[1]-p[1]).toFixed(1)}`);
     		else
     			d.push(`c${(p[2]-p[0]).toFixed(1)} ${(p[3]-p[1]).toFixed(1)} ${(p[4]-p[0]).toFixed(1)} ${(p[5]-p[1]).toFixed(1)} ${(p1[0]-p[0]).toFixed(1)} ${(p1[1]-p[1]).toFixed(1)}`);
@@ -5271,9 +5271,9 @@ void main() {
 				<div class="openlime-annotation-edit">
 					<span>Title:</span> <input name="label" type="text">
 					<span>Description:</span> <input name="description" type="text">
-					
 
-					<span>Class:</span> 
+
+					<span>Class:</span>
 					<div class="openlime-select">
 						<input type="hidden" name="classes" value=""/>
 						<div class="openlime-select-button"></div>
@@ -5327,7 +5327,7 @@ void main() {
     		let draw = await Skin.appendIcon(tools, '.openlime-draw');
     		draw.addEventListener('click', (e) => { this.setTool('line'); this.setActiveTool(draw); });
 
-    		//		let pen = await Skin.appendIcon(tools, '.openlime-pen'); 
+    		//		let pen = await Skin.appendIcon(tools, '.openlime-pen');
     		//		pen.addEventListener('click', (e) => { this.setTool('pen'); setActive(pen); });
 
     		let erase = await Skin.appendIcon(tools, '.openlime-erase');
@@ -5339,7 +5339,7 @@ void main() {
     		let redo = await Skin.appendIcon(tools, '.openlime-redo');
     		redo.addEventListener('click', (e) => { this.redo(); });
 
-    		/*		let colorpick = await Skin.appendIcon(tools, '.openlime-colorpick'); 
+    		/*		let colorpick = await Skin.appendIcon(tools, '.openlime-colorpick');
     				undo.addEventListener('click', (e) => { this.pickColor(); }); */
 
     		let label = edit.querySelector('[name=label]');
@@ -5381,7 +5381,7 @@ void main() {
     		//anno.bbox = anno.getBBoxFromElements();
     		let serializer = new XMLSerializer();
     		post.svg = `<svg xmlns="http://www.w3.org/2000/svg">
-				${anno.selector.elements.map((s) => { s.classList.remove('selected'); return serializer.serializeToString(s) }).join("\n")}  
+				${anno.selector.elements.map((s) => { s.classList.remove('selected'); return serializer.serializeToString(s) }).join("\n")}
 				</svg>`;
 
     		if (this.updateCallback) {
@@ -5453,9 +5453,9 @@ void main() {
     		let svg = serializer.serializeToString(svgElement);
     		/*(${this.layer.annotations.map(anno => {
     			return `<group id="${anno.id}" title="${anno.label}" data-description="${anno.description}">
-    				${anno.selector.elements.map((s) => { 
-    					s.classList.remove('selected'); 
-    					return serializer.serializeToString(s) 
+    				${anno.selector.elements.map((s) => {
+    					s.classList.remove('selected');
+    					return serializer.serializeToString(s)
     				}).join("\n")}
     				</group>`;
     		})}
@@ -5497,7 +5497,7 @@ void main() {
     		document.querySelector('.openlime-overlay').classList.toggle('crosshair', tool && tool != 'erase');
     	}
 
-    	// UNDO STUFF	
+    	// UNDO STUFF
 
     	undo() {
     		let anno = this.annotation; //current annotation.
@@ -5688,7 +5688,7 @@ void main() {
     		let transform = camera.getCurrentTransform(performance.now());
     		let pos = camera.mapToScene(e.offsetX, e.offsetY, transform);
     		const topLeft = this.layer.boundingBox().corner(0);
-    		pos.x -= topLeft[0]; 
+    		pos.x -= topLeft[0];
     		pos.y -= topLeft[1];
     		pos.z = transform.z;
     		return pos;
@@ -5871,14 +5871,14 @@ void main() {
     	}
     	//TODO: smooth should be STABLE, if possible.
     	static svgPath(points) {
-    		//return points.map((p, i) =>  `${(i == 0? "M" : "L")}${p.x} ${p.y}`).join(' '); 
+    		//return points.map((p, i) =>  `${(i == 0? "M" : "L")}${p.x} ${p.y}`).join(' ');
 
     		let tolerance = 1.5 / points[0].z;
     		let tmp = simplify(points, tolerance);
 
     		let smoothed = smooth(tmp, 90, true);
     		return smoothToPath(smoothed);
-    		
+
     	}
     	static distanceToLast(line, point) {
     		let last = line[line.length - 1];
@@ -5954,14 +5954,14 @@ void main() {
 
     	constructor(div, options) {
 
-    		Object.assign(this, { 
+    		Object.assign(this, {
     			background: null,
     			canvas: {},
     			controllers: [],
     			camera: new Camera()
     		});
 
-    		
+
     		if(typeof(div) == 'string')
     			div = document.querySelector(div);
 
@@ -5993,7 +5993,7 @@ void main() {
     			e.preventDefault();
     			return false;
     		});
-    		
+
     		var resizeobserver = new ResizeObserver( entries => {
     			for (let entry of entries) {
     				this.resize(entry.contentRect.width, entry.contentRect.height);
