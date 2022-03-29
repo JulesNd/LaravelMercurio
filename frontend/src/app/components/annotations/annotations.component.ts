@@ -3,6 +3,7 @@ import { Rti } from '../../rti';
 import { DataService } from '../../service/data.service';
 import {ActivatedRoute } from '@angular/router';
 import { User } from '../../user';
+import {Location} from '@angular/common';
 
 
 
@@ -24,7 +25,7 @@ export class AnnotationsComponent implements OnInit {
   rti = new Rti();
 
 
-  constructor(private route:ActivatedRoute, private dataService: DataService) { }
+  constructor(private route:ActivatedRoute, private dataService: DataService, private _location: Location,) { }
 
   ngOnInit(): void {
 
@@ -143,7 +144,9 @@ export class AnnotationsComponent implements OnInit {
   }
 
 
-
+  backClicked() {
+ this._location.back();
+}
 
 
 

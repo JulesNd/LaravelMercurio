@@ -1,6 +1,12 @@
 
 
-
+<div (click)="backClicked()" class="floatingButtonWrap">
+    <div class="floatingButtonInner">
+        <a  class="floatingButton">
+            <i class="fa fa-arrow-left icon-default"></i>
+        </a>
+    </div>
+</div>
 
 
   <div  class="container" id="popout">
@@ -9,8 +15,10 @@
     <div class="layout">
 
 
+      <button (click)="backClicked()" class="btn backdesk"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
 
       <div class="col col-main">
+
         <div id="popup1" class="overlay">
           <div class="popup">
             <h2>Editer</h2>
@@ -106,13 +114,14 @@
                   </div>
           </div>
         </div>
-
             <!-- open lime !-->
         <div id="openlime"></div>
   <!-- open lime !-->
 <script src="/assets/js/openlime.js"></script>
 
       </div>
+
+
 
 
       <div *ngFor="let rti of rtis" class="col col-complementary" role="complementary">
@@ -147,7 +156,7 @@
   			<div class="social-icons">
   				<ul>
           <!--  [routerLink]="['/rti',rti.nom,rti.annotation_id,'annotation']" !-->
-  					<li  ><a [routerLink]="['/rti',rti.annotation_id,'annotation']" ><i class=" fa fa-pencil-alt "></i></a></li>
+  					<li  ><a [routerLink]="['/rti',rti.annotation_id,'annotation']" ><i class=" fa fa-asterisk "></i></a></li>
   					<li><a href="#popup1" ><i class=" fa fa-edit   " ></i></a></li>
   					<li><a ><i class="fa fa-share-alt "></i></a></li>
 

@@ -643,7 +643,31 @@ ul {
 
 
 
-@media only screen and (min-width : 320px) and (max-width : 850px) {
+
+@media only screen and (min-width: 1080px) {
+  .layout {
+    display: flex;
+  }
+}
+
+
+
+@media only screen and (min-width : 1081px) {
+  .floatingButtonWrap {
+    display: none!important;
+
+  }
+
+
+
+}
+
+@media only screen and (min-width : 320px) and (max-width : 1080px) {
+
+
+  .backdesk {
+    display: none!important;
+  }
 
   .col {
     /**margin: 0 2px 2px 0;**/
@@ -664,7 +688,7 @@ ul {
     flex: 1;
     padding: 30px;
     height: 30%;
-    width: 50%;
+    width: 100%;
     text-align: center;
     background-color: #fff;
     border-radius: 10px 10px 10px 10px;
@@ -673,8 +697,8 @@ ul {
   }
 
   .col-main {
-    flex: 3;
-    border-radius: 10px 0px 0px 10px;
+    flex: 4;
+    border-radius: 10px 10px 10px 10px;
     box-shadow: 4px 4px 2px -1px #00000070;
     background-color: rgba(0, 0, 0, 0.80);
 
@@ -691,4 +715,59 @@ ul {
   }
 
 
+}
+
+
+.floatingButtonWrap {
+    display: block;
+    position: fixed;
+    bottom: 45px;
+    right: 50px;
+    z-index: 999999999;
+}
+
+.floatingButtonInner {
+    position: relative;
+}
+
+.floatingButton {
+    display: block;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    background: -webkit-linear-gradient(45deg, #8769a9, #2d3047);
+    background: -o-linear-gradient(45deg, #8769a9, #507cb3);
+    background: linear-gradient(45deg, #8769a9, #507cb3);
+    color: #fff;
+    line-height: 50px;
+    position: absolute;
+    border-radius: 50% 50%;
+    bottom: 0px;
+    right: 0px;
+    border: 5px solid #b2bedc;
+    /* opacity: 0.3; */
+    opacity: 1;
+    transition: all 0.4s;
+}
+
+.floatingButton .fa {
+    font-size: 15px !important;
+}
+
+.floatingButton.open,
+.floatingButton:hover,
+.floatingButton:focus,
+.floatingButton:active {
+    opacity: 1;
+    color: #fff;
+}
+
+
+.floatingButton .fa {
+    transform: rotate(0deg);
+    transition: all 0.4s;
+}
+
+.floatingButton.open .fa {
+    transform: rotate(270deg);
 }

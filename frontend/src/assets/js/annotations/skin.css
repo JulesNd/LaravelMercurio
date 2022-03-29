@@ -2,7 +2,39 @@
 /*	pointer-events: none; */
 }
 
+@media only screen and (min-width : 320px) and (max-width : 1080px) {
 
+.openlime-layers-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 0%;
+  max-width: 110px!important;
+  overflow: hidden;
+  transition: width 0.3s;
+  font-family: "Open Sans",sans-serif;
+  color: #ccc;
+  background-color: rgb(20, 20, 20, 0.8);
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  z-index: 1;
+}
+.openlime-layers-menu .openlime-list .openlime-entry {
+font-size: 0.8em;
+
+}
+
+#entry_7 {
+	font-size: 0.75em;
+
+}
+
+}
 
 .openlime-overlay {
 	position:absolute;

@@ -29,3 +29,7 @@ a {
   display: none;
 
 }
+
+.navbar.navbar-light .navbar-toggler {
+  color: white;
+}

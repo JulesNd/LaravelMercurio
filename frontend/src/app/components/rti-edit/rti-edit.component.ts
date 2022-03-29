@@ -7,6 +7,7 @@ import { User } from '../../user';
 import Swal from 'sweetalert2';
 import { JwtService } from './../../shared/jwt.service';
 import { HttpClient } from '@angular/common/http';
+import {Location} from '@angular/common';
 
 declare var OpenLIME: any;
 declare var require: any;
@@ -28,7 +29,7 @@ export class RtiEditComponent implements OnInit {
 
   rti = new Rti();
 
-  constructor(private route:ActivatedRoute, private dataService: DataService, public jwtService: JwtService) {
+  constructor(private route:ActivatedRoute, private dataService: DataService, public jwtService: JwtService,private _location: Location) {
 
 
     this.jwtService.profile().subscribe((res:any) => {
@@ -69,9 +70,16 @@ export class RtiEditComponent implements OnInit {
          url: '/assets/'+(this.annotation_id)+'/image.tzi', //this.rti_id
   normals: false
  });
- lime.canvas.addLayer('Image', layer1);
+
+
+ /** ADD LAYERS **/
+
 
        lime.canvas.addLayer('RTI', layer0);
+       lime.canvas.addLayer('Image', layer1);
+
+
+        /** ADD LAYERS **/
 
     /*
     if autodetectimage()
@@ -93,20 +101,10 @@ export class RtiEditComponent implements OnInit {
        ui.actions.snapshot.display = false;
        ui.actions.help.display = true;
        ui.actions.help.html = `
-       <h2>Help</h2>
+       <h2>Aide</h2>
        <p>Si la lumière est éteinte, cliquez et déplacez pour déplacer l'image</p>
        <p>Si la lumière est allumée, cliquez et déplacez pour déplacer la lumière
        Cliquez sur la lumière pour changer sa fonction</p>
-
-       <p>Cliquez sur l'icone <b>Calques</b> pour afficher les annotations
-       Selectionnez une annotations et activez l'outil "dessin" en cliquant dessus.</p>
-       <p>Commencez un dessin libre en cliquant sur une petite distance, vous pouvez le continuer en
-       cliquand point par point. Pour commencer une nouvelle trace, il faut garder cliqué et bouger
-       légèrmeent la souris.</p>
-
-       <p>En mode <b>Annotation</b>, la combinaison <i>Majuscule</i> + clic et déplacement fait bouger la lumière
-       La combinaison <i>Alt</i> + clic et déplacement fait bouger l'image
-       Le bouton annuler permet d'annuler, il est possible aussi de faire <i>Ctrl</i>+z</p>
        `;
 
 
@@ -126,6 +124,8 @@ getData() {
     this.rtis = res;
   })
 }
+
+
 
 getDataForUpdate() {
   this.dataService.getForUpdate(this.annotation_id).subscribe(res=> {
@@ -166,5 +166,7 @@ this.dataService.updateData(this.annotation_id, this.rti).subscribe(res=>{
 });
 
 }
-
+backClicked() {
+this._location.back();
+}
 }
