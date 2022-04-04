@@ -9,7 +9,7 @@
 
 <!-- onSubmitform(f) !-->
 
-  <form class="form"  #f="ngForm"   (ngSubmit)="insertData() ;  ">
+  <form class="form"  #f="ngForm"(ngSubmit)="onSubmitform(f)"    (ngSubmit)="insertData() ;  ">
     <h1 class="form-title">Ajouter un RTI</h1>
     <div class="grid">
 
@@ -20,6 +20,16 @@
        <input type="text" name="name" class="form-control"  placeholder="Nom"  [(ngModel)]="rti.nom"   >
       </div>
 
+
+
+
+<!-- TEXT EDITOR  !-->
+
+
+
+
+
+
       <div class="form-group">
         <label for="exampleFormControlSelect1">Description</label>
 
@@ -27,6 +37,8 @@
       </div>
 
 
+
+<!-- TEXT EDITOR !-->
 
 
 
@@ -95,6 +107,8 @@
 
                             </select>
                           </div>
+
+                          <input type="file"   name="myFile" (change)="fileEvent($event)"/>
 
 
 <!--

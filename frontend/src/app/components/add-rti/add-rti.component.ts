@@ -57,7 +57,7 @@ export class AddRtiComponent implements OnInit {
       headers.append('Accept', 'application/json');
       myFormData.append('zip', this.filedata);
       /* Image Post Request */
-      this.http.post('//backbeta.mercurio-app.com/api/upload', myFormData, {
+      this.http.post('//backdev.mercurio-app.com/api/upload', myFormData, {
       headers: headers
       }).subscribe(data => {
        //Check success message

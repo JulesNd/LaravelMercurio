@@ -30,7 +30,7 @@
               <div class="column">
                 <div class="form-group">
               <label for="name">Identifiant </label>
-              <input type="text"  name="id" class="form-control" readonly  value="rti.rti_id"  [(ngModel)]="rti.annotation_id" #formInputText >
+              <input type="text"  name="id" class="form-control" readonly  value="rti.rti_id"  [(ngModel)]="rti.rti_id" #formInputText >
 
 
                   <li  class="btn fa fa-clipboard" [ngxClipboard]="formInputText"></li>
@@ -155,8 +155,8 @@
 
   			<div class="social-icons">
   				<ul>
-          <!--  [routerLink]="['/rti',rti.nom,rti.annotation_id,'annotation']" !-->
-  					<li  ><a [routerLink]="['/rti',rti.annotation_id,'annotation']" ><i class=" fa fa-asterisk "></i></a></li>
+          <!--  [routerLink]="['/rti',rti.nom,rti.rti_id,'annotation']" !-->
+  					<li  ><a [routerLink]="['/rti',rti.rti_id,'annotation']" ><i class=" fa fa-asterisk "></i></a></li>
   					<li><a href="#popup1" ><i class=" fa fa-edit   " ></i></a></li>
   					<li><a ><i class="fa fa-share-alt "></i></a></li>
 

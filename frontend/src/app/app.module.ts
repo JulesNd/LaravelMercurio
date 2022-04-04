@@ -29,16 +29,17 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { EditorModule } from "@tinymce/tinymce-angular";
 
 const routes: Routes = [
 
   //{path:'rti/:nom/:annotation_id', component:RtiEditComponent},
-  {path:'rti/:annotation_id', component:RtiEditComponent},
+  {path:'rti/:rti_id', component:RtiEditComponent},
 
 //  {path:'rti/'+'abc'+':annotation_id', component:RtiEditComponent},
 
   //{path:'rti/:nom/:annotation_id/annotation', component: AnnotationsComponent},
-  {path:'rti/:annotation_id/annotation', component: AnnotationsComponent},
+  {path:'rti/:rti_id/annotation', component: AnnotationsComponent},
 
   { path: 'Users', component: ProfileComponent },
   { path: 'loading', component: LoadingComponent },
@@ -80,6 +81,7 @@ const routes: Routes = [
     FormsModule,
     ClipboardModule,
     NgbModule,
+    EditorModule,
   ],
   providers: [
     {

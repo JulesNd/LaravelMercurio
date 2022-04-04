@@ -21,7 +21,7 @@ declare var name: any;
   styleUrls: ['./rti-edit.component.css']
 })
 export class RtiEditComponent implements OnInit {
-  annotation_id: any;
+  rti_id: any;
   rtis: any;
   data: any;
   users:any;
@@ -45,7 +45,7 @@ export class RtiEditComponent implements OnInit {
     //REMPLACER TOUS LES annotation_id par rti_id
 
        //console.log(this.route.snapshot.params.id);
-       this.annotation_id =  this.route.snapshot.params.annotation_id;
+       this.rti_id =  this.route.snapshot.params.rti_id;
        this.getData();
        this.getDataForUpdate();
        this.getUsersData();
@@ -58,7 +58,7 @@ export class RtiEditComponent implements OnInit {
           label: 'RTI',
             layout: 'itarzoom',  //VENIR RECUPERER this.layout
             type:'rti',
-            url: '/assets/'+(this.annotation_id)+'/info.json', //this.rti_id
+            url: '/assets/'+(this.rti_id)+'/info.json', //this.rti_id
      normals: false
     });
 
@@ -67,7 +67,7 @@ export class RtiEditComponent implements OnInit {
        label: 'Image',
          layout: 'tarzoom',  //VENIR RECUPERER this.layout
          type:'image',
-         url: '/assets/'+(this.annotation_id)+'/image.tzi', //this.rti_id
+         url: '/assets/'+(this.rti_id)+'/image.tzi', //this.rti_id
   normals: false
  });
 
@@ -119,7 +119,7 @@ copyInputMessage(inputElement){
 }
 
 getData() {
-  this.dataService.getRtiById(this.annotation_id).subscribe(res=> {
+  this.dataService.getRtiById(this.rti_id).subscribe(res=> {
     //console.log(res);
     this.rtis = res;
   })
@@ -128,7 +128,7 @@ getData() {
 
 
 getDataForUpdate() {
-  this.dataService.getForUpdate(this.annotation_id).subscribe(res=> {
+  this.dataService.getForUpdate(this.rti_id).subscribe(res=> {
     //console.log(res);
     this.data = res
     this.rti = this.data;
@@ -148,7 +148,7 @@ getUsersData() {
 
 updateRti() {
 
-this.dataService.updateData(this.annotation_id, this.rti).subscribe(res=>{
+this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
   Swal.fire({
     title: '<strong>Le RTI à été mis à jour</strong>',
     icon: 'success',
