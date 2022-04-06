@@ -43,7 +43,7 @@ export class AnnotationsComponent implements OnInit {
     	layout: 'itarzoom',
     	type:'rti',
     //	url: 'Data/ptm_lowdef_mask/info.json',
-    	url: '/assets/'+this.annotation_id+'/info.json',
+    	url: '//mercurio-app.com/assets/'+this.annotation_id+'/info.json',
     	normals: false
     });
     lime.canvas.addLayer('RTI', layer0);

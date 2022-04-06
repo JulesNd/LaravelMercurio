@@ -15,7 +15,7 @@
           <h2 class="title">{{mydata.nom}}</h2>
           <p class="sub-title">
   Acquisition effectuée le  <strong> {{mydata.date}}</strong> <br>
- Par <strong> {{mydata.owner_id.username}}</strong><br>
+ Par <strong> {{mydata.owner_id}}</strong><br>
           </p>
 
           <div class="more-information">
@@ -48,7 +48,7 @@
 
         <ul  >
 
-          <li *ngFor="let mydata of rtis1" class="booking-card center" style="background-image: url('/assets/{{mydata.rti_id}}/thumbnail.jpg')">
+          <li *ngFor="let mydata of rtis1; " class="booking-card center" style="background-image: url('/assets/{{mydata.rti_id}}/thumbnail.jpg')">
 
               <div class="book-container">
               <div class="content">
@@ -57,7 +57,7 @@
               </div>
             </div>
             <div class="informations-container">
-              <h2 class="title">{{mydata.nom}}</h2>
+              <h2   class="title">   {{mydata.nom}}</h2>
               <p class="sub-title">
       Acquisition effectuée le  <strong> {{mydata.date}}</strong> <br>
      Par <strong> {{mydata.owner_id.username}}</strong><br>

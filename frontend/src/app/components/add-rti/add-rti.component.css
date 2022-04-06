@@ -4,10 +4,12 @@
 
 }
 input {
-  color: white;
+/**  color: white;**/
 }
 
-
+.txt {
+  color: white;
+}
 .fa {
   font-size: 2vh;
 }

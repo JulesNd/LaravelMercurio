@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {Location} from '@angular/common';
 import { JwtService } from './../../shared/jwt.service';
 import Swal from 'sweetalert2';
+import { EditorModule } from "@tinymce/tinymce-angular";
 
 export class User {
   name: string;
@@ -29,7 +30,7 @@ export class AddRtiComponent implements OnInit {
   user: User;
 
 
-    constructor(private dataService: DataService, private http: HttpClient, private _location: Location,     public jwtService: JwtService,
+    constructor(private DataService: DataService, private http: HttpClient, private _location: Location,     public jwtService: JwtService,
 ) {
 
       this.jwtService.profile().subscribe((res:any) => {
@@ -76,18 +77,19 @@ export class AddRtiComponent implements OnInit {
     ngOnInit(): void {
   this.getRtisData();
   this.getUsersData();
+  this.getRtis();
 
     }
 
     getRtisData() {
-      this.dataService.getDataByUser().subscribe(res => {
+      this.DataService.getDataByUser().subscribe(res => {
          this.rtis = res;
       });
     }
 
     insertData()  {
 
-      this.dataService.insertData(this.rti).subscribe(res => {
+      this.DataService.insertData(this.rti).subscribe(res => {
          console.log(res);
          Swal.fire({
          //position: 'top-end',
@@ -101,9 +103,16 @@ export class AddRtiComponent implements OnInit {
 
     }
 
+    getRtis() {
+      this.DataService.getData().subscribe(res => {
+         this.rtis = res;
+      });
+    }
+
+
     getUsersData() {
 
-      this.dataService.getUsers().subscribe(res => {
+      this.DataService.getUsers().subscribe(res => {
          this.users = res;
       });
     }

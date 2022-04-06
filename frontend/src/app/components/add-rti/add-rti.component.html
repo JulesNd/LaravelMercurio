@@ -9,7 +9,10 @@
 
 <!-- onSubmitform(f) !-->
 
-  <form class="form"  #f="ngForm"(ngSubmit)="onSubmitform(f)"    (ngSubmit)="insertData() ;  ">
+  <form class="form"     (ngSubmit)="insertData() ;  ">
+
+<!-- #f="ngForm" (ngSubmit)="onSubmitform(f)" !-->
+
     <h1 class="form-title">Ajouter un RTI</h1>
     <div class="grid">
 
@@ -108,28 +111,39 @@
                             </select>
                           </div>
 
-                          <input type="file"   name="myFile" (change)="fileEvent($event)"/>
+                        <!--  <input type="file"   name="myFile" (change)="fileEvent($event)"/> !-->
+
+                        <input type="file" class="form-group"   name="myFile" (change)="fileEvent($event)"/>
+
 
 
 <!--
                   <input type="file"  name="myFile" (change)="fileEvent($event)"/>
                   <button>Upload Image</button>
 
+ *ngIf=" i === 0 "
 !-->
-      <button type="submit" class="btn">Ajouter</button>
+      <button type="submit"  class="btn">Ajouter</button>
+
+
+
     </div>
   </form>
+
+
 
 
 </div>
 
 
+<!--
+
+<div  *ngFor="let mydata of rtis; index as i">
+      <div class="txt"  *ngIf=" i === 0 ">{{mydata.nom}}</div>
+      </div>
 
 
-
-
-
-
+!-->
 
 
 

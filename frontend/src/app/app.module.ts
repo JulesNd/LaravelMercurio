@@ -12,7 +12,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import {RouterModule, Routes} from '@angular/router';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpEvent, HttpEventType  } from '@angular/common/http';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
 import { EmployeesComponent } from './components/employees/employees.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
