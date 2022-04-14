@@ -14,6 +14,9 @@ export class User {
   email: string;
   id: string;
   username: string;
+  img: string;
+  biography: string;
+  location: string;
 }
 
 

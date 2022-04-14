@@ -19,7 +19,7 @@ declare var layout: any;
   styleUrls: ['./annotations.component.css']
 })
 export class AnnotationsComponent implements OnInit {
-  annotation_id: any;
+  rti_id: any;
   rtis: any;
   data: any;
   rti = new Rti();
@@ -30,11 +30,11 @@ export class AnnotationsComponent implements OnInit {
   ngOnInit(): void {
 
 
-    this.annotation_id =  this.route.snapshot.params.annotation_id;
+    this.rti_id =  this.route.snapshot.params.rti_id;
     this.getData();
 
 
-    var idannojson = this.annotation_id;
+    var idannojson = this.rti_id;
 
     let lime = new OpenLIME.OpenLIME('#openlime', { canvas: { preserveDrawingBuffer: true} });
 
@@ -43,7 +43,7 @@ export class AnnotationsComponent implements OnInit {
     	layout: 'itarzoom',
     	type:'rti',
     //	url: 'Data/ptm_lowdef_mask/info.json',
-    	url: '//mercurio-app.com/assets/'+this.annotation_id+'/info.json',
+    	url: '/assets/'+(this.rti_id)+'/info.json',
     	normals: false
     });
     lime.canvas.addLayer('RTI', layer0);
@@ -68,7 +68,7 @@ export class AnnotationsComponent implements OnInit {
     		<h3>${annotation.class}</h3>
     		<p>${annotation.description}</p>
     		`; },
-    	annotations: '//mercurio-app.com/assets/js/annotations/json_eloi.php?idannojson='+idannojson,
+    	annotations: '/assets/js/annotations/json_eloi.php?idannojson='+idannojson,
     	editable: true,
     });
 
@@ -137,7 +137,7 @@ export class AnnotationsComponent implements OnInit {
   }
 
   getData() {
-    this.dataService.getRtiById(this.annotation_id).subscribe(res=> {
+    this.dataService.getRtiById(this.rti_id).subscribe(res=> {
       //console.log(res);
       this.rtis = res;
     })

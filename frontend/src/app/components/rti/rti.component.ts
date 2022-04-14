@@ -7,6 +7,7 @@ import { Rti } from '../../rti';
 
 
 
+
 export class User {
   name: string;
   email: string;

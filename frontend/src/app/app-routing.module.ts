@@ -9,6 +9,7 @@ import { RtiComponent } from './components/rti/rti.component';
 import { RtiEditComponent } from './components/rti-edit/rti-edit.component';
 import { AddRtiComponent } from './components/add-rti/add-rti.component';
 import { MyrtisComponent } from './components/myrtis/myrtis.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -17,12 +18,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
 //  { path: 'Dashboard/:pseudo', component: ProfileComponent },
-  {path:'Employees', component: EmployeesComponent},
-  {path:'useremployees', component: UseremployeeComponent},
   {path:'rtis', component: RtiComponent},
   {path:'Ajouter-rti',component: AddRtiComponent},
   { path: 'Users/:username', component: MyrtisComponent },
-
+  {path: 'mon-profile/:id', component: UserProfileComponent},
 
 ];
 

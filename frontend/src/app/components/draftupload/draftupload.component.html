@@ -1,0 +1,37 @@
+
+
+
+    <h2>Upload pour le RTI :  {{rti.nom}}</h2>
+    <a class="close"   href="#popout">&times;</a>
+
+      <form class="row"    (ngSubmit)="onSubmitform(f)"  #f="ngForm" >
+
+
+        <!-- Progress Bar
+
+        <div class="progress form-group" *ngIf="progress > 0">
+                <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+                </div>
+            </div>
+-->
+<div class="center">
+
+<div class='container' >
+	<div class="dropzone">
+		<label for="files" class="dropzone-container">
+			<div class="file-icon">+</div>
+			<div class="dropzone-title">
+				 <input type="file" class="form-group"   name="myFile" (change)="fileEvent($event)"/>
+			</div>
+		</label>
+
+	</div>
+  <button     class="btn btn-dark btn-sm mt-4"> Uploader </button>
+
+</div>
+</div>
+
+
+
+
+        </form>

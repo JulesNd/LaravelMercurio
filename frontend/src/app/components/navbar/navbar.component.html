@@ -29,39 +29,25 @@
  !-->
 
 
-
  <!-- Navbar -->
  <nav class="navbar navbar-expand-lg navbar-light bg-light" >
    <!-- Container wrapper -->
    <div class="container-fluid">
      <!-- Toggle button -->
-     <button
-       class="navbar-toggler"
-       type="button"
-       data-mdb-toggle="collapse"
-       data-mdb-target="#navbarSupportedContent"
-       aria-controls="navbarSupportedContent"
-       aria-expanded="false"
-       aria-label="Toggle navigation"
-     >
-       <i class="fas fa-bars"></i>
-     </button>
 
+     <img  routerLink="Users/{{user?.username}}" class="logo"
+       src="./assets/logowhite.png"
+       height="35"
+       alt="MDB Logo"
+       loading="lazy"/>
      <!-- Collapsible wrapper -->
-     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+     <div class="collapse navbar-collapse" id="navbarSupportedContent " >
        <!-- Navbar brand -->
-       <a   routerLink="Users/{{user?.username}}"   class="navbar-brand mt-2 mt-lg-0" >
-         <img
-           src="./assets/logowhite.png"
-           height="25"
-           alt="MDB Logo"
-           loading="lazy"
-         />
-       </a>
+
        <!-- Left links -->
 
-
-       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<!--
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0" aria-labelledby="dropdownMenu2">
 
          <div>
 
@@ -69,7 +55,7 @@
          <li class="nav-item">
            <a class="nav-link" routerLink="/Ajouter-rti" >Ajouter un rti</a>
          </li>
-      
+
 </div>
 
 
@@ -82,67 +68,90 @@
 
          </div>
 
-  <!--
 
-         <li class="nav-item">
-           <a class="nav-link" >Projects</a>
-         </li>
-         !-->
 
        </ul>
 
-
+!-->
        <!-- Left links -->
      </div>
      <!-- Collapsible wrapper -->
 
      <!-- Right elements -->
-     <div class="d-flex align-items-center">
+     <div class="d-flex align-items-center"  >
 
+
+       <div class="dropdown dropleft">
+           <!-- <button class="btn btn-secondary"   type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+           <img dropdown-toggle
+             src="{{user?.img}}"
+             class="rounded-circle"
+             height="25"
+             alt="Black and White Portrait of a Man"
+             loading="lazy" />
+
+         </button>   !-->
+         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+           <a class="dropdown-item" routerLink="mon-profile/{{user?.id}}">Editer profile</a>
+
+           <a class="dropdown-item" (click)="logOut()" > Se deconnecter </a>
+         </div>
+       </div>
 
 
 
 
        <div class="user">
-<B>{{user?.username}}</B>
+        Bonjour
+    <B class="fade-in delayed" >
+      <!--routerLink="mon-profile/{{user?.id}}"!-->
+      {{user?.username}}
+    </B>
        </div>
-       <!-- Avatar -->
-       <div class="dropdown">
-         <a
-           class="dropdown-toggle d-flex align-items-center hidden-arrow"
 
-           id="navbarDropdownMenuAvatar"
-           role="button"
-           data-mdb-toggle="dropdown"
-           aria-expanded="false"
-         >
-           <img
-             src="//cdn-icons-png.flaticon.com/512/1177/1177568.png"
-             class="rounded-circle"
-             height="25"
-             alt="Black and White Portrait of a Man"
-             loading="lazy"
-           />
-         </a>
-         <ul
-           class="dropdown-menu dropdown-menu-end"
-           aria-labelledby="navbarDropdownMenuAvatar"
-         >
-           <li>
-             <a class="dropdown-item" >My profile</a>
-           </li>
-           <li>
-             <a class="dropdown-item" >Settings</a>
-           </li>
-           <li>
-             <a class="dropdown-item" >Logout</a>
-           </li>
-         </ul>
-       </div>
-          <li><a ><i aria-hidden="true"   (click)="logOut()" class="fa fa-power-off "></i></a></li>
+
      </div>
      <!-- Right elements -->
    </div>
    <!-- Container wrapper -->
  </nav>
  <!-- Navbar -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- LE BOUTON QUI FLOAT !-->
+
+ <div   class="adminActions">
+ 	<input type="checkbox" name="adminToggle" class="adminToggle" />
+ 	<img src="{{user?.img}}" alt="" class="user-avatar-md rounded-circle img">
+
+ 	<div class="adminButtons">
+ 		<!--
+ 		<a href="#" title="Ajouter RTI"><i class="fa fa-plus"></i></a>
+ 		!-->
+    <a routerLink="/Ajouter-rti"  title="Ajouter un RtI"><i class="fa fa-plus"></i></a>
+    <a routerLink="Users/{{user?.username}}"  title="Mes RTI"><i class="fa fa-eye"></i></a>
+    <a routerLink="mon-profile/{{user?.id}}"  title="Mon profile"><i class="fa fa-info"></i></a>
+
+
+     <a (click)="logOut()"  title="Se deconnecter"><i class="fa fa-power-off"></i></a>
+ 	</div>
+ </div>
+
+ <!-- LE BOUTON QUI FLOAT !-->

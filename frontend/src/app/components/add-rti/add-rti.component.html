@@ -9,7 +9,7 @@
 
 <!-- onSubmitform(f) !-->
 
-  <form class="form"     (ngSubmit)="insertData() ;  ">
+  <form class="form"  (ngSubmit)="onSubmitform(f)"  #f="ngForm"     (ngSubmit)="insertData() ">
 
 <!-- #f="ngForm" (ngSubmit)="onSubmitform(f)" !-->
 
@@ -113,8 +113,6 @@
 
                         <!--  <input type="file"   name="myFile" (change)="fileEvent($event)"/> !-->
 
-                        <input type="file" class="form-group"   name="myFile" (change)="fileEvent($event)"/>
-
 
 
 <!--
@@ -134,6 +132,43 @@
 
 
 </div>
+
+
+<h3> DRAFT </h3>
+
+
+
+
+
+<div  >
+
+        <ul  >
+<div *ngFor="let mydata of rtis; " >
+          <li    class="booking-card center" style="background-image: url('/assets/{{mydata.rti_id}}/thumbnail.jpg')">
+
+              <div class="book-container">
+              <div class="content">
+                <!--        [routerLink]="['/rti',mydata.nom,mydata.rti_id]"   *ngIf=" mydata.status === 'draft'"  !-->
+                <button class="btn" [routerLink]="['/rti',mydata.rti_id,'charger-mon-rti']"  > Charger mon fichier </button>
+              </div>
+            </div>
+            <div class="informations-container">
+              <h2   class="title">   {{mydata.nom}}</h2>
+              <p class="sub-title">
+      Acquisition effectuée le  <strong> {{mydata.date}}</strong> <br>
+     Par <strong> {{mydata.owner_id.username}}</strong><br>
+              </p>
+
+              <div class="more-information">
+
+                <p class="disclaimer">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quasi eveniet perferendis culpa. Expedita architecto nesciunt, rem distinctio</p>
+                </div>
+            </div>
+          </li>
+</div>
+        </ul>
+        </div>
+
 
 
 <!--

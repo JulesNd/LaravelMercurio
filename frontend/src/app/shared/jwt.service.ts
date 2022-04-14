@@ -18,15 +18,17 @@ export class JwtService {
   constructor(private http: HttpClient) { }
 
   signUp(user: User): Observable<any> {
-    return this.http.post('//Backbeta.mercurio-app.com/api/auth/signup', user);
+    return this.http.post('//Backdev.mercurio-app.com/api/auth/signup', user);
   }
 
   logIn(user: User): Observable<any> {
-    return this.http.post<any>('//Backbeta.mercurio-app.com/api/auth/signin', user);
+    return this.http.post<any>('//Backdev.mercurio-app.com/api/auth/signin', user);
   }
 
   profile(): Observable<any> {
-    return this.http.get('//Backbeta.mercurio-app.com/api/auth/user');
+    return this.http.get('//Backdev.mercurio-app.com/api/auth/user');
   }
+
+
 
 }

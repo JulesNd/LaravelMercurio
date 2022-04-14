@@ -14,6 +14,7 @@ export class User {
   email: string;
   id: string;
   username: string;
+  status: string;
 }
 
 
@@ -75,9 +76,9 @@ export class AddRtiComponent implements OnInit {
 /* file upload */
 
     ngOnInit(): void {
-  this.getRtisData();
+
   this.getUsersData();
-  this.getRtis();
+  this.getUserdraft();
 
     }
 
@@ -95,6 +96,9 @@ export class AddRtiComponent implements OnInit {
          //position: 'top-end',
          icon: 'success',
          title: 'RTI crée avec succès',
+         html:
+
+           '<a href="/#/loading">Rafraichir la page</a>',
          showConfirmButton: false,
          timer: 1800
          })
@@ -103,8 +107,8 @@ export class AddRtiComponent implements OnInit {
 
     }
 
-    getRtis() {
-      this.DataService.getData().subscribe(res => {
+    getUserdraft() {
+      this.DataService.getUserdraft().subscribe(res => {
          this.rtis = res;
       });
     }

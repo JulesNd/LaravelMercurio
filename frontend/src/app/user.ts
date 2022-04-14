@@ -4,5 +4,8 @@ export class User {
   id: string;
   username: string;
   role:string;
+  img: string;
+  biography: string;
+  location: string;
 
 }

@@ -12,11 +12,17 @@
           </div>
         </div>
         <div class="informations-container">
+
           <h2 class="title">{{mydata.nom}}</h2>
+
+           <i *ngIf=" mydata.public === '0'" class="fa fa-eye-slash" aria-hidden="true"></i>
+          
           <p class="sub-title">
   Acquisition effectuée le  <strong> {{mydata.date}}</strong> <br>
  Par <strong> {{mydata.owner_id}}</strong><br>
           </p>
+<!--*ngIf=" mydata.public === 0" !-->
+
 
           <div class="more-information">
             <div class="info-and-date-container">

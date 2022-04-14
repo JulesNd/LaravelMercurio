@@ -30,11 +30,18 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EditorModule } from "@tinymce/tinymce-angular";
+import { UploadComponent } from './components/upload/upload.component';
+import { DraftuploadComponent } from './components/draftupload/draftupload.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { PrivatePageComponent } from './components/private-page/private-page.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const routes: Routes = [
 
   //{path:'rti/:nom/:annotation_id', component:RtiEditComponent},
   {path:'rti/:rti_id', component:RtiEditComponent},
+  {path:'rti/:rti_id/charger-mon-rti', component:DraftuploadComponent},
+
 
 //  {path:'rti/'+'abc'+':annotation_id', component:RtiEditComponent},
 
@@ -71,6 +78,10 @@ const routes: Routes = [
     MyrtisComponent,
     LoadingComponent,
     AdminComponent,
+    UploadComponent,
+    DraftuploadComponent,
+    PrivatePageComponent,
+    UserProfileComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -82,6 +93,7 @@ const routes: Routes = [
     ClipboardModule,
     NgbModule,
     EditorModule,
+    NgxDropzoneModule,
   ],
   providers: [
     {
