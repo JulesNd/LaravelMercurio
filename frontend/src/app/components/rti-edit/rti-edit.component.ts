@@ -11,6 +11,11 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { HttpClientModule, HTTP_INTERCEPTORS , HttpEvent, HttpEventType } from '@angular/common/http';
 import {Location} from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { EditRtiFormComponent } from '../edit-rti-form/edit-rti-form.component';
+
 
 declare var OpenLIME: any;
 declare var require: any;
@@ -24,6 +29,7 @@ declare var name: any;
   styleUrls: ['./rti-edit.component.css']
 })
 export class RtiEditComponent implements OnInit {
+  showFiller = false;
   rti_id: any;
   rtis: any;
   data: any;
@@ -31,7 +37,7 @@ export class RtiEditComponent implements OnInit {
   user: User;
   progress: number = 0;
   rti = new Rti();
-
+  isModalActive: boolean = false;
   constructor(private route:ActivatedRoute, private dataService: DataService, public jwtService: JwtService,private _location: Location, private http: HttpClient) {
 
 
@@ -262,7 +268,10 @@ this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
 });
 
 }
-backClicked() {
-this._location.back();
+
+
+toggleModal() {
+  this.isModalActive = !this.isModalActive;
 }
+
 }

@@ -1,0 +1,36 @@
+
+
+
+
+    <ul>
+      <li *ngFor="let mydata of rtis" class="booking-card center" style="background-image: url('/assets/{{mydata.rti_id}}/thumbnail.jpg')">
+
+
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="/assets/{{mydata.rti_id}}/thumbnail.jpg" alt="thumbnail {{mydata.nom}}">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="media">
+
+              <div class="media-content">
+                <p class="title is-4">{{mydata.nom}}</p>
+                <p class="subtitle is-6">@owner_name</p>
+                <p class="subtitle is-6"> Effectué le {{mydata.date}} </p>
+
+              </div>
+            </div>
+
+            <div class="content">
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </li>
+
+    </ul>

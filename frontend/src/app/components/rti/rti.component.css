@@ -1,284 +1,53 @@
-form {
-  width: 40%!important;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  margin-top: 5%;
-}
-.row {
-  display: flex;
-}
 
-.column {
-  flex: 50%;
-}
-
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-
-
-.box:hover{
+.card {
   cursor: pointer;
-  transform: scale(1.02);
-
-}
-.sub-title {
-  color: #f0f0f0;
-  opacity: 0!important;
-}
-.booking-card:hover .sub-title {
-  color: #333!important;
-  opacity: 1!important;
+transition: 0.4s;
 }
 
-.title {
-  font-size: 2em!important;
+
+.card-content-background-color {
+  background-color: red;
 }
-h2 {
-  color: #333;
-  font-weight: 500;
+
+.card:hover {
+  transform: translate(0, -2px);
+}
+.fa-eye, .fa-thumbs-up {
+  margin-left: 1vh;
 }
 
 ul {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%
-}
-li {
+	display: flex;
+	flex-wrap: wrap;
+	list-style: none;
 
-
-}
-
-.info-and-date-container {
-  padding: 3%;
-}
-
-.informations-container {
-  font-family:'Work Sans'!important;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%
 }
 
 ul .booking-card {
-  position: relative;
-  display: flex;
-  flex: 0 0 400px;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-box-shadow: 4px 4px 2px -1px rgba(0,0,0,0.44);
-  box-shadow: 4px 4px 2px -1px rgba(0,0,0,0.44);
-  border-radius: 10px;
-  overflow: hidden;
-  background-position: center center;
-  background-size: cover;
-  text-align: center;
-  color: #fc4400;
-  transition: 0.3s;
-}
-ul .booking-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  transition: 0.3s;
-}
-ul .booking-card .book-container {
-  height: 200px;
-}
-ul .booking-card .book-container .content {
-  position: relative;
-  opacity: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-
-  transform: translateY(-200px);
-  transition: 0.3s;
-}
-ul .booking-card .book-container .content .btn {
-  border: 3px solid white;
-  padding: 10px 15px;
-  background: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.3em;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
-}
-ul .booking-card .book-container .content .btn:hover {
-  background: white;
-  border: 0px solid white;
-  color: #fc4400;
-}
-ul .booking-card .informations-container {
-  flex: 1 0 auto;
-  padding: 20px;
-  background:rgba(240, 240, 240, 0.75);
-  transform: translateY(250px);
-  transition: 0.3s;
-}
-ul .booking-card .informations-container .title {
-  position: relative;
-
-
-  font-weight: bold;
-  font-size: 1.2em;
+	position: relative;
+	display: flex;
+	flex: 0 0 400px;
+	flex-direction: column;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-box-shadow: 2px 2px 1px -1px rgba(0, 0, 0, .44);
+	box-shadow: 2px 2px 1px -1px rgba(0, 0, 0, .44);
+	border-radius: 10px;
+	overflow: hidden;
+	background-position: center center;
+	background-size: cover;
+	text-align: center;
+	color: #fc4400;
+	transition: .3s
 }
 
-
-/** A CHECKER */
-
-
-.title::after  {
-  background: #f0f0f0!important;
+.fa-eye-slash{
+  font-size: 2vh;
 }
-
-
-/** A CHECKER */
-
-ul .booking-card .informations-container .title::after {
-
-
-}
-ul .booking-card .informations-container .price {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 10px;
-}
-ul .booking-card .informations-container .price .icon {
-  margin-right: 10px;
-}
-ul .booking-card .informations-container .more-information {
-  opacity: 0;
-  transition: 0.3s;
-}
-ul .booking-card .informations-container .more-information .info-and-date-container {
-  display: flex;
-}
-ul .booking-card .informations-container .more-information .info-and-date-container .box {
-  flex: 1 0;
-  padding: 15px;
-  margin-top: 20px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
-  background: white;
-  font-weight: bold;
-  font-size: 0.9em;
-}
-ul .booking-card .informations-container .more-information .info-and-date-container .box .icon {
-  margin-bottom: 5px;
-}
-ul .booking-card .informations-container .more-information .info-and-date-container .box.info {
-  color: #FA4616;
-  margin-right: 10px;
-}
-
-ul .booking-card .informations-container .more-information .disclaimer {
-  margin-top: 20px;
-  font-size: 0.8em;
-  color: #7d7d7d;
-}
-ul .booking-card:hover::before {
-  background: rgba(0, 0, 0, 0.05);
-}
-ul .booking-card:hover .book-container .content {
-  opacity: 1;
-  transform: translateY(90px);
-}
-ul .booking-card:hover .informations-container {
-  transform: translateY(98px);
-}
-ul .booking-card:hover .informations-container .more-information {
-  opacity: 1;
-}
-
-@media (max-width: 1500px) {
-  ul {
-      width: 100%
-  }
-  /**
-  ul .booking-card::before {
-    background: rgba(10, 72, 112, 0.6);
-  }
-  ul .booking-card .book-container .content {
-    opacity: 1;
-    transform: translateY(0px);
-  }
-  ul .booking-card .informations-container {
-    transform: translateY(0px);
-  }
-  ul .booking-card .informations-container .more-information {
-    opacity: 1;
-  }
-  **/
-}
-.sub-title{
-  color: #333;
-}
-
-h1 {
-  margin: 10px 20px;
-}
-
-/** RTI POUR MOBILE  POINT DE REPERE **/
-
-@media only screen and (min-width : 320px) and (max-width : 790px) {
-
-  ul .booking-card .informations-container .more-information {
-    opacity: 1!important;
-    transition: 0.3s;
-
-  }
-
-  .sub-title{
-    color: #333!important;
-    opacity: 1!important;
-  }
-  ul .booking-card:hover .book-container .content {
-    opacity: 1;
-    transform: translateY(70px);
-  }
-
-  ul .booking-card::before {
-    background: rgba(0, 0, 0, 0.2);
-  }
-  ul .booking-card .book-container .content {
-    opacity: 1;
-    transform: translateY(70px);
-  }
-  ul .booking-card .informations-container {
-    transform: translateY(200px);
-  }
-
-  ul .booking-card:hover .informations-container {
-    transform: translateY(200px);
-  }
-  ul .booking-card .informations-container .more-information {
-    opacity: 1!important;
-  }
-
-
-
-
-}
-
-
-/** RTI POUR MOBILE  POINT DE REPERE **/

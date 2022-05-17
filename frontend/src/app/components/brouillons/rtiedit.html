@@ -1,0 +1,50 @@
+<div *ngFor="let rti of rtis" class="col .col-6 .col-lg-4 col-complementary" role="complementary">
+
+
+
+
+
+
+  <div class="section-titleRti">
+<span class="title">  <strong>{{rti.nom}}</strong></span><br>
+
+<span>  publié le <strong> {{rti.date}} </strong> </span> <br>
+<!--  <span>  <!Par <strong> {{rti.owner_id}} </strong> </span>
+<span> {{rti.id}} </span>!-->
+</div>
+
+<div class="section description">
+
+<span class="section-title"> <strong>  Description </strong> </span> <br>
+<input type="checkbox" class="read-more-state" id="post-1" />
+
+<div style="width:100%; height:250px; overflow: auto;" >
+{{rti.description}}
+
+</div>
+
+</div>
+
+
+<div id="popout" class="section-actions">
+
+<span class="section-title"><strong>  Actions </strong> </span> <br>
+
+<div class="row actions ">
+
+  <div class="social-icons">
+    <ul>
+    <!--  [routerLink]="['/rti',rti.nom,rti.rti_id,'annotation']" !-->
+
+<li  *ngIf=" user.id === rti.owner_id" ><a    [routerLink]="['/rti',rti.rti_id,'annotation']" ><i class=" fa fa-asterisk "></i></a></li>
+      <li><a href="#popup1" ><i class=" fa fa-edit   " ></i></a></li>
+      <li><a ><i class="fa fa-share-alt "></i></a></li>
+
+    </ul>
+
+</div>
+</div>
+</div>
+
+
+</div>

@@ -29,12 +29,18 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatSliderModule } from '@angular/material/slider';
 import { EditorModule } from "@tinymce/tinymce-angular";
 import { UploadComponent } from './components/upload/upload.component';
 import { DraftuploadComponent } from './components/draftupload/draftupload.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { PrivatePageComponent } from './components/private-page/private-page.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material/material.module';
+
+import { MesDossiersComponent } from './components/mes-dossiers/mes-dossiers.component';
+import { EditRtiFormComponent } from './components/edit-rti-form/edit-rti-form.component';
 
 const routes: Routes = [
 
@@ -50,7 +56,7 @@ const routes: Routes = [
 
   { path: 'Users', component: ProfileComponent },
   { path: 'loading', component: LoadingComponent },
-
+  { path: 'Mes-dossiers', component: MesDossiersComponent },
 
 
 
@@ -82,6 +88,8 @@ const routes: Routes = [
     DraftuploadComponent,
     PrivatePageComponent,
     UserProfileComponent,
+    MesDossiersComponent,
+    EditRtiFormComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -94,6 +102,8 @@ const routes: Routes = [
     NgbModule,
     EditorModule,
     NgxDropzoneModule,
+    BrowserAnimationsModule,
+    
   ],
   providers: [
     {

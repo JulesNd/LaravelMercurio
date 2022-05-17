@@ -1,157 +1,80 @@
-<!--
-
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark" *ngIf="isLoggedin">
-   <div class="container-fluid">
-     <a class="navbar-brand" href="#">Fixed navbar</a>
-     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-       <span class="navbar-toggler-icon"></span>
-     </button>
-     <div class="collapse navbar-collapse" id="navbarCollapse">
-       <ul class="navbar-nav me-auto mb-2 mb-md-0">
-         <li class="nav-item">
-           <a class="nav-link active" aria-current="page" href="#">Home</a>
-         </li>
-         <li class="nav-item">
-           <a class="nav-link" href="#">Link</a>
-         </li>
-
-         <li class="nav-item">
-
- <a class="nav-link"   (click)="logOut()" >lOGOUT</a>
-
-</li>
-
-       </ul>
-
-     </div>
-   </div>
- </nav>
- !-->
-
-
- <!-- Navbar -->
- <nav class="navbar navbar-expand-lg navbar-light bg-light" >
-   <!-- Container wrapper -->
-   <div class="container-fluid">
-     <!-- Toggle button -->
-
-     <img  routerLink="Users/{{user?.username}}" class="logo"
-       src="./assets/logowhite.png"
-       height="35"
-       alt="MDB Logo"
-       loading="lazy"/>
-     <!-- Collapsible wrapper -->
-     <div class="collapse navbar-collapse" id="navbarSupportedContent " >
-       <!-- Navbar brand -->
-
-       <!-- Left links -->
-
-<!--
-       <ul class="navbar-nav me-auto mb-2 mb-lg-0" aria-labelledby="dropdownMenu2">
-
-         <div>
-
-
-         <li class="nav-item">
-           <a class="nav-link" routerLink="/Ajouter-rti" >Ajouter un rti</a>
-         </li>
-
-</div>
 
 
 
-<div>
-
-         <li class="nav-item"   >
-           <a class="nav-link"     routerLink="Users/{{user?.username}}"   > Mes rtis  </a>
-         </li>
-
-         </div>
 
 
 
-       </ul>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div  class="navbar-brand">
+    <a class="navbar-item" >
+      <img src="https://mercurioimaging.com/wp-content/uploads/Logo_Mercurio_seul.png" >
+    </a><a (click)="toggleNavbar()" role="button" #navBurger class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div><div id="navbarBasicExample" class="navbar-menu" #navMenu>
+    <div class="navbar-start">
+      <a   [routerLink]="['/loading']" class="navbar-item">
+      Mes Rtis
+      </a>
+      <a  [routerLink]="['/Ajouter-rti']" class="navbar-item" *ngIf=" user.email === 'Admin@gmail.com'">
+        Ajouter un Rti
+      </a>
+      <!--
+      <a  [routerLink]="['/Mes-dossiers']"  class="navbar-item">
+        Mes dossiers
+      </a>
 !-->
-       <!-- Left links -->
-     </div>
-     <!-- Collapsible wrapper -->
 
-     <!-- Right elements -->
-     <div class="d-flex align-items-center"  >
+    </div><div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
 
+          <a [routerLink]="['/mon-profile',user.id]"    class="button is-light">
+            <img
+              src="{{user.img}}"
+              class="rounded-circle"
+              height="28"
+              alt=""
+              loading="lazy"
+            /> <span class="bjr subtitle is-6">  Bonjour {{user.username}} </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
 
-       <div class="dropdown dropleft">
-           <!-- <button class="btn btn-secondary"   type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<!--
+  <img
+    src="{{user.img}}"
+    class="rounded-circle"
+    height="28"
+    alt=""
+    loading="lazy"
+  />
 
-           <img dropdown-toggle
-             src="{{user?.img}}"
-             class="rounded-circle"
-             height="25"
-             alt="Black and White Portrait of a Man"
-             loading="lazy" />
-
-         </button>   !-->
-         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-           <a class="dropdown-item" routerLink="mon-profile/{{user?.id}}">Editer profile</a>
-
-           <a class="dropdown-item" (click)="logOut()" > Se deconnecter </a>
-         </div>
-       </div>
-
-
-
-
-       <div class="user">
-        Bonjour
-    <B class="fade-in delayed" >
-      <!--routerLink="mon-profile/{{user?.id}}"!-->
-      {{user?.username}}
-    </B>
-       </div>
-
-
-     </div>
-     <!-- Right elements -->
-   </div>
-   <!-- Container wrapper -->
- </nav>
- <!-- Navbar -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!-- LE BOUTON QUI FLOAT !-->
-
- <div   class="adminActions">
- 	<input type="checkbox" name="adminToggle" class="adminToggle" />
- 	<img src="{{user?.img}}" alt="" class="user-avatar-md rounded-circle img">
-
- 	<div class="adminButtons">
- 		<!--
- 		<a href="#" title="Ajouter RTI"><i class="fa fa-plus"></i></a>
- 		!-->
-    <a routerLink="/Ajouter-rti"  title="Ajouter un RtI"><i class="fa fa-plus"></i></a>
-    <a routerLink="Users/{{user?.username}}"  title="Mes RTI"><i class="fa fa-eye"></i></a>
-    <a routerLink="mon-profile/{{user?.id}}"  title="Mon profile"><i class="fa fa-info"></i></a>
-
-
-     <a (click)="logOut()"  title="Se deconnecter"><i class="fa fa-power-off"></i></a>
- 	</div>
- </div>
-
- <!-- LE BOUTON QUI FLOAT !-->
+  !-->

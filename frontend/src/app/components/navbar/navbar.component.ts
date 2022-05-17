@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup } from "@angular/forms";
 import Swal from 'sweetalert2';
@@ -6,7 +6,6 @@ import { JwtService } from './../../shared/jwt.service';
 import { TokenAuthService } from '../../shared/token-auth.service';
 import { AuthenticationStateService } from '../../shared/authentication-state.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 
 
 export class User {
@@ -31,11 +30,22 @@ export class User {
 
 
 export class NavbarComponent implements OnInit {
+
+  @ViewChild('navBurger') navBurger: ElementRef;
+    @ViewChild('navMenu') navMenu: ElementRef;
+
   isLoggedin: boolean;
   user: User;
   signinForm: FormGroup;
   err = null;
   public isCollapsed = false;
+  toggleNavbar() {
+         this.navBurger.nativeElement.classList.toggle('is-active');
+         this.navMenu.nativeElement.classList.toggle('is-active');
+     }
+
+  
+
 
   constructor(
     public router: Router,
