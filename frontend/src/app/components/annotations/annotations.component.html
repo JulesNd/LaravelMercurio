@@ -1,8 +1,14 @@
+<div id="app" *ngIf=" user.role != 'Admin'">
+   <div>403  <br />
+ </div>
+   <div class="txt">
+  <br />  <br />  Vous n'avez pas la permission d'accéder à ce contenu<span class="blink">_</span>
+   </div>
+</div>
 
+<div *ngIf=" user.id === rti.owner_id || user.role === 'Admin' ">
 
-<div class=" ">
-
-<div class="columns  is-gapless      ">
+<div class="columns  is-gapless"  >
 
     <!-- OPENLIME ! -->
   <div  class="column   is-full">

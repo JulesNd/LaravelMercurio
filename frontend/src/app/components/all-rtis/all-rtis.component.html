@@ -1,4 +1,14 @@
-<div class="container is-widescreen">
+
+<div id="app" *ngIf=" user.role != 'Admin'">
+   <div>403  <br />
+ </div>
+   <div class="txt">
+  <br />  <br />  Vous n'avez pas la permission d'accéder à ce contenu<span class="blink">_</span>
+   </div>
+</div>
+
+
+<div class="container is-widescreen " *ngIf=" user.role === 'Admin'">
 
      <ul >
        <li *ngFor="let mydata of rtis1" class="booking-card center " >

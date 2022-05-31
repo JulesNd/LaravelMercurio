@@ -53,7 +53,9 @@ ul .booking-card {
 	margin-right: auto;
 	margin-top: 20px;
 	margin-bottom: 30px;
-	-webkit-box-shadow: 2px 2px 1px -1px rgba(0, 0, 0, .44);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 5000px;
+-webkit-box-shadow: 2px 2px 1px -1px rgba(0, 0, 0, .44);
 	box-shadow: 2px 2px 1px -1px rgba(0, 0, 0, .44);
 
 	overflow: hidden;

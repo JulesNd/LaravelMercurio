@@ -12,6 +12,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS , HttpEvent, HttpEventType } from '
 import {Location} from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { EditRtiFormComponent } from '../edit-rti-form/edit-rti-form.component';
+import { AnnotationsComponent } from '../annotations/annotations.component';
 
 declare var OpenLIME: any;
 declare var require: any;
@@ -151,7 +152,7 @@ export class RtiEditComponent implements OnInit {
 
 
        let lime = new OpenLIME.OpenLIME('#openlime',{ background:'black'});
-       OpenLIME.Skin.setUrl('/assets/js/skin.svg');
+       OpenLIME.Skin.setUrl('/assets/js/Openlime/skin.svg');
 
        let layer0 = new OpenLIME.Layer({
           label: 'RTI',
@@ -210,6 +211,8 @@ export class RtiEditComponent implements OnInit {
 
   }
 
+
+
   /* To copy Text from Textbox */
 copyInputMessage(inputElement){
  inputElement.select();
@@ -248,7 +251,7 @@ getUsersData() {
 updateRti() {
 
 this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
-/**  Swal.fire({
+ Swal.fire({
     title: '<strong>Le RTI à été mis à jour</strong>',
     icon: 'success',
     html:
@@ -260,7 +263,7 @@ this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
     focusConfirm: false,
     showConfirmButton: false,
 
-  })**/
+  })
 
 });
 

@@ -1,111 +1,114 @@
-<!--
-<div id="popup1" class="overlay">
-  <div class="popup">
-    <h2>Editer</h2>
-    <a class="close"   href="#popout">&times;</a>
-    <div>
 
-      <form class="row"    (ngSubmit)="onSubmitform(f)"  #f="ngForm"        (ngSubmit)= "updateRti()"  >
+<div  [ngClass]="{ 'is-active' : isModalActive }" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Editer le RTI </p>
+      <button class="delete" (click)="toggleModal()" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
 
-      <div class="column">
-        <div class="form-group">
-      <label for="name">Identifiant </label>
-      <input type="text"  name="id" class="form-control" readonly  value="rti.rti_id"  [(ngModel)]="rti.rti_id" #formInputText >
+        <div>
+          <div>
+
+            <form class="row"    (ngSubmit)="onSubmitform(f)"  #f="ngForm"        (ngSubmit)= "updateRti()"  >
+
+            <div class="column">
+              <div class="form-group none">
+            <label for="name">Identifiant </label>
+            <input type="text"  name="id" class="form-control" readonly  value="rti.rti_id"  [(ngModel)]="rti.rti_id" #formInputText >
 
 
-          <li  class="btn fa fa-clipboard" [ngxClipboard]="formInputText"></li>
+                <li  class="btn fa fa-clipboard" [ngxClipboard]="formInputText"></li>
+              </div>
+
+
+
+
+            <div class="form-group" *ngIf=" user.role === 'Admin'">
+            <label for="exampleFormControlSelect1">Proprietaire</label>
+            <select [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+          <option value="" selected disabled>Selectionnez un proprietaire pour ce RTI</option>
+          <option   *ngFor="let user of users" value="{{user.id}}" >{{user.username}} - {{user.email}}</option>
+
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf=" user.email != 'Admin@gmail.com'">
+          <label for="exampleFormControlSelect1">Proprietaire</label>
+          <select disabled [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+        <option   disabled value="{{user?.id}}" >{{user?.username}} - {{user?.email}}</option>
+
+          </select>
+
         </div>
 
 
+                             <div class="form-group">
+                                   <label for="exampleFormControlSelect1">Visibilité</label>
+                               <select [(ngModel)]="rti.public" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+                                   <option   value="1" >Public</option>
+                                 <option   value="0" >Privé</option>
+                                 </select>
+                                 </div>
+            </div>
 
+            <div class="column">
+              <div class="form-group">
+                <label for="exampleFormControlSelect1">Date d'acquisition</label>
 
-      <div class="form-group" *ngIf=" user.email === 'Admin@gmail.com'">
-      <label for="exampleFormControlSelect1">Proprietaire</label>
-      <select [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
-    <option value="" selected disabled>Selectionnez un proprietaire pour ce RTI</option>
-    <option   *ngFor="let user of users" value="{{user.id}}" >{{user.username}} - {{user.email}}</option>
+                <input readonly  type="date" name="date" class="form-control" placeholder="Date" [(ngModel)]="rti.date">
+                </div>
 
-      </select>
-    </div>
-
-    <div class="form-group" *ngIf=" user.email != 'Admin@gmail.com'">
-    <label for="exampleFormControlSelect1">Proprietaire</label>
-    <select disabled [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
-  <option   disabled value="{{user?.id}}" >{{user?.username}} - {{user?.email}}</option>
-
-    </select>
-
-  </div>
-
-
-
-
-
+                    <div class="form-group">
+                  <label for="name">Nom</label>
+                  <input type="text" name="name" class="form-control"  [(ngModel)]="rti.nom"    >
+                       </div>
 
                        <div class="form-group">
-                             <label for="exampleFormControlSelect1">Visibilité</label>
-                         <select [(ngModel)]="rti.public" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
-                             <option   value="1" >Public</option>
-                           <option   value="0" >Privé</option>
-                           </select>
-                           </div>
+                         <label for="exampleFormControlSelect1">Description</label>
+
+                           <textarea  name="description" class="form-control" placeholder="Description" [(ngModel)]="rti.description"> </textarea>
+                       </div>
 
 
+                                   <div class="progress form-group" *ngIf="progress > 0">
+                                       <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+                                       </div>
+                                   </div>
+               <input  type="file" class="form-group"  *ngIf=" user.role === 'Admin'"  name="myFile" (change)="fileEvent($event)"/>
 
-      </div>
+            </div>
+              </form>
 
-      <div class="column">
-        <div class="form-group">
-          <label for="exampleFormControlSelect1">Date d'acquisition</label>
-
-          <input type="date" name="date" class="form-control" placeholder="Date" [(ngModel)]="rti.date">
-          </div>
-
-              <div class="form-group">
-            <label for="name">Nom</label>
-            <input type="text" name="name" class="form-control"  [(ngModel)]="rti.nom"    >
-                 </div>
-
-                 <div class="form-group">
-                   <label for="exampleFormControlSelect1">Description</label>
-
-                     <textarea  name="description" class="form-control" placeholder="Description" [(ngModel)]="rti.description"> </textarea>
-                 </div>
-
-
-
-
-                             <div class="progress form-group" *ngIf="progress > 0">
-                                 <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
-                                 </div>
-                             </div>
-         <input type="file" class="form-group"   name="myFile" (change)="fileEvent($event)"/>
-
-
-
-      </div>
-            <button     class="btn btn-dark btn-sm mt-4">Mettre à jour </button>
-
-
-        </form>
-
-          </div>
+                </div>
+        </div>
+      </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success"  (click)= "updateRti()"  (ngSubmit)= "updateRti()">Sauvegarder</button>
+      <button class="button" (click)="toggleModal()" >Annuler</button>
+    </footer>
   </div>
 </div>
-!-->
-<div class=" is-flex-desktop ">
+
+
+
+
+
+
+<div class=" ">
 
 <div class="columns  is-gapless      ">
 
     <!-- OPENLIME ! -->
-  <div  class="column    is-three-quarters">
+  <div  class="column col    is-three-quarters">
     <div id="openlime"></div>
   </div>
   <!----------------->
 
 
   <!-- informations ! -->
-  <div *ngFor="let rti of rtis" class="column ">
+  <div *ngFor="let rti of rtis" class="column col ">
 
 
 
@@ -125,18 +128,17 @@
   <section class="section p-3  desc is-small ">
   <p class=" subtitle is-5 py-1 ">
 {{rti.description}}
-orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus cursus accumsan. Nullam non vestibulum est, dignissim pretium urna. Nunc porttitor scelerisque nisi, non
-orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus cursus accumsan. Nullam non vestibulum est, dignissim pretium urna. Nunc porttitor scelerisque nisi, non
-orem ipsum dolor sit amet, consectetur adipiscing elit. Nulla rhoncus cursus accumsan. Nullam non vestibulum est, dignissim pretium urna. Nunc porttitor scelerisque nisi, non
+
+
   </p>
 </section>
 
 
 
 <footer class="card-footer">
-  <a  class="card-footer-item"> <i class="fas fa-edit" aria-hidden="true"></i> </a>
+  <a (click)="toggleModal()" *ngIf=" user.id === rti.owner_id || user.role === 'Admin' "  class="card-footer-item"> <i class="fas fa-edit" aria-hidden="true"></i> </a>
   <a  class="card-footer-item"> <i class="fas fa-code" aria-hidden="true"></i> </a>
-  <a [routerLink]="['/rti',rti.rti_id,'annotation']" class="card-footer-item">     <i class="fas fa-asterisk" aria-hidden="true"></i>   </a>
+  <a  *ngIf=" user.id === rti.owner_id || user.role === 'Admin' " [routerLink]="['/rti',rti.rti_id,'annotation']" class="card-footer-item">     <i class="fas fa-asterisk" aria-hidden="true"></i>   </a>
 </footer>
 
   </div>

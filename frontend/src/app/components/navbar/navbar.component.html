@@ -28,27 +28,32 @@
 
     </div>
     <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="buttons">
 
-          <a [routerLink]="['/mon-profile',user.id]"    class="">
-            <img
-              src="{{user.img}}"
-              class="rounded-circle"
-              height="28"
-              alt=""
-              loading="lazy"
-            /> <span class="bjr subtitle is-6">  Bonjour {{user.username}} </span>
-          </a>
-        </div>
-      </div>
       <div class="navbar-item">
-        <div class="buttons">
-<a (click)="logOut()" class="button is-light">
-    <i class=" fas fa-solid fa-right-from-bracket"></i>
-    </a>
+
+
+        <div class="buttons are-small ">
+          <button class="button ">    <a [routerLink]="['/mon-profile',user.id]"    class="">
+                <img
+                  src="{{user.img}}"
+                  class="rounded-circle"
+                  height=""
+                  alt=""
+                  loading="lazy"
+                /> <span class="bjr subtitle is-6"> {{user.username}} </span>
+              </a>
+            </button>
+          <button class="button is-light">
+          <a (click)="logOut()">
+              <i class=" fas fa-solid fa-right-from-bracket"></i>
+              </a></button>
+
         </div>
+
+
+
       </div>
+
 
 
     </div>

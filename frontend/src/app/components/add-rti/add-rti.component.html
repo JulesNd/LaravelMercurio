@@ -1,11 +1,17 @@
 
-<body>
+<div id="app" *ngIf=" user.role != 'Admin'">
+   <div>403  <br />
+ </div>
+   <div class="txt">
+  <br />  <br />  Vous n'avez pas la permission d'accéder à ce contenu<span class="blink">_</span>
+   </div>
+</div>
+
+<div *ngIf=" user.role === 'Admin'">
 
 
 
-
-  <button (click)="backClicked()" class="btn"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
-<div class="container">
+<div class="container" >
 
 <!-- onSubmitform(f) !-->
 
@@ -169,7 +175,7 @@
         </ul>
         </div>
 
-
+</div>
 
 <!--
 
@@ -179,7 +185,3 @@
 
 
 !-->
-
-
-
-</body>

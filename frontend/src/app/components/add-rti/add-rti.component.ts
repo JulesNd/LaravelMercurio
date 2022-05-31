@@ -13,6 +13,7 @@ export class User {
   name: string;
   email: string;
   id: string;
+  role: string;
   username: string;
   status: string;
 }

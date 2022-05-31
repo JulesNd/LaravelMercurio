@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Rti } from '../../rti';
 import { DataService } from '../../service/data.service';
 import {ActivatedRoute } from '@angular/router';
-import { User } from '../../user';
 import {Location} from '@angular/common';
 
 
@@ -12,6 +11,14 @@ declare var require: any;
 const URL = require("url").URL;
 declare var name: any;
 declare var layout: any;
+
+export class User {
+  name: string;
+  email: string;
+  id: string;
+  username: string;
+  role: string;
+}
 
 @Component({
   selector: 'app-annotations',
@@ -23,6 +30,7 @@ export class AnnotationsComponent implements OnInit {
   rtis: any;
   data: any;
   rti = new Rti();
+  user: User;
 
 
   constructor(private route:ActivatedRoute, private dataService: DataService, private _location: Location,) { }
@@ -87,7 +95,7 @@ export class AnnotationsComponent implements OnInit {
 
   //  lime.camera.maxFixedZoom = 4;
 
-    OpenLIME.Skin.setUrl('/assets/js/skin.svg');
+    OpenLIME.Skin.setUrl('/assets/js/Openlime/skin.svg');
 
     let editor = new OpenLIME.SvgAnnotationEditor(lime, anno, {
     	lime: lime,
