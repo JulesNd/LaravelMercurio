@@ -110,8 +110,6 @@ button {
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #FA4616);
-  animation: btn-anim1 1s linear infinite;
 }
 
 @keyframes btn-anim1 {
@@ -128,9 +126,6 @@ button {
 	right: 0;
 	width: 2px;
 	height: 100%;
-	background: linear-gradient(180deg, transparent, #FA4616);
-	animation: btn-anim2 1s linear infinite;
-	animation-delay: .25s;
 }
 
 @keyframes btn-anim2 {
@@ -147,9 +142,6 @@ button {
 	tight: -100%;
 	width: 100%;
 	height: 2px;
-	background: linear-gradient(270deg, transparent, #FA4616);
-	animation: btn-anim3 1s linear infinite;
-	animation-delay: .5s;
 }
 
 @keyframes btn-anim3 {
@@ -166,9 +158,6 @@ button {
 	left: 0;
 	width: 2px;
 	height: 100%;
-	background: linear-gradient(360deg, transparent, #FA4616);
-	animation: btn-anim4 1s linear infinite;
-	animation-dealy: .75s;
 }
 
 @keyframes btn-anim4 {

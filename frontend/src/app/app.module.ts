@@ -14,7 +14,6 @@ import {RouterModule, Routes} from '@angular/router';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpEvent, HttpEventType  } from '@angular/common/http';
 import { AuthHeaderInterceptor } from './shared/auth-header.interceptor';
-import { EmployeesComponent } from './components/employees/employees.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UseremployeeComponent } from './components/useremployee/useremployee.component';
 import { PipePipe } from './components/pipe.pipe';
@@ -29,7 +28,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MatSliderModule } from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
 import { EditorModule } from "@tinymce/tinymce-angular";
 import { UploadComponent } from './components/upload/upload.component';
 import { DraftuploadComponent } from './components/draftupload/draftupload.component';
@@ -38,16 +37,20 @@ import { PrivatePageComponent } from './components/private-page/private-page.com
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-
+import { AuthGuard } from './shared/auth.guard';
 import { MesDossiersComponent } from './components/mes-dossiers/mes-dossiers.component';
 import { EditRtiFormComponent } from './components/edit-rti-form/edit-rti-form.component';
+import { RtiModalComponent } from './components/rti-modal/rti-modal.component';
+import { AllRtisComponent } from './components/all-rtis/all-rtis.component';
 
 const routes: Routes = [
 
   //{path:'rti/:nom/:annotation_id', component:RtiEditComponent},
   {path:'rti/:rti_id', component:RtiEditComponent},
   {path:'rti/:rti_id/charger-mon-rti', component:DraftuploadComponent},
+  {path:'popup/rti/:rti_id', component:RtiModalComponent},
 
+  {path:'all', component:AllRtisComponent},
 
 //  {path:'rti/'+'abc'+':annotation_id', component:RtiEditComponent},
 
@@ -73,7 +76,6 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     ProfileComponent,
-    EmployeesComponent,
     NavbarComponent,
     UseremployeeComponent,
     PipePipe,
@@ -90,6 +92,8 @@ const routes: Routes = [
     UserProfileComponent,
     MesDossiersComponent,
     EditRtiFormComponent,
+    RtiModalComponent,
+    AllRtisComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -103,9 +107,11 @@ const routes: Routes = [
     EditorModule,
     NgxDropzoneModule,
     BrowserAnimationsModule,
-    
+    MatDialogModule,
+
   ],
   providers: [
+    AuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthHeaderInterceptor,

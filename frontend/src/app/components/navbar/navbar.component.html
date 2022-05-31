@@ -1,35 +1,8 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div  class="navbar-brand">
     <a class="navbar-item" >
-      <img src="https://mercurioimaging.com/wp-content/uploads/Logo_Mercurio_seul.png" >
+      <img [routerLink]="['Users/',user.username]" src="https://mercurioimaging.com/wp-content/uploads/Logo_Mercurio_seul.png" >
     </a><a (click)="toggleNavbar()" role="button" #navBurger class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
@@ -37,23 +10,28 @@
     </a>
   </div><div id="navbarBasicExample" class="navbar-menu" #navMenu>
     <div class="navbar-start">
-      <a   [routerLink]="['/loading']" class="navbar-item">
+      <a   [routerLink]="['Users/',user.username]" class="navbar-item">
       Mes Rtis
+      </a>
+      <a  [routerLink]="['/all']" class="navbar-item" *ngIf=" user.email === 'Admin@gmail.com'">
+        Tout les RTIs
       </a>
       <a  [routerLink]="['/Ajouter-rti']" class="navbar-item" *ngIf=" user.email === 'Admin@gmail.com'">
         Ajouter un Rti
       </a>
+
       <!--
       <a  [routerLink]="['/Mes-dossiers']"  class="navbar-item">
         Mes dossiers
       </a>
 !-->
 
-    </div><div class="navbar-end">
+    </div>
+    <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
 
-          <a [routerLink]="['/mon-profile',user.id]"    class="button is-light">
+          <a [routerLink]="['/mon-profile',user.id]"    class="">
             <img
               src="{{user.img}}"
               class="rounded-circle"
@@ -64,6 +42,15 @@
           </a>
         </div>
       </div>
+      <div class="navbar-item">
+        <div class="buttons">
+<a (click)="logOut()" class="button is-light">
+    <i class=" fas fa-solid fa-right-from-bracket"></i>
+    </a>
+        </div>
+      </div>
+
+
     </div>
   </div>
 </nav>

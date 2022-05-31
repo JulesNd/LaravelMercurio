@@ -1,21 +1,39 @@
-.openlime {
-	position: relative;
-	background-color:#000;
-	height:100%;
+.openlime-overlay, .openline-svgoverlay {
+/*	pointer-events: none; */
 }
 
-.openlime > canvas {
-	width: 100%;
-	height: 100%;
-	overflow: hidden; /* this is important, it would cause firefox flickering! */
-	padding: 0px;	
+@media only screen and (min-width : 320px) and (max-width : 1080px) {
+
+.openlime-layers-menu {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 0%;
+  max-width: 110px!important;
+  overflow: hidden;
+  transition: width 0.3s;
+  font-family: "Open Sans",sans-serif;
+  color: #ccc;
+  background-color: rgb(20, 20, 20, 0.8);
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  z-index: 1;
+}
+.openlime-layers-menu .openlime-list .openlime-entry {
+font-size: 0.8em;
+
 }
 
-.openlime-overlay, .openlime-svgoverlay {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	height: 100%;
+#entry_7 {
+	font-size: 0.75em;
+
+}
+
 }
 
 .openlime-overlay {
@@ -37,88 +55,23 @@
 .openlime-scale > text {
 	font-size:24px;
 }
-
 .openlime-scale > line {
 	stroke:white;
 	stroke-width:2px;
 }
 
-/* DIALOG */
-
-.openlime-dialog-background {
-	opacity: 1.0;
-	transition: visibility 0s linear 300ms, opacity 300ms;
-
+.openlime-info {
 	position:absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	color:#fff;
-	background: rgb(0, 0, 0, 0.5);
-	padding:20px 40px;
-	border-radius:5px;	
-	cursor:pointer;
-}
-
-.openlime-dialog {
-	position:absolute;
-	top: 10%;
-	left: 15%;
-	right: 15%;
-	bottom: 7%;
-	color:#fff;
-	font-family: "Open Sans",sans-serif;
-	background: rgb(32, 32, 32, 0.9);
-	opacity:0.95;
-	padding:20px 40px;
-	border-radius:5px;	
-	cursor:auto;
-	transition: visibility 0s linear 0s, opacity 300ms;
-	overflow-y: auto;
-}
-
-.openlime-dialog.openlime-info {
-	position:absolute;
-	top:10px;
-	left:10px;
-	width:25%;
-	height:fit-content;
+	top:30%;
+	left:30%;
 	background-color:rgb(20, 20, 20, 0.9);
-	padding:0px 10px;
+	padding:0px 20px;
 	color:white;
 	border-radius:3px;
 	border:1px solid rgb(60, 60, 60);
+
 }
 
-.openlime-dialog.fading {
-	opacity:0.0;
-}
-
-.openlime-dialog.hidden, .openlime-dialog-background.hidden {
-	visibility:hidden;
-	opacity:0.0;
-}
-
-.openlime-dialog .openlime-close {
-	position:absolute;
-	top:10px;
-	right:10px;
-	width:30px;
-	height:30px;
-	cursor:pointer;
-} 
-
-.openlime-close * {
-	stroke:#fff !important;
-	fill:#fff !important;
-}
-
-.openlime-close:hover  * {
-	opacity: 70%;
-}
-
-/* TOOLBAR */
 
 .openlime-toolbar rect[style] {
 	fill:rgb(255, 255, 255, 0) !important;
@@ -130,19 +83,16 @@
 	fill:white !important
 }
 
-.openlime-toolbar text {
-	stroke:white !important;
-	fill:white !important
-}
 
 .openlime-toolbar {
-	position:absolute; 
+	position:absolute;
 	bottom:0px;
 	right:0px;
 	padding:5px;
-	background-color: transparent; 
+	background-color:rgb(0, 0, 0, 0.0);
 	display:flex;
 }
+
 
 .openlime-toolbar svg:not(:root) {
 	width:auto;
@@ -152,32 +102,47 @@
 
 .openlime-toolbar .openlime-button:hover {
 	cursor:pointer;
-	opacity:70%;
+	opacity:50%;
 }
+
 
 .openlime-light path[style] {
-	fill:#80808011 !important; 
+	fill:#80808011 !important;
 }
-
 .openlime-light-active .openlime-light path[style] {
-	fill:#ffcc00 !important; 
+	fill:#ffcc00 !important;
 }
 
-.openlime-lightdir {
+
+
+.openlime-help-window {
 	position:absolute;
-	top:0px;
-	left:0px;
-	width:100%;
-	height:100%;
-	pointer-events:none;
+	top: 10%;
+	left: 30%;
+	right: 30%;
+	bottom: 10%;
+	color:#fff;
+	background: #222;
+	opacity:0.95;
+	padding:20px 40px;
+	border-radius:5px;
+    font-family: "Open Sans",sans-serif;
+
 }
 
-.openlime-lightdir line {
-	stroke: #ff0;
-	opacity: 0.4;
-	stroke-width:1.5px;
-	vector-effect: non-scaling-stroke;
+.openlime-help-window .openlime-close {
+	position:absolute;
+	top:10px;
+	right:10px;
+	width:30px;
+	height:30px;
+	cursor:pointer;
 }
+.openlime-close:hover  * {
+	stroke:#fff !important;
+}
+
+/* layers menu */
 
 g.openlime-compact {
 	visibility:hidden !important;
@@ -194,68 +159,6 @@ g.openlime-expand {
 .openlime-fullscreen-active g.openlime-expand {
 	visibility:hidden !important;
 }
-
-.openlime-help-window.shown {
-	visibility:visible; 
-	opacity:0.95;
-	transition: visibility 0s linear 0s, opacity 300ms;
-
-}
-
-.openlime-help-window {
-
-	opacity: 0.0;
-	visibility:hidden; 
-	transition: visibility 0s linear 300ms, opacity 300ms;
-
-	position:absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	color:#fff;
-	background: rgb(0, 0, 0, 0.5);
-	padding:20px 40px;
-	border-radius:5px;	
-	font-family: "Open Sans",sans-serif;
-	cursor:pointer;
-}
-
-.openlime-help-content {
-	position:absolute;
-	top: 10%;
-	left: 30%;
-	right: 30%;
-	bottom: 10%;
-	color:#fff;
-	background: #222;
-	opacity:0.95;
-	padding:20px 40px;
-	border-radius:5px;	
-	cursor:auto;
-}
-
-.openlime-help-window .openlime-close {
-	position:absolute;
-	top:10px;
-	right:10px;
-	width:30px;
-	height:30px;
-	cursor:pointer;
-}
-
-/* ATTRIBUTION */
-
-.openlime-attribution {
-    position:absolute;
-    left:20px;
-    bottom:0;
-    font-family: "Open Sans",sans-serif;
-    font-size:10px;
-    color:white;
-}
-
-/* LAYERS MENU */
 
 .openlime-layers-menu {
 	position:absolute;
@@ -280,13 +183,16 @@ g.openlime-expand {
 	z-index: 1;
 }
 
+
 .openlime-layers-menu > * {
 	margin:10px 10px 0px 10px;
 }
 
+
 .openlime-layers-menu.open {
 	width:100%
 }
+
 
 .openlime-list {
 	margin-left:20px;
@@ -301,9 +207,13 @@ g.openlime-expand {
 }
 
 .active + .openlime-list {
-	height:auto; 
+	height:auto;
 	max-height:100%;
 }
+
+
+
+
 
 .openlime-layers-menu .openlime-entry {
 	color: #ccc;
@@ -317,7 +227,7 @@ g.openlime-expand {
 .openlime-layers-menu .openlime-entry:hover,
 .openlime-layers-menu .openlime-entry:focus {
 
-	background-color: rgb(40, 40, 40); 
+	background-color: rgb(40, 40, 40);
 	color:#fff;
 }
 
@@ -328,14 +238,16 @@ g.openlime-expand {
 
 .openlime-layers-menu .openlime-entry.active,
 .openlime-layers-menu .openlime-entry:active {
-	background-color: rgb(80, 80, 80); 
+	background-color: rgb(80, 80, 80);
 	color:#fff;
 }
 
+
 .openlime-layers-menu .openlime-entry.selected {
-	background-color: rgb(80, 80, 80); 
+	background-color: rgb(80, 80, 80);
 	color:#fff;
 }
+
 
 .openlime-layers-menu .openlime-list .openlime-entry {
 	font-size:90%;
@@ -346,6 +258,7 @@ g.openlime-expand {
 .openlime-layers-menu .openlime-tool {
 	padding:0px !important;
 }
+
 
 .openlime-list .openlime-tools {
 	flex-direction:row;
@@ -385,7 +298,7 @@ g.openlime-expand {
 /* editor */
 
 .openlime-annotation-edit.hidden { display: none; }
-.openlime-annotation-edit-tools svg, .openlime-tools svg { height:25px; cursor: pointer; margin-right: 10px } 
+.openlime-annotation-edit-tools svg, .openlime-tools svg { height:25px; cursor: pointer; margin-right: 10px }
 .openlime-annotation-edit-tools { margin-top: 5px; }
 .openlime-tool { height: 25px; width:25px; }
 
@@ -393,9 +306,9 @@ g.openlime-expand {
 .openlime-annotation-edit option:hover { background:red; }
 
 .openlime-eye, .openlime-eye-off { height:14px; float: right;}
-.openlime-eye, .hidden .openlime-eye-off { display: block; }
+.openline-eye, .hidden .openlime-eye-off { display: block; }
 .openlime-eye-off, .hidden .openlime-eye { display: none; }
- 
+
 .openlime-eye:hover, .openlime-eye-off:hover { color: #ffa; }
 
 /*.openlime-annotation-edit-tools .active {  background-color:rgb(80, 80, 80); } */
@@ -413,8 +326,8 @@ g.openlime-expand {
 /* Editor select */
 
 .openlime-select  {
-	background: #888; 
-	position: relative; 
+	background: #888;
+	position: relative;
 	cursor: pointer;
 	display: inline-block;
 	height:24px;
@@ -430,18 +343,16 @@ g.openlime-expand {
 	background-color: #888;
 	padding: 2px 15px;
 }
-
 .openlime-select-button:after {
 	content:"";
 	width: 0;
 	height: 0;
 	border: 7px solid transparent;
-	border-color: #fff transparent transparent transparent; 
+	border-color: #fff transparent transparent transparent;
 	position: absolute;
 	top: 8px;
 	right: 10px;
 }
-
 .openlime-select-button:hover {
 	background-color: #444;
 }
@@ -449,14 +360,12 @@ g.openlime-expand {
 .active .openlime-select-button {
 	background-color: #888;
 }
-
 .active .openlime-select-button:after {
-	top: 1px;	
-	border-color: transparent transparent #fff transparent; 
+	top: 1px;
+	border-color: transparent transparent #fff transparent;
 
 }
-
-.openlime-select-menu { 
+.openlime-select-menu {
 	display: none;
 	position: absolute;
 	top: 100%;
@@ -467,8 +376,9 @@ g.openlime-expand {
 	padding: 0;
 	list-style: none;
 }
-
 .active .openlime-select-menu { display: block; }
+
+
 
 .openlime-select-menu li {
 	margin: 0;
@@ -477,7 +387,6 @@ g.openlime-expand {
 	/* border-top: 1px solid darken($select-background, 10); */
 /*	@include transition(all 0.15s ease-in); */
 }
-
 .openlime-select-menu li:hover {
 	color: #fff;
 	border: 1px #aaa;

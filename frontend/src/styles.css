@@ -1,17 +1,10 @@
 
 
-
-
-
-
-
 * {
   font-family: Questrial;
 }
 
-app-root {
 
-}
 
 .toolbtn {
   cursor: pointer;
@@ -43,9 +36,18 @@ background-color: #FAFAFA!important;
    background-attachment: fixed;**/
  }
 
- .modal-dialog {
-     max-width: 90%!important;
-   }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%!important; }
+body {  }
+
+app-root{
+
+}
+
+
+
+html,body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  margin: 0;
+}

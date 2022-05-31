@@ -46,7 +46,18 @@ export class AnnotationsComponent implements OnInit {
     	url: '/assets/'+(this.rti_id)+'/info.json',
     	normals: false
     });
+
+    let layer1 = new OpenLIME.Layer({
+       label: 'Image',
+         layout: 'tarzoom',  //VENIR RECUPERER this.layout
+         type:'image',
+         url: '/assets/'+(this.rti_id)+'/image.tzi', //this.rti_id
+  normals: false
+ });
+
+
     lime.canvas.addLayer('RTI', layer0);
+    lime.canvas.addLayer('Image', layer1);
 
     let anno = new OpenLIME.SvgAnnotationLayer({
     	label: 'Annotations',
@@ -76,7 +87,7 @@ export class AnnotationsComponent implements OnInit {
 
   //  lime.camera.maxFixedZoom = 4;
 
-    OpenLIME.Skin.setUrl('/assets/js/annotations/skin.svg');
+    OpenLIME.Skin.setUrl('/assets/js/skin.svg');
 
     let editor = new OpenLIME.SvgAnnotationEditor(lime, anno, {
     	lime: lime,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { JwtService } from './../../shared/jwt.service';
-import { EmployeesComponent } from '../employees/employees.component';
 import { TokenAuthService } from '../../shared/token-auth.service';
 import {ActivatedRoute } from '@angular/router';
 import { AuthenticationStateService } from '../../shared/authentication-state.service';

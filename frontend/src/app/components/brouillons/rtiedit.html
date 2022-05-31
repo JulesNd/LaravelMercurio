@@ -1,50 +1,237 @@
-<div *ngFor="let rti of rtis" class="col .col-6 .col-lg-4 col-complementary" role="complementary">
+
+
+
+
+    <div class="is-fluid "  >
 
 
 
 
 
 
-  <div class="section-titleRti">
-<span class="title">  <strong>{{rti.nom}}</strong></span><br>
+      <div class="is-fluid container ">
 
-<span>  publié le <strong> {{rti.date}} </strong> </span> <br>
-<!--  <span>  <!Par <strong> {{rti.owner_id}} </strong> </span>
-<span> {{rti.id}} </span>!-->
+
+
+            <!-- open lime !-->
+        <div   id="openlime"> </div>
+  <!-- open lime !-->
+<script src="/assets/js/openlime.js"></script>
+
+      </div>
+
+
+
+
+
+
+
+      <div *ngFor="let rti of rtis" class="card is-fluid  ">
+  <header class="card-header">
+    <p class="card-header-title">
+      {{rti.nom}}
+    </p>
+    <button class="card-header-icon" aria-label="more options">
+      <span class="icon">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </header>
+  <div class="card-content">
+    <div class="content">
+    {{rti.description}}
+
+      <br>
+      <time datetime="">Publié le {{rti.date}}</time>
+    </div>
+  </div>
+  <footer class="card-footer">
+    <a  [routerLink]="['/loading']"  class="card-footer-item"><i class="fas fa-circle-xmark"></i> Retour</a>
+
+    <a   href="#ft-demo-modal"   class="card-footer-item"> <i class="fas fa-pen-to-square"></i> Editer</a>
+    <a  [routerLink]="['/rti',rti.rti_id,'annotation']"  class="card-footer-item" *ngIf=" user.id === rti.owner_id" > <i class="fas fa-highlighter"></i> Annoter</a>
+  </footer>
 </div>
 
-<div class="section description">
+<div>
+    </div>
+  </div>
 
-<span class="section-title"> <strong>  Description </strong> </span> <br>
-<input type="checkbox" class="read-more-state" id="post-1" />
 
-<div style="width:100%; height:250px; overflow: auto;" >
-{{rti.description}}
+
+
+
+
+
+
+  <!-- Start Modal -->
+  <div class="ft-modal" id="ft-demo-modal">
+  	<div class="ft-modal-content container ">
+          <div class="ft-modal-header">
+            <button (click)="refresh()" class="delete"></button>
+
+          </div>
+          <div class="ft-modal-body">
+            <div>
+
+              <form class="row"    (ngSubmit)="onSubmitform(f)"  #f="ngForm"        (ngSubmit)= "updateRti()"  >
+
+              <div class="column">
+                <div class="form-group">
+
+              <label for="name">
+                Identifiant
+                <span class="icon is-small is-left"><i class="fas fa-id-card"></i></span>
+              </label>
+              <input type="text"  name="id" class="form-control" readonly  value="rti.rti_id"  [(ngModel)]="rti.rti_id" #formInputText >
+
+
+                  <li  class="btn fa fa-clipboard" [ngxClipboard]="formInputText"></li>
+                </div>
+
+
+
+
+              <div class="form-group" *ngIf=" user.email === 'Admin@gmail.com'">
+              <label for="exampleFormControlSelect1">Proprietaire
+                <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+
+              </label>
+              <select [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+            <option value="" selected disabled>Selectionnez un proprietaire pour ce RTI</option>
+            <option   *ngFor="let user of users" value="{{user.id}}" >{{user.username}} - {{user.email}}</option>
+
+              </select>
+            </div>
+
+            <div class="form-group" *ngIf=" user.email != 'Admin@gmail.com'">
+            <label for="exampleFormControlSelect1">Proprietaire
+              <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+
+            </label>
+            <select disabled [(ngModel)]="rti.owner_id" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+          <option   disabled value="{{user?.id}}" >{{user?.username}} - {{user?.email}}</option>
+
+            </select>
+
+          </div>
+
+
+
+
+
+
+                               <div class="form-group">
+                                     <label for="exampleFormControlSelect1">Visibilité
+                                       <span class="icon is-small is-left"><i class="fas fa-eye"></i></span>
+
+                                     </label>
+                                 <select [(ngModel)]="rti.public" [ngModelOptions]="{standalone: true}" class="form-control" id="exampleFormControlSelect1">
+                                     <option   value="1" >Public</option>
+                                   <option   value="0" >Privé</option>
+                                   </select>
+                                   </div>
+
+
+
+              </div>
+
+              <div class="column">
+                <div class="form-group">
+                  <label for="exampleFormControlSelect1">Date d'acquisition
+                    <span class="icon is-small is-left"><i class="fas fa-calendar"></i></span>
+
+                  </label>
+
+                  <input type="date" name="date" class="form-control" placeholder="Date" [(ngModel)]="rti.date">
+                  </div>
+
+                      <div class="form-group">
+                    <label for="name">Nom
+                      <span class="icon is-small is-left"><i class="fas fa-id-card"></i></span>
+
+                    </label>
+                    <input type="text" name="name" class="form-control"  [(ngModel)]="rti.nom"    >
+                         </div>
+
+                         <div class="form-group">
+                           <label for="exampleFormControlSelect1">
+                             Description
+                             <span class="icon is-small is-left"><i class="fas fa-align-center"></i></span>
+
+                           </label>
+
+                             <textarea  name="description" class="form-control" placeholder="Description" [(ngModel)]="rti.description"> </textarea>
+                         </div>
+
+
+
+                            <!--
+                            <div class="form-group">
+                          <label for="name">tag</label>
+                          <input type="text" name="public" class="form-control" [(ngModel)]="rti.tag">
+                               </div>
+                               !-->
+
+                               <!-- Progress Bar -->
+                               <!--
+                                     <div class="progress form-group" *ngIf="progress > 0">
+                                         <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+                                         </div>
+                                     </div>
+                 <input type="file" class="form-group"   name="myFile" (change)="fileEvent($event)"/>
+        !-->
+
+
+              </div>
+                  <!--  <button     class="btn btn-dark btn-sm mt-4">Mettre à jour </button>!-->
+
+
+                </form>
+
+                  </div>
+          </div>
+          <div class="ft-modal-footer">
+
+
+
+              <div class="field is-grouped container">
+  <p class="control">
+    <button   (click)="updateRti()" class="button is-dark">
+      Mettre à jour
+    </button>
+  </p>
+  <p class="control">
+    <button  (click)="refresh()" class="button is-success">
+      Valider
+    </button>
+  </p>
 
 </div>
-
-</div>
-
-
-<div id="popout" class="section-actions">
-
-<span class="section-title"><strong>  Actions </strong> </span> <br>
-
-<div class="row actions ">
-
-  <div class="social-icons">
-    <ul>
-    <!--  [routerLink]="['/rti',rti.nom,rti.rti_id,'annotation']" !-->
-
-<li  *ngIf=" user.id === rti.owner_id" ><a    [routerLink]="['/rti',rti.rti_id,'annotation']" ><i class=" fa fa-asterisk "></i></a></li>
-      <li><a href="#popup1" ><i class=" fa fa-edit   " ></i></a></li>
-      <li><a ><i class="fa fa-share-alt "></i></a></li>
-
-    </ul>
-
-</div>
-</div>
-</div>
+          </div>
 
 
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </div>
+  </div>
+  <!-- End Modal -->

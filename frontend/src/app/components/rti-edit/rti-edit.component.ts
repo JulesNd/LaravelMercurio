@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import { DataService } from '../../service/data.service';
 import { Rti } from '../../rti';
@@ -11,11 +11,7 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { HttpClientModule, HTTP_INTERCEPTORS , HttpEvent, HttpEventType } from '@angular/common/http';
 import {Location} from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { EditRtiFormComponent } from '../edit-rti-form/edit-rti-form.component';
-
 
 declare var OpenLIME: any;
 declare var require: any;
@@ -38,6 +34,7 @@ export class RtiEditComponent implements OnInit {
   progress: number = 0;
   rti = new Rti();
   isModalActive: boolean = false;
+  @Input() edit;
   constructor(private route:ActivatedRoute, private dataService: DataService, public jwtService: JwtService,private _location: Location, private http: HttpClient) {
 
 
@@ -251,7 +248,7 @@ getUsersData() {
 updateRti() {
 
 this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
-  Swal.fire({
+/**  Swal.fire({
     title: '<strong>Le RTI à été mis à jour</strong>',
     icon: 'success',
     html:
@@ -263,7 +260,7 @@ this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
     focusConfirm: false,
     showConfirmButton: false,
 
-  })
+  })**/
 
 });
 
@@ -273,5 +270,7 @@ this.dataService.updateData(this.rti_id, this.rti).subscribe(res=>{
 toggleModal() {
   this.isModalActive = !this.isModalActive;
 }
-
+refresh(): void {
+    window.location.reload();
+}
 }

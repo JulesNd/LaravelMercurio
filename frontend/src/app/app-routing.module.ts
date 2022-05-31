@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { EmployeesComponent } from './components/employees/employees.component';
 import { UseremployeeComponent } from './components/useremployee/useremployee.component';
 import { RtiComponent } from './components/rti/rti.component';
 import { RtiEditComponent } from './components/rti-edit/rti-edit.component';

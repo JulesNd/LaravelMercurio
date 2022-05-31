@@ -43,7 +43,7 @@ export class LoadingComponent implements OnInit {
 
     setTimeout(() => {
       this.router.navigate(['Users/',this.user.username]);
-    }, 2000);
+    }, 500);
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 
   }

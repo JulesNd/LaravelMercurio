@@ -1,11 +1,255 @@
+/**
+form {
+  width: 40%!important;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  margin-top: 5%;
+}
+.row {
+  display: flex;
+}
+
+
+.card-content {
+	padding: 0;
+}
+
+
+
+
+
+#popup1 {
+  z-index: 1;
+}
+
+
+
+.col-main {
+  flex: 5;
+  border-radius: 10px 0px 0px 10px;
+  box-shadow: 4px 4px 2px -1px #00000070;
+  background-color: rgba(0, 0, 0, 0.80);
+
+}
+
+.card {
+  flex: 1.5;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 0px 10px 10px 0px;
+  box-shadow: 4px 4px 2px -1px #00000070;
+
+}
+
+
+
+@media only screen and (min-width: 1080px) {
+  .layout {
+    display: flex;
+  }
+}
+
+
+
+@media only screen and (min-width : 1081px) {
+  .floatingButtonWrap {
+    display: none!important;
+
+  }
+
+
+
+}
+
+@media only screen and (min-width : 320px) and (max-width : 1080px) {
+
+
+  .backdesk {
+    display: none!important;
+  }
+
+  .col {
+
+    height: auto!important;
+  }
+
+
+  .card {
+    padding: 30px;
+
+
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 4px 4px 2px -1px #00000070;
+
+  }
+
+  .col-main {
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 4px 4px 2px -1px #00000070;
+    background-color: rgba(0, 0, 0, 0.80);
+
+  }
+
+  .openlime-toolbar {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 5px;
+    background-color: rgb(0, 0, 0, 0.0);
+    display: flex;
+    width: 50%!important;
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 .container {
   margin-top: 1%;
-
+  margin-bottom: 1%;
+  margin-right: auto;
+  margin-left: auto;
 }
 
+.col {
+
+  height: 80vh;
+}
+
+.fixedContainer {
+    background-color:#ddd;
+    position: fixed;
+    padding: 2em;
+    left: 50%;
+    top: 0%;
+    transform: translateX(-50%);
+}
+
+
+
+.text-desc {
+  overflow:scroll;
+  white-space: nowrap;
+}
+
+.read-more-state {
+  display: none;
+}
+
+.read-more-target {
+  opacity: 0;
+  max-height: 0;
+  font-size: 0;
+  transition: .25s ease;
+}
+
+.read-more-state:checked ~ .read-more-wrap .read-more-target {
+  opacity: 1;
+  font-size: inherit;
+  max-height: 999em;
+}
+
+.read-more-state ~ .read-more-trigger:before {
+  content: 'Show more';
+}
+
+.read-more-state:checked ~ .read-more-trigger:before {
+  content: 'Show less';
+}
+
+.read-more-trigger {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 .5em;
+  color: #666;
+  font-size: .9em;
+  line-height: 2;
+  border: 1px solid #ddd;
+  border-radius: .25em;
+}
+.action {
+  font-size: 5vh
+}
+.action:hover {
+  color: #FA4616;
+  transition: all 1s;
+}
+
+.universal-inline-block {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.social-icons {
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.5em;
+  color: #FA4616;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+.social-icons ul {
+  list-style: none;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+}
+.social-icons ul li {
+  display: inline-block;
+  zoom: 1;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  *display: inline;
+  vertical-align: middle;
+  text-align: center;
+}
+.social-icons ul li a {
+  display: block;
+  font-size: 1.4em;
+  margin: 0 5px;
+  text-decoration: none;
+}
+.social-icons ul li a i {
+  color: #FA4616;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.social-icons ul li a:hover i {
+  color: #275066;
+}
+.social-icons ul li a:focus i,
+.social-icons ul li a:active i {
+  transition: none;
+  color: #FA4616;
+}
 
 
 
@@ -19,18 +263,30 @@ ul {
 
 
 
-.box {
-  width: 40%;
-  margin: 0 auto;
-  background: rgba(255,255,255,0.2);
-  padding: 35px;
-  border: 2px solid #fff;
+
+
+
+
+
+
+
+
+
+
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
   border-radius: 20px/50px;
-  background-clip: padding-box;
-  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
 }
-
-
+.button:hover {
+  background: #06D85F;
+}
 
 .overlay {
   position: fixed;
@@ -48,8 +304,96 @@ ul {
   opacity: 1;
 }
 
+.popup {
+  margin: 20px auto;
+  padding: 10px;
+  background: #fff;
+  border-radius: 5px;
+  width: 80%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
 
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
 
 .none {
   display: none;
+}
+
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 20%;
+  overflow: auto;
+}
+**/
+
+
+
+
+.hero.is-primary {
+
+  background-color: #FA4616;
+}
+.mt-1 {
+  position: relative;
+}
+
+#openlime {
+  position: relative;
+}
+
+.desc {
+  overflow-y: scroll;
+  height: 60vh;
+  position: relative;
+}
+
+footer {
+  bottom: 0;
+}
+
+.column {
+      height:90vh; /* Would mean 50% of Viewport height */
+}
+
+
+
+.is-three-quarters {
+background-color : rgba(0,0,0,0.9);
+}
+
+ .is-three-quarters {
+  background-color: black;
+}
+
+/** Breakpoints responsive **/
+
+@media only screen and (min-width: 768px) {
+/* tablettes et ordinateurs */
+}
+@media only screen and (max-width: 767px) {
+  .column {
+        height: 80vh; /* Would mean 50% of Viewport height */
+  }
+}
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+  .column {
+        height: 80vh; /* Would mean 50% of Viewport height */
+  }
 }
