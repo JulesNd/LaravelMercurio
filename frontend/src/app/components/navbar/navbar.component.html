@@ -1,16 +1,19 @@
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
+
   <div  class="navbar-brand">
-    <a class="navbar-item" >
-      <img [routerLink]="['Users/',user.username]" src="https://mercurioimaging.com/wp-content/uploads/Logo_Mercurio_seul.png" >
+    <a  [routerLink]="['/Users/',user.username]"  class="navbar-item" >
+      <img src="https://mercurioimaging.com/wp-content/uploads/Logo_Mercurio_seul.png" >
     </a><a (click)="toggleNavbar()" role="button" #navBurger class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
       <span aria-hidden="true"></span>
     </a>
-  </div><div id="navbarBasicExample" class="navbar-menu" #navMenu>
+  </div>
+
+  <div id="navbarBasicExample" class="navbar-menu" #navMenu>
     <div class="navbar-start">
-      <a   [routerLink]="['Users/',user.username]" class="navbar-item">
+      <a   [routerLink]="['/Users/',user.username]" routerLink="'Users/',user.username" class="navbar-item">
       Mes Rtis
       </a>
       <a  [routerLink]="['/all']" class="navbar-item" *ngIf=" user.email === 'Admin@gmail.com'">

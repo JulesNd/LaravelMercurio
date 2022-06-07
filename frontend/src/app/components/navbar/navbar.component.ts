@@ -44,7 +44,7 @@ export class NavbarComponent implements OnInit {
          this.navMenu.nativeElement.classList.toggle('is-active');
      }
 
-  
+
 
 
   constructor(
@@ -54,6 +54,14 @@ export class NavbarComponent implements OnInit {
     private tokenAuthService: TokenAuthService,
     private authenticationStateService: AuthenticationStateService,
   ) {
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+          return false;
+        };
+
+
+
+
     this.signinForm = this.fb.group({
       email: [],
       password: []
