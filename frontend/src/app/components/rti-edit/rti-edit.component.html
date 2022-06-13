@@ -76,7 +76,7 @@
                                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
                                        </div>
                                    </div>
-               <input  type="file" class="form-group"  *ngIf=" user.role === 'Admin'"  name="myFile" (change)="fileEvent($event)"/>
+               <input  type="file" class="form-group"   *ngIf="user.role === 'Admin'"  name="myFile" (change)="fileEvent($event)"/>
 
             </div>
               </form>
@@ -137,7 +137,7 @@
 
 <footer class="card-footer">
   <a (click)="toggleModal()" *ngIf=" user.id === rti.owner_id || user.role === 'Admin' "  class="card-footer-item"> <i class="fas fa-edit" aria-hidden="true"></i> </a>
-  <a  class="card-footer-item"> <i class="fas fa-code" aria-hidden="true"></i> </a>
+  <a [routerLink]="['/rti',rti.rti_id,'embed']"  class="card-footer-item"> <i class="fas fa-code" aria-hidden="true"></i> </a>
   <a  *ngIf=" user.id === rti.owner_id || user.role === 'Admin' " [routerLink]="['/rti',rti.rti_id,'annotation']" class="card-footer-item">     <i class="fas fa-asterisk" aria-hidden="true"></i>   </a>
 </footer>
 

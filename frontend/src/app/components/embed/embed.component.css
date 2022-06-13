@@ -1,0 +1,77 @@
+.container1{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text-center{
+  text-align: center;
+}
+pre{
+  font-family: 'Source Code Pro', monospace;
+  font-size: 1em;
+  color: white;
+  background-color: #0B0D26;
+  padding: 10px;
+  border: 1px solid #dfe2e5;
+  border-radius: 5px;
+}
+
+.none {
+  display: none;
+}
+input, select {
+  width: 20vw;
+}
+
+.hero.is-primary {
+
+  background-color: #FA4616;
+}
+.mt-1 {
+  position: relative;
+}
+
+#openlime {
+  position: relative;
+}
+
+
+.card-footer,   footer {
+  bottom: 0;
+  position: relative;
+}
+
+.col {
+      height:90vh; /* Would mean 50% of Viewport height */
+}
+
+
+
+.is-three-quarters {
+background-color : rgba(0,0,0,0.9);
+}
+
+ .is-three-quarters {
+  background-color: black;
+}
+
+/** Breakpoints responsive **/
+
+@media only screen and (min-width: 768px) {
+/* tablettes et ordinateurs */
+}
+@media only screen and (max-width: 767px) {
+  .col  {
+        height: 80vh; /* Would mean 50% of Viewport height */
+  }
+}
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+  .col  {
+        height: 80vh; /* Would mean 50% of Viewport height */
+  }
+}
+
+.has-display-none {
+   display: none;
+   visibility: hidden;
+}

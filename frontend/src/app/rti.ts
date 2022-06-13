@@ -12,4 +12,7 @@ export class Rti {
       tag_id: any;
       vues: any;
       likes:any;
+      Param1: any;
+      Param2: any;
+      Param3: any;
 }

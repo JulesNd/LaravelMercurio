@@ -7,6 +7,22 @@
    </div>
 </div>
 
+<div class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- Content ... -->
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Save changes</button>
+      <button class="button">Cancel</button>
+    </footer>
+  </div>
+</div>
 
 <div class="container is-widescreen " *ngIf=" user.role === 'Admin'">
 
@@ -54,7 +70,7 @@
 
 
 
-          <a class="level-item" aria-label="embed">
+          <a [routerLink]="['/rti',mydata.rti_id,'/embed']" class="level-item" aria-label="embed">
             <span class="icon is-small">
               <i class="fas c fa-code" aria-hidden="true"></i>
             </span>

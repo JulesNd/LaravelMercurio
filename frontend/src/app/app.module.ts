@@ -42,6 +42,9 @@ import { MesDossiersComponent } from './components/mes-dossiers/mes-dossiers.com
 import { EditRtiFormComponent } from './components/edit-rti-form/edit-rti-form.component';
 import { RtiModalComponent } from './components/rti-modal/rti-modal.component';
 import { AllRtisComponent } from './components/all-rtis/all-rtis.component';
+import { HomeComponent } from './components/home/home.component';
+import { EmbedComponent } from './components/embed/embed.component';
+import { EmbedLinkComponent } from './components/embed-link/embed-link.component';
 
 const routes: Routes = [
 
@@ -51,6 +54,7 @@ const routes: Routes = [
   {path:'popup/rti/:rti_id', component:RtiModalComponent},
 
   {path:'all', component:AllRtisComponent},
+  {path:'rti/:rti_id/embed', component:EmbedComponent},
 
 //  {path:'rti/'+'abc'+':annotation_id', component:RtiEditComponent},
 
@@ -60,6 +64,7 @@ const routes: Routes = [
   { path: 'Users', component: ProfileComponent },
   { path: 'loading', component: LoadingComponent },
   { path: 'Mes-dossiers', component: MesDossiersComponent },
+  {path: 'home', component: HomeComponent},
 
 
 
@@ -94,6 +99,9 @@ const routes: Routes = [
     EditRtiFormComponent,
     RtiModalComponent,
     AllRtisComponent,
+    HomeComponent,
+    EmbedComponent,
+    EmbedLinkComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
